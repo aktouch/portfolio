@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LP Funnel Analytics Demo</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #202124;
+      background: #f8fafc;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #2563eb;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: #5f6368;
+    }
+
+    .nav a:hover {
+      color: #2563eb;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .hero {
+      padding: 96px 0 72px;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 34%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(36px, 6vw, 62px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+    }
+
+    .hero p {
+      margin: 22px 0 0;
+      font-size: 18px;
+      color: #5f6368;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #1d4ed8;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #2563eb;
+      border: 1px solid #dbeafe;
+    }
+
+    .btn-secondary:hover {
+      background: #eff6ff;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    .mini-browser {
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .browser-bar {
+      padding: 12px;
+      background: #f1f5f9;
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .browser-content {
+      padding: 22px;
+    }
+
+    .fake-chart {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .fake-chart-row {
+      height: 14px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .fake-chart-row span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: #2563eb;
+    }
+
+    .section-title {
+      max-width: 720px;
+      margin-bottom: 34px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.05em;
+      line-height: 1.2;
+    }
+
+    .section-title p {
+      margin: 14px 0 0;
+      color: #5f6368;
+      font-size: 16px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: #eff6ff;
+      color: #2563eb;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #5f6368;
+      font-size: 14px;
+    }
+
+    .solution {
+      background: #ffffff;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 20px 20px 20px 68px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #2563eb;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin: 0 0 6px;
+    }
+
+    .step p {
+      margin: 0;
+      color: #5f6368;
+    }
+
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .price-card.featured {
+      border: 2px solid #2563eb;
+      position: relative;
+    }
+
+    .price-label {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .price {
+      margin: 18px 0 8px;
+      font-size: 34px;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .price-card ul {
+      padding-left: 1.2em;
+      color: #5f6368;
+    }
+
+    .contact {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .contact .section-title p {
+      color: #cbd5e1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .contact-box p {
+      color: #cbd5e1;
+    }
+
+    .form {
+      background: #ffffff;
+      color: #202124;
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #ecfdf5;
+      color: #047857;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .form-message.is-show {
+      display: block;
+    }
+
+    .analytics {
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .analytics-panel {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 24px;
+    }
+
+    .analytics-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .analytics-header h2 {
+      margin: 0;
+      letter-spacing: -0.04em;
+    }
+
+    .analytics-header p {
+      margin: 6px 0 0;
+      color: #5f6368;
+      font-size: 14px;
+    }
+
+    .analytics-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .metric {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .metric span {
+      display: block;
+      color: #5f6368;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .metric strong {
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .funnel {
+      display: grid;
+      gap: 12px;
+    }
+
+    .funnel-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 80px;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .bar {
+      height: 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #2563eb;
+      border-radius: 999px;
+      transition: width 0.3s;
+    }
+
+    .log-table-wrap {
+      overflow-x: auto;
+      margin-top: 24px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #5f6368;
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .footer {
+      padding: 28px 20px;
+      text-align: center;
+      color: #5f6368;
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+
+      .hero-grid,
+      .pricing-wrap,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .funnel-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .analytics-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo">LP Analytics Demo</a>
+      <nav class="nav">
+        <a href="#problem">課題</a>
+        <a href="#solution">解決策</a>
+        <a href="#pricing">料金</a>
+        <a href="#contact">問い合わせ</a>
+        <a href="#analytics">計測結果</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 計測対象セクション：data-sectionを付ける -->
+    <section class="hero" data-section="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">ローカルで動くファネル計測デモ</div>
+          <h1>LPの反応を、作って終わりにしない。</h1>
+          <p>
+            このページは、架空サービスのLPでありながら、PV・CTAクリック・セクション到達率・CV率を
+            JavaScriptで計測できるサンプルです。
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary js-cta" data-cta="hero_primary" data-scroll="#contact">
+              無料相談する
+            </button>
+            <button class="btn btn-secondary js-cta" data-cta="hero_secondary" data-scroll="#analytics">
+              計測結果を見る
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="mini-browser">
+            <div class="browser-bar">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="browser-content">
+              <strong>LP Funnel Dashboard</strong>
+              <p style="margin: 8px 0 0; color: #5f6368; font-size: 14px;">
+                ユーザー行動をローカル保存し、改善ポイントを可視化します。
+              </p>
+              <div class="fake-chart">
+                <div class="fake-chart-row"><span style="width: 92%;"></span></div>
+                <div class="fake-chart-row"><span style="width: 72%;"></span></div>
+                <div class="fake-chart-row"><span style="width: 48%;"></span></div>
+                <div class="fake-chart-row"><span style="width: 28%;"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="problem" class="section" data-section="problem">
+      <div class="container">
+        <div class="section-title">
+          <h2>よくあるLPの課題</h2>
+          <p>
+            見た目は整っていても、どこで離脱しているか、どのCTAが押されているかが分からないと改善できません。
+          </p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-icon">1</div>
+            <h3>作って終わりになる</h3>
+            <p>公開後の数値が見えないため、改善の優先順位を決めづらい。</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">2</div>
+            <h3>クリックが見えない</h3>
+            <p>どのボタンが押されたか分からず、CTA改善の判断ができない。</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">3</div>
+            <h3>離脱箇所が見えない</h3>
+            <p>ユーザーがどのセクションまで読んだのか把握しづらい。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section solution" data-section="solution">
+      <div class="container">
+        <div class="section-title">
+          <h2>JavaScriptで行動を可視化する</h2>
+          <p>
+            実務ではGoogle Analyticsなどを使いますが、学習用としてはJavaScriptだけでも考え方を再現できます。
+          </p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <h3>PVを記録</h3>
+            <p>ページを開いたタイミングでPVをカウントし、日別ログとして保存します。</p>
+          </div>
+          <div class="step">
+            <h3>セクション到達を記録</h3>
+            <p>Intersection Observerを使い、ユーザーがどこまで読んだかを記録します。</p>
+          </div>
+          <div class="step">
+            <h3>CTAクリックを記録</h3>
+            <p>ボタンごとのクリック数を計測し、どの導線が強いかを比較できます。</p>
+          </div>
+          <div class="step">
+            <h3>CVを記録</h3>
+            <p>フォーム送信をコンバージョンとしてカウントし、CV率を自動計算します。</p>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary js-cta" data-cta="solution_cta" data-scroll="#contact">
+            改善相談をする
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section" data-section="pricing">
+      <div class="container">
+        <div class="section-title">
+          <h2>架空サービスの料金例</h2>
+          <p>
+            実際の案件提案に寄せるなら、診断・簡易LP・改善運用のようなプランにすると実務感が出ます。
+          </p>
+        </div>
+
+        <div class="pricing-wrap">
+          <div class="price-card">
+            <span class="price-label">ライト</span>
+            <div class="price">¥30,000〜</div>
+            <p>既存LPの簡易診断・改善コメント</p>
+            <ul>
+              <li>ファーストビュー確認</li>
+              <li>CTA導線チェック</li>
+              <li>改善レポート</li>
+            </ul>
+            <button class="btn btn-secondary js-cta" data-cta="pricing_light" data-scroll="#contact">
+              ライトで相談
+            </button>
+          </div>
+
+          <div class="price-card featured">
+            <span class="price-label">おすすめ</span>
+            <div class="price">¥80,000〜</div>
+            <p>LP制作＋簡易計測タグ＋改善提案</p>
+            <ul>
+              <li>LP構成設計</li>
+              <li>HTML/CSS/JS実装</li>
+              <li>簡易ファネル計測</li>
+            </ul>
+            <button class="btn btn-primary js-cta" data-cta="pricing_standard" data-scroll="#contact">
+              おすすめで相談
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact" data-section="contact">
+      <div class="container contact-grid">
+        <div>
+          <div class="section-title">
+            <h2>フォーム送信をCVとして計測</h2>
+            <p>
+              このフォームは実際には送信されません。ローカルでCV数だけを記録するデモです。
+            </p>
+          </div>
+
+          <div class="contact-box">
+            <h3>計測されるイベント</h3>
+            <p>
+              フォームの「送信する」を押すと、localStorageにCVが1件追加されます。
+              ページ下部のダッシュボードにすぐ反映されます。
+            </p>
+          </div>
+        </div>
+
+        <form class="form" id="contactForm">
+          <div class="form-group">
+            <label for="name">お名前</label>
+            <input id="name" type="text" placeholder="山田 太郎" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input id="email" type="email" placeholder="sample@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">相談内容</label>
+            <textarea id="message" placeholder="LP改善について相談したいです。" required></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            送信する
+          </button>
+
+          <div class="form-message" id="formMessage">
+            CVを1件カウントしました。ページ下部の計測結果をご確認ください。
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="analytics" class="section analytics">
+      <div class="container">
+        <div class="analytics-panel">
+          <div class="analytics-header">
+            <div>
+              <h2>計測ダッシュボード</h2>
+              <p>
+                localStorageに保存されたデータを表示しています。リロードしても数値は残ります。
+              </p>
+            </div>
+
+            <div class="analytics-actions">
+              <button class="btn btn-secondary" id="downloadCsvBtn">CSV出力</button>
+              <button class="btn btn-secondary" id="resetBtn">データリセット</button>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <span>PV</span>
+              <strong id="metricPv">0</strong>
+            </div>
+            <div class="metric">
+              <span>CTAクリック</span>
+              <strong id="metricCta">0</strong>
+            </div>
+            <div class="metric">
+              <span>CV</span>
+              <strong id="metricCv">0</strong>
+            </div>
+            <div class="metric">
+              <span>CV率</span>
+              <strong id="metricCvr">0%</strong>
+            </div>
+          </div>
+
+          <h3>ファネル到達率</h3>
+          <div class="funnel" id="funnelList"></div>
+
+          <div class="log-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>日付</th>
+                  <th>PV</th>
+                  <th>CTAクリック</th>
+                  <th>CV</th>
+                  <th>CTA率</th>
+                  <th>CV率</th>
+                </tr>
+              </thead>
+              <tbody id="dailyTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    JavaScript Local Funnel Analytics Demo
+  </footer>
+
+  <script>
+    /*
+      ==========================================================
+      LP簡易ファネル計測デモ
+
+      計測しているもの：
+      1. PV
+      2. セクション到達数
+      3. CTAクリック数
+      4. フォーム送信CV
+      5. 日別ログ
+      6. CSV出力
+
+      保存先：
+      localStorage
+
+      実務ではGoogle Analytics / GTMなどを使いますが、
+      ここではJavaScript学習用にローカルで再現しています。
+      ==========================================================
+    */
+
+    const STORAGE_KEY = "lp_funnel_analytics_demo_v1";
+
+    const sectionLabels = {
+      hero: "FV到達",
+      problem: "課題セクション到達",
+      solution: "解決策セクション到達",
+      pricing: "料金セクション到達",
+      contact: "フォーム到達"
+    };
+
+    const initialData = {
+      total: {
+        pv: 0,
+        ctaClicks: 0,
+        conversions: 0
+      },
+      sections: {
+        hero: 0,
+        problem: 0,
+        solution: 0,
+        pricing: 0,
+        contact: 0
+      },
+      ctas: {},
+      byDate: {}
+    };
+
+    const viewedSectionsInThisPageview = new Set();
+
+    function getToday() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        return structuredClone(initialData);
+      }
+
+      try {
+        return JSON.parse(saved);
+      } catch (error) {
+        console.error("保存データの読み込みに失敗しました", error);
+        return structuredClone(initialData);
+      }
+    }
+
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function ensureTodayData(data) {
+      const today = getToday();
+
+      if (!data.byDate[today]) {
+        data.byDate[today] = {
+          pv: 0,
+          ctaClicks: 0,
+          conversions: 0,
+          sections: {
+            hero: 0,
+            problem: 0,
+            solution: 0,
+            pricing: 0,
+            contact: 0
+          },
+          ctas: {}
+        };
+      }
+
+      return data.byDate[today];
+    }
+
+    function percent(numerator, denominator) {
+      if (!denominator) return "0%";
+      return `${((numerator / denominator) * 100).toFixed(1)}%`;
+    }
+
+    function incrementPv() {
+      const data = loadData();
+      const todayData = ensureTodayData(data);
+
+      data.total.pv += 1;
+      todayData.pv += 1;
+
+      saveData(data);
+      renderDashboard();
+    }
+
+    function trackSection(sectionName) {
+      if (viewedSectionsInThisPageview.has(sectionName)) {
+        return;
+      }
+
+      viewedSectionsInThisPageview.add(sectionName);
+
+      const data = loadData();
+      const todayData = ensureTodayData(data);
+
+      if (!data.sections[sectionName]) {
+        data.sections[sectionName] = 0;
+      }
+
+      if (!todayData.sections[sectionName]) {
+        todayData.sections[sectionName] = 0;
+      }
+
+      data.sections[sectionName] += 1;
+      todayData.sections[sectionName] += 1;
+
+      saveData(data);
+      renderDashboard();
+    }
+
+    function trackCta(ctaName) {
+      const data = loadData();
+      const todayData = ensureTodayData(data);
+
+      data.total.ctaClicks += 1;
+      todayData.ctaClicks += 1;
+
+      if (!data.ctas[ctaName]) {
+        data.ctas[ctaName] = 0;
+      }
+
+      if (!todayData.ctas[ctaName]) {
+        todayData.ctas[ctaName] = 0;
+      }
+
+      data.ctas[ctaName] += 1;
+      todayData.ctas[ctaName] += 1;
+
+      saveData(data);
+      renderDashboard();
+    }
+
+    function trackConversion() {
+      const data = loadData();
+      const todayData = ensureTodayData(data);
+
+      data.total.conversions += 1;
+      todayData.conversions += 1;
+
+      saveData(data);
+      renderDashboard();
+    }
+
+    function renderDashboard() {
+      const data = loadData();
+      const pv = data.total.pv;
+      const ctaClicks = data.total.ctaClicks;
+      const conversions = data.total.conversions;
+
+      document.getElementById("metricPv").textContent = pv;
+      document.getElementById("metricCta").textContent = ctaClicks;
+      document.getElementById("metricCv").textContent = conversions;
+      document.getElementById("metricCvr").textContent = percent(conversions, pv);
+
+      renderFunnel(data);
+      renderDailyTable(data);
+    }
+
+    function renderFunnel(data) {
+      const funnelList = document.getElementById("funnelList");
+
+      const funnelItems = [
+        {
+          label: "PV",
+          count: data.total.pv,
+          rate: 100
+        },
+        ...Object.entries(sectionLabels).map(([sectionName, label]) => {
+          const count = data.sections[sectionName] || 0;
+          const rate = data.total.pv ? (count / data.total.pv) * 100 : 0;
+
+          return {
+            label,
+            count,
+            rate
+          };
+        }),
+        {
+          label: "CTAクリック",
+          count: data.total.ctaClicks,
+          rate: data.total.pv ? (data.total.ctaClicks / data.total.pv) * 100 : 0
+        },
+        {
+          label: "CV",
+          count: data.total.conversions,
+          rate: data.total.pv ? (data.total.conversions / data.total.pv) * 100 : 0
+        }
+      ];
+
+      funnelList.innerHTML = funnelItems.map(item => {
+        const displayRate = `${item.rate.toFixed(1)}%`;
+        const barWidth = Math.min(item.rate, 100);
+
+        return `
+          <div class="funnel-row">
+            <div>${item.label}：${item.count}</div>
+            <div class="bar">
+              <div class="bar-fill" style="width: ${barWidth}%;"></div>
+            </div>
+            <div>${displayRate}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderDailyTable(data) {
+      const tableBody = document.getElementById("dailyTableBody");
+      const rows = Object.entries(data.byDate)
+        .sort(([dateA], [dateB]) => dateB.localeCompare(dateA))
+        .map(([date, item]) => {
+          return `
+            <tr>
+              <td>${date}</td>
+              <td>${item.pv}</td>
+              <td>${item.ctaClicks}</td>
+              <td>${item.conversions}</td>
+              <td>${percent(item.ctaClicks, item.pv)}</td>
+              <td>${percent(item.conversions, item.pv)}</td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      tableBody.innerHTML = rows || `
+        <tr>
+          <td colspan="6">まだデータがありません。</td>
+        </tr>
+      `;
+    }
+
+    function initSectionObserver() {
+      const targets = document.querySelectorAll("[data-section]");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionName = entry.target.dataset.section;
+            trackSection(sectionName);
+          }
+        });
+      }, {
+        threshold: 0.45
+      });
+
+      targets.forEach(target => observer.observe(target));
+    }
+
+    function initCtaTracking() {
+      const buttons = document.querySelectorAll(".js-cta");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          const ctaName = button.dataset.cta;
+          const scrollTarget = button.dataset.scroll;
+
+          trackCta(ctaName);
+
+          if (scrollTarget) {
+            const targetElement = document.querySelector(scrollTarget);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+    }
+
+    function initFormTracking() {
+      const form = document.getElementById("contactForm");
+      const message = document.getElementById("formMessage");
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        trackConversion();
+
+        form.reset();
+        message.classList.add("is-show");
+
+        setTimeout(() => {
+          message.classList.remove("is-show");
+        }, 3500);
+      });
+    }
+
+    function downloadCsv() {
+      const data = loadData();
+
+      const header = [
+        "date",
+        "pv",
+        "cta_clicks",
+        "conversions",
+        "cta_rate",
+        "cvr",
+        "hero_reach",
+        "problem_reach",
+        "solution_reach",
+        "pricing_reach",
+        "contact_reach"
+      ];
+
+      const rows = Object.entries(data.byDate)
+        .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
+        .map(([date, item]) => {
+          const sections = item.sections || {};
+
+          return [
+            date,
+            item.pv,
+            item.ctaClicks,
+            item.conversions,
+            percent(item.ctaClicks, item.pv),
+            percent(item.conversions, item.pv),
+            sections.hero || 0,
+            sections.problem || 0,
+            sections.solution || 0,
+            sections.pricing || 0,
+            sections.contact || 0
+          ];
+        });
+
+      const csv = [header, ...rows]
+        .map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(","))
+        .join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `lp-funnel-log-${getToday()}.csv`;
+      link.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function resetData() {
+      const confirmed = confirm("計測データをすべてリセットしますか？");
+
+      if (!confirmed) {
+        return;
+      }
+
+      localStorage.removeItem(STORAGE_KEY);
+      viewedSectionsInThisPageview.clear();
+
+      renderDashboard();
+
+      alert("データをリセットしました。");
+    }
+
+    function initButtons() {
+      document.getElementById("downloadCsvBtn").addEventListener("click", downloadCsv);
+      document.getElementById("resetBtn").addEventListener("click", resetData);
+    }
+
+    function init() {
+      incrementPv();
+      initSectionObserver();
+      initCtaTracking();
+      initFormTracking();
+      initButtons();
+      renderDashboard();
+    }
+
+    init();
+  </script>
+</body>
+</html>

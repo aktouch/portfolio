@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description"
+        content="FutureTech株式会社の公式サイト。イノベーションで未来を創造するパートナーとして、テクノロジー開発やITソリューションの提供を行っています。会社概要、最新の技術ニュース、アクセス情報をご覧いただけます。">
+    <title>FutureTech株式会社 | イノベーションで未来を創造するITソリューション</title>
+
+    <!-- slickカルーセル用CSS -->
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+
+    <style>
+        /* =========================
+           共通設定
+        ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 2;
+            color: #222;
+            background: #fff;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: bottom;
+        }
+
+        /* =========================
+           ヘッダー・ナビゲーション
+        ========================= */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, .96);
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header h1 img {
+            display: block;
+            height: 48px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .nav a:hover {
+            color: #1f65ad;
+        }
+
+        /* スマホ時に表示するハンバーガーメニューボタン */
+        .menu-btn {
+            display: none;
+            width: 52px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background: #fff;
+            color: #222;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* メニューが開いているときの×ボタン */
+        .menu-btn.open {
+            font-size: 42px;
+            font-weight: 300;
+        }
+
+        /* =========================
+           メインビジュアル・カルーセル
+        ========================= */
+        .main-visual {
+            position: relative;
+            width: 100%;
+            height: clamp(320px, 40vw, 480px);
+            overflow: hidden;
+        }
+
+        /* slickが自動生成する要素にも高さを継承させ、画像下の余白を防ぐ */
+        .main-visual .slick-list,
+        .main-visual .slick-track,
+        .main-visual .slick-slide,
+        .main-visual .slick-slide > div,
+        .main-visual .slide {
+            height: 100%;
+        }
+
+        .main-visual .slide img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.12);
+            opacity: 0;
+            transition: transform 1.8s ease, opacity 1.2s ease;
+        }
+
+        /* 1枚目のメイン画像は下側も見えるように表示位置を調整 */
+        .main-visual .slide-main img {
+            object-position: center bottom;
+        }
+
+        /* ページ読み込み後にメイン画像をふわっと表示 */
+        .main-visual.show .slide img {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* slick-theme.cssのドット用余白を打ち消す */
+        .main-visual.slick-dotted.slick-slider {
+            margin-bottom: 0;
+        }
+
+        /* slickの左右矢印 */
+        .main-visual .slick-prev {
+            left: 24px;
+            z-index: 2;
+        }
+
+        .main-visual .slick-next {
+            right: 24px;
+            z-index: 2;
+        }
+
+        /* slickのドットインジケーター */
+        .main-visual .slick-dots {
+            bottom: 18px;
+            z-index: 5;
+        }
+
+        .main-visual .slick-dots li button:before {
+            color: #fff;
+            opacity: .65;
+            font-size: 10px;
+        }
+
+        .main-visual .slick-dots li.slick-active button:before {
+            color: #fff;
+            opacity: 1;
+        }
+
+        /* =========================
+           メインコンテンツ共通
+        ========================= */
+        main {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 72px 0 24px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            width: 48px;
+            height: 3px;
+            background: #1f65ad;
+            position: absolute;
+            left: 50%;
+            bottom: -12px;
+            transform: translateX(-50%);
+        }
+
+        /* スクロール時に表示させるフェードイン演出 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           ごあいさつセクション
+        ========================= */
+        .message-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 44px;
+            align-items: start;
+        }
+
+        .message-content img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+        }
+
+        .message-text {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 2.1;
+        }
+
+        .sign {
+            text-align: right;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 28px;
+        }
+
+        /* =========================
+           会社概要テーブル
+        ========================= */
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+        }
+
+        .company-table th,
+        .company-table td {
+            border: 1px solid #ddd;
+            padding: 15px 18px;
+        }
+
+        .company-table th {
+            width: 220px;
+            background: #e5e5e5;
+            font-weight: 700;
+        }
+
+        .company-table td {
+            font-weight: 500;
+        }
+
+        /* =========================
+           新着情報
+        ========================= */
+        .news-box {
+            max-height: 240px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 8px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+        }
+
+        .news-item {
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item time {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .news-item p {
+            margin: 4px 0 0;
+            color: #1b3f8b;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* =========================
+           アクセス
+        ========================= */
+        .access-map {
+            width: 100%;
+            height: 320px;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+        }
+
+        .access-text {
+            margin-top: 24px;
+            font-size: 16px;
+            line-height: 2;
+            font-weight: 500;
+        }
+
+        /* =========================
+           お問い合わせフォーム
+        ========================= */
+        .contact-form {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 32px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            margin-top: 8px;
+            padding: 12px 14px;
+            font-size: 16px;
+            font-family: inherit;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #1f65ad;
+            box-shadow: 0 0 0 3px rgba(31, 101, 173, .15);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: #1f65ad;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background: #174f88;
+        }
+
+        .form-message {
+            margin-top: 16px;
+            text-align: center;
+            font-weight: 700;
+            color: #1f65ad;
+        }
+
+        /* =========================
+           ページトップボタン・フッター
+        ========================= */
+        .page-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: #111;
+            color: #fff;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            font-weight: 700;
+        }
+
+        .page-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 22px;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* =========================
+           スマホ表示
+        ========================= */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .header-inner {
+                align-items: center;
+            }
+
+            .header h1 img {
+                height: 42px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: #fff;
+                border-top: 1px solid #eee;
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav a {
+                padding: 18px 24px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .main-visual {
+                height: 260px;
+            }
+
+            .section {
+                padding: 56px 0 20px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .message-content {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .message-content img {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .message-text,
+            .access-text,
+            .news-item p {
+                font-size: 16px;
+            }
+
+            .company-table,
+            .company-table tbody,
+            .company-table tr,
+            .company-table th,
+            .company-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .company-table th {
+                text-align: left;
+            }
+
+            .company-table td {
+                border-top: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- =========================
+         ヘッダー
+    ========================= -->
+    <header class="header">
+        <div class="header-inner">
+            <h1>
+                <a href="practiceindex.html"><img src="img/logo.png" alt="FutureTech株式会社"></a>
+            </h1>
+
+            <!-- スマホ用メニューボタン。開閉時にJSで「☰」と「×」を切り替える -->
+            <button class="menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false">☰</button>
+
+            <!-- グローバルナビゲーション -->
+            <nav class="nav" id="nav">
+                <a href="#message">ごあいさつ</a>
+                <a href="#company">会社概要</a>
+                <a href="#news">新着情報</a>
+                <a href="#access">アクセス</a>
+                <a href="#contact">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========================
+         メインビジュアル：slickカルーセル
+    ========================= -->
+    <div class="main-visual slider" id="mainVisual">
+        <div class="slide slide-main">
+            <img src="img/mainimage2.jpg" alt="イノベーションで未来を創造するパートナー FutureTech株式会社">
+        </div>
+        <div class="slide">
+            <img src="img/photo1.jpg" alt="FutureTech株式会社の事業イメージ">
+        </div>
+        <div class="slide">
+            <img src="img/photo2.jpg" alt="FutureTech株式会社のオフィスイメージ">
+        </div>
+    </div>
+
+    <!-- =========================
+         メインコンテンツ
+    ========================= -->
+    <main>
+        <!-- ごあいさつ -->
+        <section id="message" class="section fade-in">
+            <h2 class="section-title">ごあいさつ</h2>
+            <div class="message-content">
+                <img src="img/ceo.jpg" alt="代表者写真">
+                <div class="message-text">
+                    <p>未来の技術で明るい未来を創造する、FutureTech株式会社の代表取締役です。当社はテクノロジーの力を通じて、社会課題の解決と新しい価値の創出に取り組んでいます。</p>
+                    <p>AI、IoT、クラウドなどの先端技術を活用し、お客様のビジネスに寄り添ったソリューションを提供してまいります。</p>
+                    <p>今後も変化を恐れず、挑戦を続ける企業として、皆様とともに未来を創造してまいります。</p>
+                    <p class="sign">代表取締役　佐藤 健一</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 会社概要 -->
+        <section id="company" class="section fade-in">
+            <h2 class="section-title">会社概要</h2>
+            <table class="company-table">
+                <tr>
+                    <th>会社名</th>
+                    <td>FutureTech株式会社</td>
+                </tr>
+                <tr>
+                    <th>設立</th>
+                    <td>2010年3月</td>
+                </tr>
+                <tr>
+                    <th>代表者</th>
+                    <td>佐藤健一</td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>東京都港区芝公園4-8-4</td>
+                </tr>
+                <tr>
+                    <th>事業内容</th>
+                    <td>テクノロジー開発、ITソリューション提供</td>
+                </tr>
+                <tr>
+                    <th>従業員数</th>
+                    <td>150名</td>
+                </tr>
+                <tr>
+                    <th>資本金</th>
+                    <td>5,000万円</td>
+                </tr>
+                <tr>
+                    <th>連絡先</th>
+                    <td>03-xxxx-xxxx</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 新着情報 -->
+        <section id="news" class="section fade-in">
+            <h2 class="section-title">新着情報</h2>
+            <div class="news-box">
+                <article class="news-item">
+                    <time>2025年7月25日</time>
+                    <p>新製品を発表しました。</p>
+                </article>
+                <article class="news-item">
+                    <time>2025年7月10日</time>
+                    <p>採用情報を更新しました。</p>
+                </article>
+                <article class="news-item">
+                    <time>2025年6月30日</time>
+                    <p>イベントに出展しました。</p>
+                </article>
+                <article class="news-item">
+                    <time>2025年6月15日</time>
+                    <p>技術ブログを公開しました。</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- アクセス -->
+        <section id="access" class="section fade-in">
+            <h2 class="section-title">アクセス</h2>
+            <iframe class="access-map" src="https://www.google.com/maps?q=東京タワー&output=embed" loading="lazy">
+            </iframe>
+            <div class="access-text">
+                <p><strong>所在地</strong><br>東京都港区芝公園4-8-4</p>
+                <p><strong>最寄り駅</strong><br>都営地下鉄 大江戸線「赤羽橋駅」徒歩5分</p>
+            </div>
+        </section>
+
+        <!-- お問い合わせ -->
+        <section id="contact" class="section fade-in">
+            <h2 class="section-title">お問い合わせ</h2>
+            <form class="contact-form">
+                <label>
+                    お名前
+                    <input type="text" name="name" required>
+                </label>
+                <label>
+                    メールアドレス
+                    <input type="email" name="email" required>
+                </label>
+                <label>
+                    お問い合わせ内容
+                    <textarea name="message" rows="6" required></textarea>
+                </label>
+                <button type="submit">送信する</button>
+                <p class="form-message" id="formMessage"></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- ページトップへ戻るボタン -->
+    <button class="page-top" id="pageTop" type="button">▲</button>
+
+    <!-- フッター -->
+    <footer>
+        <p>© FutureTech Inc. All Rights Reserved.</p>
+    </footer>
+
+    <!-- =========================
+         JavaScript読み込み
+    ========================= -->
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script src="js/slick.min.js"></script>
+
+    <script>
+        /* =========================
+           slickカルーセルの初期化
+        ========================= */
+        $(function () {
+            $(".main-visual.slider").slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                arrows: true,
+                infinite: true,
+                speed: 600,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                pauseOnHover: true
+            });
+        });
+    </script>
+
+    <script>
+        /* =========================
+           要素の取得
+        ========================= */
+        const menuBtn = document.getElementById("menuBtn");
+        const nav = document.getElementById("nav");
+        const pageTop = document.getElementById("pageTop");
+        const fadeItems = document.querySelectorAll(".fade-in");
+        const contactForm = document.querySelector(".contact-form");
+        const formMessage = document.getElementById("formMessage");
+
+        /* =========================
+           スマホメニューの開閉
+           開いているときはボタン表示を「×」へ切り替える
+        ========================= */
+        function closeMenu() {
+            nav.classList.remove("open");
+            menuBtn.classList.remove("open");
+            menuBtn.textContent = "☰";
+            menuBtn.setAttribute("aria-label", "メニューを開く");
+            menuBtn.setAttribute("aria-expanded", "false");
+        }
+
+        menuBtn.addEventListener("click", () => {
+            const isOpen = nav.classList.toggle("open");
+            menuBtn.classList.toggle("open", isOpen);
+            menuBtn.textContent = isOpen ? "×" : "☰";
+            menuBtn.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+            menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        nav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        /* =========================
+           メインビジュアルの表示アニメーション
+        ========================= */
+        window.addEventListener("load", () => {
+            const mainVisual = document.getElementById("mainVisual");
+            mainVisual.classList.add("show");
+        });
+
+        /* =========================
+           スクロール時の処理
+           ・ページトップボタンの表示
+           ・各セクションのフェードイン
+        ========================= */
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 400) {
+                pageTop.classList.add("show");
+            } else {
+                pageTop.classList.remove("show");
+            }
+
+            fadeItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    item.classList.add("show");
+                }
+            });
+        });
+
+        pageTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        /* 初期表示時にもフェードイン判定を実行 */
+        window.dispatchEvent(new Event("scroll"));
+
+        /* =========================
+           お問い合わせフォーム送信時の仮メッセージ表示
+        ========================= */
+        if (contactForm) {
+            contactForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                formMessage.textContent = "お問い合わせありがとうございます。内容を確認のうえ、ご連絡いたします。";
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+
+</html>

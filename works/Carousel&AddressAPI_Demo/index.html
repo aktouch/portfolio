@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- スマホ表示に対応するための設定 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>slick カルーセル + 郵便番号API + Googleマップ</title>
+
+  <!-- slick本体のCSS -->
+  <link rel="stylesheet" href="css/slick.css">
+
+  <!-- slickのテーマCSS：矢印・ドットなどの見た目に使う -->
+  <link rel="stylesheet" href="css/slick-theme.css">
+
+  <style>
+    /* =========================
+      ページ全体の基本設定
+    ========================= */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, "Yu Gothic", "游ゴシック", sans-serif;
+      background: #f8fafd;
+      color: #202124;
+    }
+
+    /*
+      全体の横幅を整えるコンテナ
+      Google風に余白を広めにして、中央寄せにしている
+    */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+
+    /* =========================
+      ヘッダー部分
+    ========================= */
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #202124;
+    }
+
+    .page-lead {
+      margin: 12px 0 0;
+      font-size: 15px;
+      color: #5f6368;
+      line-height: 1.7;
+    }
+
+    /* =========================
+      Google風カード共通
+    ========================= */
+    .card {
+      background: #fff;
+      border: 1px solid #e8eaed;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(60, 64, 67, 0.10);
+    }
+
+    /* =========================
+      カルーセル部分
+    ========================= */
+
+    /*
+      カルーセル全体のカード
+      下に住所フォームを置くので、まず画像を見せるエリアとして独立させる
+    */
+    .slider-card {
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    /*
+      slickの矢印を画像外に出すための外枠
+      左右に余白を作って、そこへ矢印を配置する
+    */
+    .slider-wrap {
+      padding: 0 60px;
+      box-sizing: border-box;
+    }
+
+    /*
+      slickを適用する本体
+      JavaScript側で $('.slider').slick({...}) と指定している
+    */
+    .slider {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /*
+      1枚1枚のスライド
+    */
+    .slider-item {
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /*
+      スライド内の画像
+
+      height:auto にすることで、
+      画像本来の縦横比を保ったまま表示する
+      そのため、左右や上下が切れない
+    */
+    .slider-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+
+    /*
+      slickの左右矢印ボタン共通
+    */
+    .slick-prev,
+    .slick-next {
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+    }
+
+    /*
+      左矢印を画像の外側へ移動
+    */
+    .slick-prev {
+      left: -55px;
+    }
+
+    /*
+      右矢印を画像の外側へ移動
+    */
+    .slick-next {
+      right: -55px;
+    }
+
+    /*
+      slickの矢印アイコンは :before に入っているため、
+      ここで色やサイズを調整する
+    */
+    .slick-prev:before,
+    .slick-next:before {
+      font-size: 40px;
+      color: #3c4043;
+    }
+
+    /*
+      下のドット位置
+    */
+    .slick-dots {
+      bottom: -42px;
+    }
+
+    /*
+      ドットのサイズ・色
+    */
+    .slick-dots li button:before {
+      font-size: 11px;
+      color: #5f6368;
+    }
+
+    .slick-dots li.slick-active button:before {
+      color: #1a73e8;
+    }
+
+    /* =========================
+      郵便番号フォーム部分
+    ========================= */
+
+    /*
+      APIデモ部分のカード
+    */
+    .form-card {
+      padding: 32px;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a73e8;
+      background: #e8f0fe;
+      border-radius: 999px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 26px;
+      color: #202124;
+    }
+
+    .section-text {
+      margin: 12px 0 28px;
+      font-size: 15px;
+      color: #5f6368;
+      line-height: 1.8;
+    }
+
+    /*
+      郵便番号検索欄
+      Google検索バーのように、横長・角丸・薄い影にしている
+    */
+    .zipcode-search {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .zipcode-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    /*
+      郵便番号入力欄
+    */
+    .zipcode-input {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 16px;
+      border: 1px solid #dadce0;
+      border-radius: 999px;
+      box-sizing: border-box;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    /*
+      入力欄を選択したときの見た目
+    */
+    .zipcode-input:focus {
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+    }
+
+    /*
+      検索ボタン
+    */
+    .search-button {
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      background: #1a73e8;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.28);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+
+    .search-button:hover {
+      background: #1558b0;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26, 115, 232, 0.34);
+    }
+
+    /*
+      検索中などでボタンを押せない状態
+    */
+    .search-button:disabled {
+      background: #9aa0a6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /*
+      メッセージ表示
+      例：住所を取得しました / 郵便番号を入力してください
+    */
+    .message {
+      min-height: 22px;
+      margin: -8px 0 20px;
+      font-size: 14px;
+      color: #5f6368;
+    }
+
+    .message.is-success {
+      color: #188038;
+    }
+
+    .message.is-error {
+      color: #d93025;
+    }
+
+    /*
+      住所入力欄を2列で配置
+    */
+    .address-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #3c4043;
+    }
+
+    .form-field input {
+      width: 100%;
+      padding: 14px 14px;
+      font-size: 15px;
+      border: 1px solid #dadce0;
+      border-radius: 12px;
+      box-sizing: border-box;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-field input:focus {
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+    }
+
+    /*
+      番地・建物名は横幅いっぱいにする
+    */
+    .form-field.is-full {
+      grid-column: 1 / -1;
+    }
+
+    /*
+      補足テキスト
+    */
+    .form-note {
+      margin: 22px 0 0;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #5f6368;
+      background: #f1f3f4;
+      border-radius: 14px;
+    }
+
+    /* =========================
+      Googleマップ表示部分
+    ========================= */
+
+    /*
+      地図表示用カード
+      住所フォームの下に配置する
+    */
+    .map-card {
+      padding: 32px;
+      margin-top: 32px;
+    }
+
+    /*
+      現在、地図に表示している住所テキスト
+    */
+    .map-address-text {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.7;
+    }
+
+    /*
+      地図全体の外枠
+      iframeを角丸のカード内にきれいに収める
+    */
+    .map-frame-wrap {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      overflow: hidden;
+      border: 1px solid #e8eaed;
+      border-radius: 18px;
+      background: #f1f3f4;
+    }
+
+    /*
+      住所検索前に表示するメッセージ
+    */
+    .map-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+      font-size: 15px;
+      color: #5f6368;
+      text-align: center;
+    }
+
+    /*
+      Googleマップを表示するiframe
+
+      初期状態では display:none にしておき、
+      住所取得後に .is-visible を付けて表示する
+    */
+    .map-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: none;
+    }
+
+    .map-frame.is-visible {
+      display: block;
+    }
+
+    /*
+      Googleマップを別タブで開くリンク
+    */
+    .map-link {
+      display: none;
+      width: fit-content;
+      margin-top: 16px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a73e8;
+      text-decoration: none;
+      border: 1px solid #dadce0;
+      border-radius: 999px;
+      background: #fff;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .map-link:hover {
+      background: #f8fafd;
+      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.16);
+    }
+
+    /* =========================
+      スマホ表示用
+    ========================= */
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 32px 14px 56px;
+      }
+
+      .page-title {
+        font-size: 26px;
+      }
+
+      .slider-card,
+      .form-card,
+      .map-card {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      /*
+        スマホでは横幅が狭いため、
+        矢印用の余白を少し小さくする
+      */
+      .slider-wrap {
+        padding: 0 36px;
+      }
+
+      .slider-item img {
+        border-radius: 14px;
+      }
+
+      .slick-prev {
+        left: -35px;
+      }
+
+      .slick-next {
+        right: -35px;
+      }
+
+      .slick-prev:before,
+      .slick-next:before {
+        font-size: 30px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      /*
+        スマホでは郵便番号入力欄とボタンを縦並びにする
+      */
+      .zipcode-search {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-button {
+        width: 100%;
+      }
+
+      /*
+        スマホでは住所入力欄を1列にする
+      */
+      .address-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /*
+        スマホでは地図の高さを少し低くする
+      */
+      .map-frame-wrap {
+        height: 280px;
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- ページ上部の見出し -->
+    <header class="page-header">
+      <h1 class="page-title">Carousel & Address API Demo</h1>
+      <p class="page-lead">
+        jQuery slickのカルーセルと、郵便番号から住所を自動入力し、取得した住所をGoogleマップで表示するサンプルです。
+      </p>
+    </header>
+
+    <!-- カルーセル部分 -->
+    <section class="card slider-card">
+
+      <!--
+        slider-wrap：
+        矢印を画像外に出すための余白を作る外枠
+      -->
+      <div class="slider-wrap">
+
+        <!--
+          slider：
+          slickを適用する要素
+          この中の .slider-item が1枚ずつスライドになる
+        -->
+        <div class="slider">
+          <div class="slider-item">
+            <img src="img/photo1.jpg" alt="写真1">
+          </div>
+
+          <div class="slider-item">
+            <img src="img/photo2.jpg" alt="写真2">
+          </div>
+
+          <div class="slider-item">
+            <img src="img/photo3.jpg" alt="写真3">
+          </div>
+
+          <div class="slider-item">
+            <img src="img/photo4.jpg" alt="写真4">
+          </div>
+
+          <div class="slider-item">
+            <img src="img/photo5.jpg" alt="写真5">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 郵便番号APIフォーム部分 -->
+    <section class="card form-card">
+      <span class="section-label">ZipCode API</span>
+
+      <h2 class="section-title">郵便番号から住所を自動入力</h2>
+
+      <p class="section-text">
+        郵便番号を入力して「住所を検索」ボタンを押すと、都道府県・市区町村・町域が自動で入力されます。
+      </p>
+
+      <!-- 郵便番号検索エリア -->
+      <div class="zipcode-search">
+        <div class="zipcode-input-wrap">
+          <!--
+            郵便番号入力欄
+
+            inputmode="numeric"：
+            スマホで数字キーボードを出しやすくする
+
+            placeholder：
+            入力例を表示する
+          -->
+          <input type="text" id="zipcode" class="zipcode-input" inputmode="numeric"
+            placeholder="例：1000001 または 100-0001">
+        </div>
+
+        <!--
+          検索ボタン
+          JavaScript側でクリックイベントを設定する
+        -->
+        <button type="button" id="searchAddressButton" class="search-button">
+          住所を検索
+        </button>
+      </div>
+
+      <!-- 検索結果やエラーを表示するエリア -->
+      <p id="message" class="message"></p>
+
+      <!-- 住所入力フォーム -->
+      <div class="address-grid">
+
+        <div class="form-field">
+          <label for="prefecture">都道府県</label>
+          <input type="text" id="prefecture" placeholder="東京都">
+        </div>
+
+        <div class="form-field">
+          <label for="city">市区町村</label>
+          <input type="text" id="city" placeholder="千代田区">
+        </div>
+
+        <div class="form-field is-full">
+          <label for="town">町域</label>
+          <input type="text" id="town" placeholder="千代田">
+        </div>
+
+        <div class="form-field is-full">
+          <label for="street">番地・建物名</label>
+          <input type="text" id="street" placeholder="1-1 〇〇マンション101">
+        </div>
+      </div>
+
+      <p class="form-note">
+        ※APIで自動入力されるのは、主に都道府県・市区町村・町域までです。番地や建物名は手入力してください。
+      </p>
+    </section>
+
+    <!-- Googleマップ表示部分 -->
+    <section class="card map-card">
+      <span class="section-label">Google Map</span>
+
+      <h2 class="section-title">取得した住所を地図で表示</h2>
+
+      <p class="section-text">
+        郵便番号から取得した「都道府県・市区町村・町域」をもとに、Googleマップを表示します。
+        番地・建物名を入力したあとに入力欄から離れると、より詳しい住所で地図を更新します。
+      </p>
+
+      <!-- 現在地図に表示している住所を出すエリア -->
+      <p id="mapAddressText" class="map-address-text">
+        まだ住所は検索されていません。
+      </p>
+
+      <!-- 地図の外枠 -->
+      <div class="map-frame-wrap">
+
+        <!-- 住所検索前に表示するメッセージ -->
+        <div id="mapPlaceholder" class="map-placeholder">
+          郵便番号を検索すると、ここに地図が表示されます。
+        </div>
+
+        <!-- Googleマップを表示するiframe -->
+        <iframe id="googleMapFrame" class="map-frame" src="" title="Googleマップ" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <!-- Googleマップ本体を別タブで開くリンク -->
+      <a id="openMapLink" class="map-link" href="#" target="_blank" rel="noopener noreferrer">
+        Googleマップで開く
+      </a>
+    </section>
+  </div>
+
+  <!--
+    jQuery本体
+
+    slickはjQueryを使って動くため、
+    slick.min.jsより前に読み込む必要がある
+  -->
+  <script src="js/jquery-4.0.0.min.js"></script>
+
+  <!-- slick本体のJavaScript -->
+  <script src="js/slick.min.js"></script>
+
+  <script>
+    /*
+      HTMLの読み込みが終わったら実行する
+    */
+    $(function () {
+
+      /*
+        =========================
+        slickカルーセルの設定
+        =========================
+      */
+      $('.slider').slick({
+        // 自動再生する
+        autoplay: true,
+
+        // 自動再生の切り替え間隔：3000ミリ秒 = 3秒
+        autoplaySpeed: 3000,
+
+        // 下のドットを表示する
+        dots: true,
+
+        // 左右の矢印を表示する
+        arrows: true,
+
+        // 最後の画像の次に、最初の画像へ戻る
+        infinite: true,
+
+        // スライド切り替えアニメーションの速さ：600ミリ秒 = 0.6秒
+        speed: 600,
+
+        // 一度に表示するスライド枚数
+        slidesToShow: 1,
+
+        // 一度に移動するスライド枚数
+        slidesToScroll: 1,
+
+        // マウスを乗せたときに自動再生を止める
+        pauseOnHover: true
+      });
+
+
+      /*
+        =========================
+        郵便番号APIの設定
+        =========================
+      */
+
+      // よく使うHTML要素を変数に入れておく
+      const zipcodeInput = document.getElementById('zipcode');
+      const searchButton = document.getElementById('searchAddressButton');
+      const message = document.getElementById('message');
+
+      const prefectureInput = document.getElementById('prefecture');
+      const cityInput = document.getElementById('city');
+      const townInput = document.getElementById('town');
+      const streetInput = document.getElementById('street');
+
+      // Googleマップ関連のHTML要素を取得
+      const googleMapFrame = document.getElementById('googleMapFrame');
+      const mapPlaceholder = document.getElementById('mapPlaceholder');
+      const mapAddressText = document.getElementById('mapAddressText');
+      const openMapLink = document.getElementById('openMapLink');
+
+      /*
+        メッセージを表示する関数
+
+        text：
+        表示したい文章
+
+        type：
+        success → 緑色
+        error   → 赤色
+        normal  → グレー
+      */
+      function showMessage(text, type) {
+        message.textContent = text;
+
+        // 一度すべての状態用クラスを外す
+        message.classList.remove('is-success', 'is-error');
+
+        // typeに応じてクラスを追加する
+        if (type === 'success') {
+          message.classList.add('is-success');
+        }
+
+        if (type === 'error') {
+          message.classList.add('is-error');
+        }
+      }
+
+      /*
+        住所欄を空にする関数
+        検索に失敗したときや、別の郵便番号を検索するときに使う
+      */
+      function clearAddressFields() {
+        prefectureInput.value = '';
+        cityInput.value = '';
+        townInput.value = '';
+        streetInput.value = '';
+      }
+
+      /*
+        Googleマップ表示を初期状態に戻す関数
+
+        郵便番号が不正な場合や、住所が見つからなかった場合に使う
+      */
+      function resetGoogleMap() {
+        googleMapFrame.src = '';
+        googleMapFrame.classList.remove('is-visible');
+
+        mapPlaceholder.style.display = 'flex';
+        mapAddressText.textContent = 'まだ住所は検索されていません。';
+
+        openMapLink.href = '#';
+        openMapLink.style.display = 'none';
+      }
+
+      /*
+        入力された郵便番号を整える関数
+
+        例：
+        100-0001 → 1000001
+        １０００００１ → 1000001
+
+        全角数字を半角数字に変換し、
+        数字以外の文字を削除している
+      */
+      function normalizeZipcode(value) {
+        return value
+          .replace(/[０-９]/g, function (char) {
+            return String.fromCharCode(char.charCodeAt(0) - 0xFEE0);
+          })
+          .replace(/[^0-9]/g, '');
+      }
+
+      /*
+        ZipCloud APIをJSONP形式で呼び出す関数
+
+        ローカルHTMLから外部APIを呼ぶ場合、
+        通常のfetchやAjaxだとCORS制限で動かないことがある
+
+        そのため今回は、
+        callbackパラメータを使ったJSONP形式で取得している
+      */
+      function fetchAddressByZipcode(zipcode) {
+        return new Promise(function (resolve, reject) {
+
+          // 毎回違うコールバック関数名を作る
+          const callbackName = 'zipcloudCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+
+          // APIを読み込むためのscriptタグを作る
+          const script = document.createElement('script');
+
+          /*
+            APIのURL
+
+            zipcode：
+            検索したい郵便番号
+
+            callback：
+            API取得後に呼び出す関数名
+          */
+          const apiUrl =
+            'https://zipcloud.ibsnet.co.jp/api/search' +
+            '?zipcode=' + encodeURIComponent(zipcode) +
+            '&callback=' + encodeURIComponent(callbackName);
+
+          // scriptタグにAPIのURLを設定する
+          script.src = apiUrl;
+
+          /*
+            APIから結果が返ってきたときに実行される関数
+
+            ZipCloud側が、
+            window[callbackName](データ)
+            のような形で結果を返してくれる
+          */
+          window[callbackName] = function (data) {
+
+            // 不要になったscriptタグを削除する
+            document.body.removeChild(script);
+
+            // 不要になったグローバル関数を削除する
+            delete window[callbackName];
+
+            // 成功扱いとしてデータを返す
+            resolve(data);
+          };
+
+          /*
+            API読み込み自体に失敗した場合
+            例：ネット接続がない、APIにアクセスできない等
+          */
+          script.onerror = function () {
+            document.body.removeChild(script);
+            delete window[callbackName];
+
+            reject(new Error('APIの読み込みに失敗しました。'));
+          };
+
+          // scriptタグをbodyに追加すると、APIへのリクエストが実行される
+          document.body.appendChild(script);
+        });
+      }
+
+      /*
+        Googleマップを更新する関数
+
+        prefecture：都道府県
+        city：市区町村
+        town：町域
+        street：番地・建物名、省略可
+      */
+      function updateGoogleMap(prefecture, city, town, street = '') {
+
+        /*
+          住所を1つの文字列にまとめる
+
+          例：
+          東京都 + 千代田区 + 千代田
+          → 東京都千代田区千代田
+        */
+        const address = prefecture + city + town + street;
+
+        /*
+          住所が空の場合は処理を止める
+        */
+        if (!address) {
+          return;
+        }
+
+        /*
+          URLに入れられるように住所をエンコードする
+
+          日本語住所をそのままURLに入れると不具合が出る場合があるため、
+          encodeURIComponentを使う
+        */
+        const encodedAddress = encodeURIComponent(address);
+
+        /*
+          iframeで表示するGoogleマップURL
+
+          output=embed を付けることで、
+          iframe内に地図として表示しやすくなる
+        */
+        const embedUrl = 'https://www.google.com/maps?q=' + encodedAddress + '&output=embed';
+
+        /*
+          別タブでGoogleマップを開くためのURL
+        */
+        const openUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+
+        /*
+          iframeのsrcにGoogleマップURLをセットする
+          これで地図が表示される
+        */
+        googleMapFrame.src = embedUrl;
+
+        /*
+          非表示だったiframeを表示する
+        */
+        googleMapFrame.classList.add('is-visible');
+
+        /*
+          プレースホルダー文言を非表示にする
+        */
+        mapPlaceholder.style.display = 'none';
+
+        /*
+          表示中の住所をテキストで出す
+        */
+        mapAddressText.textContent = '表示中：' + address;
+
+        /*
+          Googleマップで開くリンクを設定して表示する
+        */
+        openMapLink.href = openUrl;
+        openMapLink.style.display = 'inline-flex';
+      }
+
+      /*
+        郵便番号から住所を検索するメイン処理
+      */
+      async function searchAddress() {
+        // 入力値を取得して、数字7桁に整える
+        const zipcode = normalizeZipcode(zipcodeInput.value);
+
+        // 住所欄と地図を一度クリアする
+        clearAddressFields();
+        resetGoogleMap();
+
+        // 郵便番号が7桁でなければエラー表示
+        if (zipcode.length !== 7) {
+          showMessage('郵便番号は7桁で入力してください。例：1000001', 'error');
+          return;
+        }
+
+        // 検索中はボタンを押せないようにする
+        searchButton.disabled = true;
+        searchButton.textContent = '検索中...';
+        showMessage('住所を検索しています。', 'normal');
+
+        try {
+          // APIから住所データを取得する
+          const data = await fetchAddressByZipcode(zipcode);
+
+          /*
+            data.results が存在しない場合、
+            住所が見つからなかったと判断する
+          */
+          if (!data.results || data.results.length === 0) {
+            showMessage('該当する住所が見つかりませんでした。郵便番号を確認してください。', 'error');
+            return;
+          }
+
+          /*
+            同じ郵便番号で複数候補が返る場合もあるため、
+            今回は先頭の住所を使う
+          */
+          const result = data.results[0];
+
+          /*
+            ZipCloudの返却値は以下のような形
+
+            address1：都道府県
+            address2：市区町村
+            address3：町域
+          */
+          prefectureInput.value = result.address1;
+          cityInput.value = result.address2;
+          townInput.value = result.address3;
+
+          /*
+            取得した住所をもとにGoogleマップを表示する
+
+            この時点では番地・建物名はまだ空なので、
+            都道府県 + 市区町村 + 町域までで地図を出す
+          */
+          updateGoogleMap(result.address1, result.address2, result.address3);
+
+          // 番地入力欄にカーソルを移動する
+          streetInput.focus();
+
+          // 成功メッセージ
+          if (data.results.length > 1) {
+            showMessage('住所を取得しました。複数候補があるため、先頭の候補を入力しています。', 'success');
+          } else {
+            showMessage('住所を取得しました。下に地図を表示しました。番地・建物名も入力できます。', 'success');
+          }
+
+        } catch (error) {
+          // 通信エラーなど
+          showMessage('住所検索に失敗しました。ネット接続やAPIの状態を確認してください。', 'error');
+
+        } finally {
+          // 検索終了後、ボタンを元に戻す
+          searchButton.disabled = false;
+          searchButton.textContent = '住所を検索';
+        }
+      }
+
+      /*
+        検索ボタンをクリックしたら住所検索を実行
+      */
+      searchButton.addEventListener('click', searchAddress);
+
+      /*
+        郵便番号入力欄でEnterキーを押したら住所検索を実行
+      */
+      zipcodeInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          searchAddress();
+        }
+      });
+
+      /*
+        現在入力されている住所情報をもとに、
+        Googleマップを更新する関数
+      
+        blur時・Enterキー押下時の両方で使えるように、
+        共通処理としてまとめている
+      */
+      function updateMapFromCurrentAddress() {
+        updateGoogleMap(
+          prefectureInput.value,
+          cityInput.value,
+          townInput.value,
+          streetInput.value
+        );
+      }
+
+      /*
+        番地・建物名の入力欄からフォーカスが外れたとき、
+        入力済みの住所全体でGoogleマップを更新する
+      */
+      streetInput.addEventListener('blur', function () {
+        updateMapFromCurrentAddress();
+      });
+
+      /*
+        番地・建物名の入力欄でEnterキーを押したとき、
+        入力済みの住所全体でGoogleマップを更新する
+      */
+      streetInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          /*
+            Enterキーによる不要な送信・画面更新を防ぐ
+            今回はformタグではないですが、入れておくと安全
+          */
+          event.preventDefault();
+
+          /*
+            番地まで含めてGoogleマップを更新
+          */
+          updateMapFromCurrentAddress();
+
+          /*
+            入力が完了した感じを出すためにフォーカスを外す
+            不要ならこの1行は削除してOK
+          */
+          streetInput.blur();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

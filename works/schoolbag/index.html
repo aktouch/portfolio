@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>samuraiプレゼン資料</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: "Yu Gothic", "游ゴシック", sans-serif;
+      background: #f7f3ed;
+      color: #2f2a25;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: 32px;
+      text-align: center;
+      letter-spacing: 0.08em;
+    }
+
+    .lead {
+      margin-bottom: 40px;
+      text-align: center;
+      color: #6f6258;
+    }
+
+    section {
+      margin-bottom: 48px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 22px;
+      border-left: 6px solid #7a4f32;
+      padding-left: 12px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+
+    .button-wrap {
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 24px;
+      background: #7a4f32;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .button:hover {
+      opacity: 0.85;
+    }
+
+    .qr {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    .qr img {
+      width: 180px;
+      max-width: 100%;
+      display: inline-block;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .qr p {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #6f6258;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>samuraiプレゼン資料</h1>
+    <p class="lead">
+      ランドセルリメイクLPのデザインカンプ・スマホビュー・バナー
+    </p>
+
+    <!-- スマホビュー -->
+    <section>
+      <h2>デザインカンプ（スマホビュー）</h2>
+
+      <div class="button-wrap">
+        <a
+          class="button"
+          href="https://dean-assist-56330408.figma.site/"
+          target="_blank"
+          rel="noopener"
+        >
+          スマホビューを開く
+        </a>
+
+        <div class="qr">
+          <img src="img/qr.png" alt="スマホビューQRコード">
+          <p>スマートフォンでQRコードを読み取ってご覧ください</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PCデザインカンプ -->
+    <section>
+      <h2>デザインカンプ</h2>
+      <img src="img/designcomp.jpg" alt="ランドセルリメイクLPのデザインカンプ">
+    </section>
+
+    <!-- バナー -->
+    <section>
+      <h2>バナー</h2>
+      <img src="img/banner.jpg" alt="ランドセルリメイクLPのバナー">
+    </section>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Web Works</title>
+  <meta name="description" content="制作したWebページをまとめたポートフォリオサイトです。">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <!-- ==============================
+    Header
+    - ページ上部に固定表示するナビゲーション
+    - GitHub Pagesでも崩れにくいよう、リンクはすべて相対パスで指定
+  =============================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="./" aria-label="Portfolio top">Portfolio</a>
+
+      <nav class="global-nav" aria-label="グローバルナビゲーション">
+        <a href="#works">Works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==============================
+      Hero
+      - Apple風に、短いコピー・大きな余白・シンプルなビジュアルで構成
+      - 背景画像は img/main.jpg を使用
+    =============================== -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Web Design / HTML / CSS / JavaScript</p>
+        <h1>つくったものを、<br>見える形に。</h1>
+        <p class="lead">
+          職業訓練・自主制作で作成したWebページをまとめたポートフォリオです。
+          LP、API連携、UI実装、計測デモなど、学習成果を実装ベースで掲載しています。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#works">制作物を見る</a>
+          <a class="button secondary" href="https://github.com/aktouch/" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <img src="./img/main.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ==============================
+      Works
+      - works配下に置いた各制作物へのリンクカード
+      - フォルダ名に & があるものは、URL上では %26 と書くと安全
+    =============================== -->
+    <section id="works" class="section works-section">
+      <div class="section-heading">
+        <p class="eyebrow">Selected Works</p>
+        <h2>制作物一覧</h2>
+        <p>
+          クリックすると、それぞれの制作ページへ移動します。
+          すべてGitHub Pages上で閲覧できる静的ページとして整理しています。
+        </p>
+      </div>
+
+      <div class="works-grid">
+        <article class="work-card featured">
+          <div class="work-meta">
+            <span>LP Design</span>
+            <span>Schoolbag</span>
+          </div>
+          <h3>ランドセルリメイクLP</h3>
+          <p>
+            ランドセルリメイクサービスを想定したLP。マーケティング分析、商品設計、訴求設計を踏まえた制作物です。
+          </p>
+          <a class="card-link" href="./works/schoolbag/">View project</a>
+        </article>
+
+        <article class="work-card">
+          <div class="work-meta">
+            <span>JavaScript</span>
+            <span>Analytics</span>
+          </div>
+          <h3>LP Analytics Demo</h3>
+          <p>
+            仮想PV・クリック・CVなど、LP改善に必要なファネル計測を体験できるJavaScriptデモです。
+          </p>
+          <a class="card-link" href="./works/LPAnalyticsDemo/">View project</a>
+        </article>
+
+        <article class="work-card">
+          <div class="work-meta">
+            <span>Web Site</span>
+            <span>FutureTech</span>
+          </div>
+          <h3>FutureTech</h3>
+          <p>
+            企業サイト風のWebページ。レイアウト、余白、見出し設計、レスポンシブ対応の練習として制作しました。
+          </p>
+          <a class="card-link" href="./works/futuretech/">View project</a>
+        </article>
+
+        <article class="work-card">
+          <div class="work-meta">
+            <span>API</span>
+            <span>Carousel</span>
+          </div>
+          <h3>Carousel & Address API Demo</h3>
+          <p>
+            画像カルーセル、郵便番号からの住所自動入力、Google Map連携を組み合わせた実装デモです。
+          </p>
+          <a class="card-link" href="./works/Carousel%26AddressAPI_Demo/">View project</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==============================
+      About
+      - 制作姿勢や学習テーマを簡潔に記載
+    =============================== -->
+    <section id="about" class="section about-section">
+      <div class="about-panel">
+        <p class="eyebrow">About this portfolio</p>
+        <h2>コードを書いて、動く形で見せる。</h2>
+        <p>
+          このポートフォリオでは、見た目のデザインだけでなく、HTML/CSSの構造化、JavaScriptによる動き、API連携、
+          レスポンシブ対応など、実装面での学習成果が伝わるように整理しています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ==============================
+      Contact
+      - 今後、メール・SNS・GitHubなどの導線を追加する場所
+    =============================== -->
+    <section id="contact" class="section contact-section">
+      <p class="eyebrow">Contact</p>
+      <h2>制作物は随時追加していきます。</h2>
+      <p>
+        新しい制作物を追加したら、worksフォルダに格納し、このトップページのカードを増やすだけで更新できます。
+      </p>
+    </section>
+  </main>
+
+  <!-- ==============================
+    Footer
+  =============================== -->
+  <footer class="site-footer">
+    <small>&copy; 2026 Portfolio. All rights reserved.</small>
+  </footer>
+</body>
+</html>
