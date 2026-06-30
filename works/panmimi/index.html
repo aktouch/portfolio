@@ -1,15 +1,299 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>パン耳ラスクデザインカンプ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hill Bread｜PCデザインカンプ</title>
+
+  <style>
+    /* ==============================
+      基本設定
+      - 余白、フォント、背景色を整える
+    ============================== */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", sans-serif;
+      color: #222;
+      background: #f4efe8;
+      line-height: 1.7;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==============================
+      ページ全体の枠
+    ============================== */
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+
+    /* ==============================
+      上部タイトルエリア
+    ============================== */
+    .work-header {
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    .work-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: #b80000;
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.25;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #555;
+      font-size: 15px;
+    }
+
+    /* ==============================
+      各セクション
+    ============================== */
+    .section {
+      margin-top: 52px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: clamp(22px, 3vw, 30px);
+    }
+
+    .section-title::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      background: #b80000;
+      border-radius: 50%;
+    }
+
+    .section-text {
+      margin: 0 0 18px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* ==============================
+      PCブラウザ風の外枠
+      - デザインカンプを「PCで表示している」ように見せる部分
+    ============================== */
+    .browser-frame {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      background: #ececec;
+      border-bottom: 1px solid #d7d7d7;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      background: #bbb;
+      border-radius: 50%;
+    }
+
+    .browser-url {
+      flex: 1;
+      padding: 6px 12px;
+      color: #777;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 999px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ==============================
+      スクリーンショット表示エリア
+      - LPが縦長なので、PC画面内をスクロールして確認できるようにする
+    ============================== */
+    .screenshot-viewport {
+      position: relative;
+      max-height: 780px;
+      overflow-y: auto;
+      background: #111;
+    }
+
+    .screenshot-viewport--menu {
+      max-height: none;
+      overflow: hidden;
+    }
+
+    .screenshot-viewport img {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .scroll-note {
+      position: sticky;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      display: inline-block;
+      margin: 14px;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.68);
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ==============================
+      戻るボタン
+    ============================== */
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 22px;
+      color: #fff;
+      font-weight: 700;
+      background: #222;
+      border-radius: 999px;
+      transition: opacity 0.2s;
+    }
+
+    .back-link:hover {
+      opacity: 0.78;
+    }
+
+    /* ==============================
+      スマホ表示時の調整
+    ============================== */
+    @media (max-width: 768px) {
+      .page {
+        padding: 32px 14px 56px;
+      }
+
+      .browser-frame {
+        border-radius: 12px;
+      }
+
+      .browser-bar {
+        min-height: 38px;
+        padding: 0 10px;
+      }
+
+      .browser-dot {
+        width: 9px;
+        height: 9px;
+      }
+
+      .browser-url {
+        font-size: 11px;
+      }
+
+      .screenshot-viewport {
+        max-height: 620px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>figmaで制作したデザインカンプ</h1>
-        <p>PCtop</p>
-        <img src="img/LP_PC.jpg" alt="">
-        <p>menu</p>
-        <img src="img/menu.jpg" alt="">
+  <main class="page">
+    <!-- ページ見出し -->
+    <header class="work-header">
+      <span class="work-label">WORKS / DESIGN COMP</span>
+      <h1>Hill Bread<br>PCデザインカンプ</h1>
+      <p class="lead">
+        Figmaで制作したパン耳ラスクLPのPC版デザインカンプです。画像をそのまま並べるのではなく、PCブラウザの外枠に入れて、実際の表示イメージが伝わるようにしています。
+      </p>
+    </header>
+
+    <!-- PC版トップページのデザインカンプ -->
+    <section class="section" aria-labelledby="pc-top-title">
+      <h2 class="section-title" id="pc-top-title">PCトップページ</h2>
+      <p class="section-text">縦長のLPデザインのため、ブラウザ風の枠内をスクロールして全体を確認できます。</p>
+
+      <div class="browser-frame">
+        <div class="browser-bar" aria-hidden="true">
+          <div class="browser-dots">
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+          </div>
+          <div class="browser-url">https://example.com/hill-bread/</div>
+        </div>
+
+        <div class="screenshot-viewport">
+          <span class="scroll-note">Scroll preview</span>
+          <img src="img/LP_PC.jpg" alt="Hill Bread PCトップページのデザインカンプ">
+        </div>
+      </div>
+    </section>
+
+    <!-- メニューを開いた状態のPC表示 -->
+    <section class="section" aria-labelledby="menu-title">
+      <h2 class="section-title" id="menu-title">メニュー展開時</h2>
+      <p class="section-text">ハンバーガーメニューを開いたときのPC表示イメージです。</p>
+
+      <div class="browser-frame">
+        <div class="browser-bar" aria-hidden="true">
+          <div class="browser-dots">
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+          </div>
+          <div class="browser-url">https://example.com/hill-bread/menu-open/</div>
+        </div>
+
+        <div class="screenshot-viewport screenshot-viewport--menu">
+          <img src="img/menu.jpg" alt="Hill Bread メニュー展開時のPCデザインカンプ">
+        </div>
+      </div>
+    </section>
+
+    <!-- ポートフォリオ一覧へ戻る導線 -->
+    <a class="back-link" href="../index.html">Works一覧へ戻る</a>
+  </main>
 </body>
 </html>
