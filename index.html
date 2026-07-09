@@ -7,15 +7,21 @@
   <meta name="description" content="制作したWebページをまとめたポートフォリオサイトです。">
   <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
   <!-- ==============================
-    Header
-    - ページ上部に固定表示するナビゲーション
-    - GitHub Pagesでも崩れにくいよう、リンクはすべて相対パスで指定
+    Instagram風 Portfolio Top
+    - プロフィール / ストーリー / 投稿グリッドの雰囲気で作品を眺めやすく整理
+    - Worksは linestamp → pictgram → 既存作品 の順で配置
   =============================== -->
+  <div class="bg-scene" aria-hidden="true"></div>
+
   <header class="site-header">
     <div class="header-inner">
-      <a class="logo" href="./" aria-label="Portfolio top">Portfolio</a>
+      <a class="logo" href="./" aria-label="Portfolio top">
+        <span class="logo-camera"></span>
+        <span>Portfolio</span>
+      </a>
 
       <nav class="global-nav" aria-label="グローバルナビゲーション">
         <a href="#works">Works</a>
@@ -28,33 +34,55 @@
   <main>
     <!-- ==============================
       Hero
-      - Apple風に、短いコピー・大きな余白・シンプルなビジュアルで構成
-      - 背景画像は img/main.jpg を使用
+      - Instagramのプロフィール画面をイメージ
     =============================== -->
     <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Web Design / HTML / CSS / JavaScript</p>
-        <h1>つくったものを、<br>見える形に。</h1>
-        <p class="lead">
-          職業訓練・自主制作で作成したWebページをまとめたポートフォリオです。
-          LP、API連携、UI実装、計測デモなど、学習成果を実装ベースで掲載しています。
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="#works">制作物を見る</a>
-          <a class="button secondary" href="https://github.com/aktouch/" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <div class="profile-card">
+        <div class="profile-avatar" aria-hidden="true">P</div>
+        <div class="profile-info">
+          <p class="eyebrow">Web Design / HTML / CSS / JavaScript</p>
+          <h1>Portfolio<br>Works Feed</h1>
+          <p class="lead">
+            職業訓練・自主制作で作成したWebページをまとめたポートフォリオです。
+            LP、API連携、UI実装、計測デモなど、学習成果を投稿グリッドのように整理しています。
+          </p>
+
+          <div class="profile-stats" aria-label="制作カテゴリ">
+            <div><strong>8</strong><span>works</span></div>
+            <div><strong>HTML</strong><span>coding</span></div>
+            <div><strong>JS</strong><span>motion</span></div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#works">制作物を見る</a>
+            <a class="button secondary" href="https://github.com/aktouch/" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <img src="./img/main.jpg" alt="">
+      <div class="story-row" aria-label="注目作品">
+        <a class="story-item" href="./works/linestamp/">
+          <span>💬</span>
+          <small>linestamp</small>
+        </a>
+        <a class="story-item" href="./works/pictgram/">
+          <span>◎</span>
+          <small>pictgram</small>
+        </a>
+        <a class="story-item" href="./works/schoolbag/">
+          <span>🎒</span>
+          <small>schoolbag</small>
+        </a>
+        <a class="story-item" href="./works/LPAnalyticsDemo/">
+          <span>📊</span>
+          <small>analytics</small>
+        </a>
       </div>
     </section>
 
     <!-- ==============================
       Works
-      - works配下に置いた各制作物へのリンクカード
-      - フォルダ名に & があるものは、URL上では %26 と書くと安全
-      - panmimi / banner は学校サーバー掲載物を統合する想定
+      - Instagram風：投稿グリッドのようなカード一覧
     =============================== -->
     <section id="works" class="section works-section">
       <div class="section-heading">
@@ -62,88 +90,151 @@
         <h2>制作物一覧</h2>
         <p>
           クリックすると、それぞれの制作ページへ移動します。
-          すべてGitHub Pages上で閲覧できる静的ページとして整理しています。
+          投稿を眺めるように、サムネイル感のあるカードとして整理しました。
         </p>
       </div>
 
       <div class="works-grid">
         <article class="work-card featured">
-          <div class="work-meta">
-            <span>LP Design</span>
-            <span>Schoolbag</span>
+          <a class="post-thumb thumb-line" href="./works/linestamp/" aria-label="LINEスタンプ制作を見る">
+            <span>LINE<br>STAMP</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Illustrator</span>
+              <span>LINE Stamp</span>
+            </div>
+            <h3>LINEスタンプ制作</h3>
+            <p>
+              Illustratorで制作したLINEスタンプ作品。QRコードとスクリーンショットを掲載し、ポップに見せるWorksページとして追加しました。
+            </p>
+            <a class="card-link" href="./works/linestamp/">View project</a>
           </div>
-          <h3>ランドセルリメイクLP</h3>
-          <p>
-            ランドセルリメイクサービスを想定したLP。マーケティング分析、商品設計、訴求設計を踏まえた制作物です。
-          </p>
-          <a class="card-link" href="./works/schoolbag/">View project</a>
         </article>
 
         <article class="work-card">
-          <div class="work-meta">
-            <span>JavaScript</span>
-            <span>Analytics</span>
+          <a class="post-thumb thumb-pict" href="./works/pictgram/" aria-label="ピクトグラムを見る">
+            <span>PICT<br>GRAM</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Illustrator</span>
+              <span>Pictogram</span>
+            </div>
+            <h3>ピクトグラム</h3>
+            <p>
+              節電・手洗いなどのテーマを、シンプルな図形構成で表現したピクトグラム制作。検討過程もあわせて掲載しています。
+            </p>
+            <a class="card-link" href="./works/pictgram/">View project</a>
           </div>
-          <h3>LP Analytics Demo</h3>
-          <p>
-            仮想PV・クリック・CVなど、LP改善に必要なファネル計測を体験できるJavaScriptデモです。
-          </p>
-          <a class="card-link" href="./works/LPAnalyticsDemo/">View project</a>
         </article>
 
         <article class="work-card">
-          <div class="work-meta">
-            <span>Web Site</span>
-            <span>FutureTech</span>
+          <a class="post-thumb thumb-schoolbag" href="./works/schoolbag/" aria-label="ランドセルリメイクLPを見る">
+            <span>LP<br>DESIGN</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>LP Design</span>
+              <span>Schoolbag</span>
+            </div>
+            <h3>ランドセルリメイクLP</h3>
+            <p>
+              ランドセルリメイクサービスを想定したLP。マーケティング分析、商品設計、訴求設計を踏まえた制作物です。
+            </p>
+            <a class="card-link" href="./works/schoolbag/">View project</a>
           </div>
-          <h3>FutureTech</h3>
-          <p>
-            企業サイト風のWebページ。レイアウト、余白、見出し設計、レスポンシブ対応の練習として制作しました。
-          </p>
-          <a class="card-link" href="./works/futuretech/">View project</a>
         </article>
 
         <article class="work-card">
-          <div class="work-meta">
-            <span>API</span>
-            <span>Carousel</span>
+          <a class="post-thumb thumb-analytics" href="./works/LPAnalyticsDemo/" aria-label="LP Analytics Demoを見る">
+            <span>JS<br>DEMO</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>JavaScript</span>
+              <span>Analytics</span>
+            </div>
+            <h3>LP Analytics Demo</h3>
+            <p>
+              仮想PV・クリック・CVなど、LP改善に必要なファネル計測を体験できるJavaScriptデモです。
+            </p>
+            <a class="card-link" href="./works/LPAnalyticsDemo/">View project</a>
           </div>
-          <h3>Carousel & Address API Demo</h3>
-          <p>
-            画像カルーセル、郵便番号からの住所自動入力、Google Map連携を組み合わせた実装デモです。
-          </p>
-          <a class="card-link" href="./works/Carousel%26AddressAPI_Demo/">View project</a>
         </article>
 
         <article class="work-card">
-          <div class="work-meta">
-            <span>Design Comp</span>
-            <span>School Work</span>
+          <a class="post-thumb thumb-future" href="./works/futuretech/" aria-label="FutureTechを見る">
+            <span>WEB<br>SITE</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Web Site</span>
+              <span>FutureTech</span>
+            </div>
+            <h3>FutureTech</h3>
+            <p>
+              企業サイト風のWebページ。レイアウト、余白、見出し設計、レスポンシブ対応の練習として制作しました。
+            </p>
+            <a class="card-link" href="./works/futuretech/">View project</a>
           </div>
-          <h3>パン耳ラスク デザインカンプ</h3>
-          <p>
-            パン耳ラスクをテーマにしたデザインカンプ制作。限られた時間内で、商品イメージと見やすさを意識して制作しました。
-          </p>
-          <a class="card-link" href="./works/panmimi/">View project</a>
         </article>
 
         <article class="work-card">
-          <div class="work-meta">
-            <span>Photoshop</span>
-            <span>Banner</span>
+          <a class="post-thumb thumb-api" href="./works/Carousel%26AddressAPI_Demo/" aria-label="Carousel & Address API Demoを見る">
+            <span>API<br>MAP</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>API</span>
+              <span>Carousel</span>
+            </div>
+            <h3>Carousel & Address API Demo</h3>
+            <p>
+              画像カルーセル、郵便番号からの住所自動入力、Google Map連携を組み合わせた実装デモです。
+            </p>
+            <a class="card-link" href="./works/Carousel%26AddressAPI_Demo/">View project</a>
           </div>
-          <h3>Photoshopバナー制作</h3>
-          <p>
-            Photoshopで制作したバナー作品。目的に合わせたビジュアル、文字配置、余白設計を意識して制作しました。
-          </p>
-          <a class="card-link" href="./works/banner/">View project</a>
+        </article>
+
+        <article class="work-card">
+          <a class="post-thumb thumb-panmimi" href="./works/panmimi/" aria-label="パン耳ラスク デザインカンプを見る">
+            <span>DESIGN<br>COMP</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Design Comp</span>
+              <span>School Work</span>
+            </div>
+            <h3>パン耳ラスク デザインカンプ</h3>
+            <p>
+              パン耳ラスクをテーマにしたデザインカンプ制作。限られた時間内で、商品イメージと見やすさを意識して制作しました。
+            </p>
+            <a class="card-link" href="./works/panmimi/">View project</a>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <a class="post-thumb thumb-banner" href="./works/banner/" aria-label="Photoshopバナー制作を見る">
+            <span>BANNER<br>WORK</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Photoshop</span>
+              <span>Banner</span>
+            </div>
+            <h3>Photoshopバナー制作</h3>
+            <p>
+              Photoshopで制作したバナー作品。目的に合わせたビジュアル、文字配置、余白設計を意識して制作しました。
+            </p>
+            <a class="card-link" href="./works/banner/">View project</a>
+          </div>
         </article>
       </div>
     </section>
 
     <!-- ==============================
       About
-      - 制作姿勢や学習テーマを簡潔に記載
     =============================== -->
     <section id="about" class="section about-section">
       <div class="about-panel">
@@ -158,7 +249,6 @@
 
     <!-- ==============================
       Contact
-      - 今後、メール・SNS・GitHubなどの導線を追加する場所
     =============================== -->
     <section id="contact" class="section contact-section">
       <p class="eyebrow">Contact</p>
@@ -169,9 +259,6 @@
     </section>
   </main>
 
-  <!-- ==============================
-    Footer
-  =============================== -->
   <footer class="site-footer">
     <small>&copy; 2026 Portfolio. All rights reserved.</small>
   </footer>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164.74 177.5">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        stroke: #eb9a18;
+        stroke-width: 5px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #eb9a18;
+      }
+
+      .cls-3 {
+        stroke: #231815;
+        stroke-width: 12px;
+      }
+    </style>
+  </defs>
+  <g id="_ピクト1" data-name="ピクト1">
+    <g>
+      <path class="cls-2" d="M135.49,85c0-31.07-25.18-56.25-56.25-56.25s-56.25,25.18-56.25,56.25c0,13.81,4.99,26.46,13.25,36.25h86c8.26-9.79,13.25-22.44,13.25-36.25Z"/>
+      <line class="cls-1" x1="44.24" y1="135" x2="114.24" y2="135"/>
+      <line class="cls-1" x1="54.24" y1="150" x2="104.24" y2="150"/>
+      <rect class="cls-2" x="59.24" y="165" width="40" height="10"/>
+      <line class="cls-1" x1="39.24" y1="7.5" x2="49.24" y2="22.5"/>
+      <line class="cls-1" x1="79.24" x2="79.24" y2="15"/>
+      <line class="cls-1" x1="124.24" y1="10" x2="114.24" y2="20"/>
+      <line class="cls-3" x1="160.49" y1="11.88" x2="4.24" y2="168.12"/>
+    </g>
+  </g>
+</svg>

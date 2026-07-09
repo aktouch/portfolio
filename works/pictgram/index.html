@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ピクトグラム制作 | Portfolio</title>
+
+  <style>
+    /* =========================
+      基本設定
+    ========================= */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", sans-serif;
+      color: #2f2a25;
+      background: #f7f3ed;
+      line-height: 1.8;
+    }
+
+    .pict-page img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .pict-page {
+      overflow-x: hidden;
+    }
+
+    .pict-page .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .pict-page section {
+      margin-top: 88px;
+    }
+
+    .pict-page h1,
+    .pict-page h2,
+    .pict-page h3,
+    .pict-page p {
+      margin-top: 0;
+    }
+
+    .pict-page h2 {
+      font-size: 28px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .pict-page h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .pict-page .section-lead {
+      max-width: 760px;
+      margin-bottom: 32px;
+      color: #5f564e;
+    }
+
+    /* =========================
+      メインビジュアル
+    ========================= */
+    .pict-page .hero {
+      padding: 88px 0 96px;
+      background:
+        radial-gradient(circle at top left, rgba(220, 160, 80, 0.18), transparent 32%),
+        linear-gradient(135deg, #fffaf2 0%, #f7f3ed 100%);
+      border-bottom: 1px solid rgba(47, 42, 37, 0.08);
+      overflow: hidden;
+    }
+
+    .pict-page .hero-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .pict-page .label {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      color: #8a5a18;
+      background: #fff1d8;
+      border-radius: 999px;
+    }
+
+    .pict-page h1 {
+      margin-bottom: 20px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.25;
+      letter-spacing: 0.08em;
+    }
+
+    .pict-page .hero-text {
+      max-width: 620px;
+      color: #5f564e;
+      font-size: 16px;
+    }
+
+    .pict-page .hero-note {
+      margin-top: 28px;
+      padding-left: 18px;
+      border-left: 4px solid #d98a24;
+      font-weight: bold;
+      color: #3a332d;
+    }
+
+    .pict-page .hero-preview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 560px;
+      margin-left: auto;
+    }
+
+    .pict-page .hero-icon {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1 / 1;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(47, 42, 37, 0.08);
+      overflow: hidden;
+    }
+
+    .pict-page .hero-icon img {
+      width: 78%;
+      height: 78%;
+      object-fit: contain;
+    }
+
+    /* SVGの描画範囲が大きい場合の個別調整 */
+    .pict-page .hero-icon img.icon-charge,
+    .pict-page .pict-img img.icon-charge {
+      width: 70%;
+      height: 70%;
+    }
+
+    /* =========================
+      作品一覧
+    ========================= */
+    .pict-page .works-section {
+      margin-top: 88px;
+    }
+
+    .pict-page .works-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .pict-page .pict-card {
+      padding: 24px;
+      background: #fff;
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 14px 32px rgba(47, 42, 37, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .pict-page .pict-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 44px rgba(47, 42, 37, 0.1);
+    }
+
+    .pict-page .pict-img {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 20px;
+      padding: 24px;
+      background: #faf7f1;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .pict-page .pict-img img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+    }
+
+    .pict-page .pict-card h3 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .pict-page .pict-card p {
+      margin-bottom: 0;
+      color: #6d635a;
+      font-size: 14px;
+    }
+
+    .pict-page .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 999px;
+    }
+
+    .pict-page .tag-orange {
+      color: #b16010;
+      background: #fff0dd;
+    }
+
+    .pict-page .tag-blue {
+      color: #246d9e;
+      background: #e6f4ff;
+    }
+
+    .pict-page .tag-green {
+      color: #3d7a35;
+      background: #e9f7e7;
+    }
+
+    .pict-page .tag-purple {
+      color: #6a4aa0;
+      background: #f0e9ff;
+    }
+
+    /* =========================
+      概要カード
+    ========================= */
+    .pict-page .overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .pict-page .info-card {
+      padding: 28px;
+      background: #fff;
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 24px;
+    }
+
+    .pict-page .info-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .pict-page .info-card li + li {
+      margin-top: 6px;
+    }
+
+    /* =========================
+      テーブル
+    ========================= */
+    .pict-page .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 20px;
+    }
+
+    .pict-page table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+
+    .pict-page th,
+    .pict-page td {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(47, 42, 37, 0.08);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .pict-page th {
+      width: 28%;
+      background: #faf7f1;
+      font-weight: bold;
+    }
+
+    .pict-page tr:last-child th,
+    .pict-page tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* =========================
+      制作プロセス
+    ========================= */
+    .pict-page .process-list {
+      display: grid;
+      gap: 24px;
+    }
+
+    .pict-page .process-item {
+      position: relative;
+      padding: 28px 28px 28px 80px;
+      background: #fff;
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 24px;
+    }
+
+    .pict-page .process-number {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      background: #2f2a25;
+      border-radius: 50%;
+    }
+
+    .pict-page .process-item p:last-child,
+    .pict-page .process-item ul:last-child {
+      margin-bottom: 0;
+    }
+
+    .pict-page .process-item ul {
+      padding-left: 1.2em;
+    }
+
+    .pict-page .color-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .pict-page .color-card {
+      padding: 18px;
+      background: #fff;
+      border: 1px solid rgba(47, 42, 37, 0.08);
+      border-radius: 18px;
+    }
+
+    .pict-page .color-dot {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+
+    .pict-page .orange {
+      background: #e8912d;
+    }
+
+    .pict-page .blue {
+      background: #2f8ec9;
+    }
+
+    .pict-page .green {
+      background: #59a84f;
+    }
+
+    .pict-page .purple {
+      background: #7b5ab6;
+    }
+
+    .pict-page .color-card h3 {
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .pict-page .color-card p {
+      margin-bottom: 0;
+      color: #6d635a;
+      font-size: 14px;
+    }
+
+    /* =========================
+      まとめ
+    ========================= */
+    .pict-page .closing-section {
+      margin-top: 40px;
+      margin-bottom: 56px;
+    }
+
+    .pict-page .closing {
+      padding: 40px;
+      background: #2f2a25;
+      color: #fff;
+      border-radius: 28px;
+    }
+
+    .pict-page .closing h2 {
+      margin-bottom: 16px;
+    }
+
+    .pict-page .closing p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .pict-page .footer {
+      padding: 48px 0 32px;
+      text-align: center;
+      color: #8a8178;
+      font-size: 13px;
+    }
+
+    /* =========================
+      レスポンシブ
+    ========================= */
+    @media (max-width: 900px) {
+      .pict-page .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .pict-page .hero-preview {
+        max-width: 520px;
+        margin-left: 0;
+      }
+
+      .pict-page .works-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pict-page .overview {
+        grid-template-columns: 1fr;
+      }
+
+      .pict-page .color-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pict-page .container {
+        width: min(100% - 28px, 1100px);
+      }
+
+      .pict-page .hero {
+        padding: 56px 0 64px;
+      }
+
+      .pict-page section {
+        margin-top: 64px;
+      }
+
+      .pict-page h2 {
+        font-size: 24px;
+      }
+
+      .pict-page .hero-preview,
+      .pict-page .works-grid,
+      .pict-page .color-list {
+        grid-template-columns: 1fr;
+      }
+
+      .pict-page .hero-icon img {
+        width: 74%;
+        height: 74%;
+      }
+
+      .pict-page .pict-card {
+        padding: 20px;
+      }
+
+      .pict-page .pict-img {
+        padding: 22px;
+      }
+
+      .pict-page .process-item {
+        padding: 76px 22px 24px;
+      }
+
+      .pict-page .process-number {
+        top: 24px;
+        left: 22px;
+      }
+
+      .pict-page .closing-section {
+        margin-top: 32px;
+      }
+
+      .pict-page .closing {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pict-page">
+    <!-- メインビジュアル -->
+    <header class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="label">Illustrator / Pictogram Design</span>
+          <h1>ピクトグラム制作</h1>
+          <p class="hero-text">
+            公共施設や案内表示で使用することを想定し、「節電・手洗い・充電・リモートワーク」の4種類のピクトグラムを制作しました。
+            一目で意味が伝わること、シリーズとして統一感があることを意識し、シンプルな線画表現で構成しています。
+          </p>
+          <p class="hero-note">
+            情報を整理し、どうすれば一瞬で伝わるかを考えながら制作しました。
+          </p>
+        </div>
+
+        <div class="hero-preview" aria-label="制作したピクトグラムのプレビュー">
+          <div class="hero-icon">
+            <img src="SVG/pict01.svg" alt="節電・消灯のピクトグラム">
+          </div>
+          <div class="hero-icon">
+            <img src="SVG/pict02.svg" alt="手洗い・消毒のピクトグラム">
+          </div>
+          <div class="hero-icon">
+            <img class="icon-charge" src="SVG/pict03.svg" alt="充電スポットのピクトグラム">
+          </div>
+          <div class="hero-icon">
+            <img src="SVG/pict04.svg" alt="リモートワークのピクトグラム">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 作品一覧 -->
+      <section class="container works-section" aria-labelledby="works-title">
+        <h2 id="works-title">Works</h2>
+        <p class="section-lead">
+          4つのテーマごとに、意味が伝わりやすいモチーフを選定し、線幅・余白・表現ルールを統一しました。
+        </p>
+
+        <div class="works-grid">
+          <article class="pict-card">
+            <div class="pict-img">
+              <img src="SVG/pict01.svg" alt="節電・消灯のピクトグラム">
+            </div>
+            <span class="tag tag-orange">Energy</span>
+            <h3>節電・消灯</h3>
+            <p>
+              電球と斜線を組み合わせ、照明やエネルギーを直感的に連想できるようにしました。
+            </p>
+          </article>
+
+          <article class="pict-card">
+            <div class="pict-img">
+              <img src="SVG/pict02.svg" alt="手洗い・消毒のピクトグラム">
+            </div>
+            <span class="tag tag-blue">Clean</span>
+            <h3>手洗い・消毒</h3>
+            <p>
+              水滴と手の形を簡略化し、清潔感と手洗いの動作が伝わる構成にしました。
+            </p>
+          </article>
+
+          <article class="pict-card">
+            <div class="pict-img">
+              <img class="icon-charge" src="SVG/pict03.svg" alt="充電スポットのピクトグラム">
+            </div>
+            <span class="tag tag-green">Charge</span>
+            <h3>充電スポット</h3>
+            <p>
+              スマートフォンと充電マークを組み合わせ、モバイル充電の用途がすぐ伝わるようにしました。
+            </p>
+          </article>
+
+          <article class="pict-card">
+            <div class="pict-img">
+              <img src="SVG/pict04.svg" alt="リモートワークのピクトグラム">
+            </div>
+            <span class="tag tag-purple">Remote</span>
+            <h3>リモートワーク</h3>
+            <p>
+              家とPCを組み合わせ、在宅で働くイメージをシンプルに表現しました。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 課題概要 -->
+      <section class="container" aria-labelledby="overview-title">
+        <h2 id="overview-title">制作概要</h2>
+
+        <div class="overview">
+          <div class="info-card">
+            <h3>課題</h3>
+            <p>
+              公共施設や求人で使用する4種類のピクトグラムを制作する課題。
+            </p>
+            <ul>
+              <li>節電・消灯</li>
+              <li>手洗い・消毒</li>
+              <li>充電スポット（モバイル）</li>
+              <li>リモートワーク</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>条件</h3>
+            <ul>
+              <li>Illustratorで制作</li>
+              <li>シンプルで一目で意味が伝わること</li>
+              <li>共通したデザインテイストで統一すること</li>
+              <li>線幅・余白・表現ルールを揃えること</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- モチーフ選定 -->
+      <section class="container" aria-labelledby="motif-title">
+        <h2 id="motif-title">モチーフ選定</h2>
+        <p class="section-lead">
+          最初に、それぞれのテーマから連想しやすいモチーフを複数案出し、
+          「誰が見てもすぐ理解できること」と「Illustratorでシンプルに制作できること」の両立を基準に選定しました。
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>テーマ</th>
+              <th>検討したモチーフ</th>
+            </tr>
+            <tr>
+              <th>節電・消灯</th>
+              <td>電球／スイッチ／コンセント</td>
+            </tr>
+            <tr>
+              <th>手洗い・消毒</th>
+              <td>手＋水滴／消毒ボトル／蛇口</td>
+            </tr>
+            <tr>
+              <th>充電スポット</th>
+              <td>スマートフォン／コンセント／バッテリー</td>
+            </tr>
+            <tr>
+              <th>リモートワーク</th>
+              <td>家＋PC／人物＋PC／オンライン会議</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 制作プロセス -->
+      <section class="container" aria-labelledby="process-title">
+        <h2 id="process-title">制作プロセス</h2>
+
+        <div class="process-list">
+          <article class="process-item">
+            <span class="process-number">01</span>
+            <h3>図形の簡略化</h3>
+            <p>
+              Illustratorで効率よく制作できるよう、複雑な形状は避け、円・長方形・角丸長方形・線・三角形などの基本図形を中心に構成しました。
+            </p>
+            <p>
+              例えば手洗いアイコンでは、リアルな手の形ではなく、受け皿のような形状に簡略化し、視認性と制作効率を両立しました。
+            </p>
+          </article>
+
+          <article class="process-item">
+            <span class="process-number">02</span>
+            <h3>デザインルールの統一</h3>
+            <p>
+              4種類を並べたときにシリーズとして見えるように、以下のルールを設定しました。
+            </p>
+            <ul>
+              <li>線のみで構成する</li>
+              <li>線幅を統一する</li>
+              <li>塗りなしでシンプルに見せる</li>
+              <li>余白を十分に確保する</li>
+              <li>モチーフのサイズ感を揃える</li>
+            </ul>
+          </article>
+
+          <article class="process-item">
+            <span class="process-number">03</span>
+            <h3>色の設計</h3>
+            <p>
+              モノクロでも成立するデザインを前提にしながら、意味を連想しやすい色をアクセントとして設定しました。
+              色にも役割を持たせることで、視認性と情報伝達のしやすさを高めています。
+            </p>
+
+            <div class="color-list">
+              <div class="color-card">
+                <div class="color-dot orange"></div>
+                <h3>オレンジ</h3>
+                <p>照明・エネルギー</p>
+              </div>
+
+              <div class="color-card">
+                <div class="color-dot blue"></div>
+                <h3>ブルー</h3>
+                <p>水・清潔</p>
+              </div>
+
+              <div class="color-card">
+                <div class="color-dot green"></div>
+                <h3>グリーン</h3>
+                <p>バッテリー・充電</p>
+              </div>
+
+              <div class="color-card">
+                <div class="color-dot purple"></div>
+                <h3>パープル</h3>
+                <p>IT・オンライン</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="process-item">
+            <span class="process-number">04</span>
+            <h3>ブラッシュアップ</h3>
+            <p>
+              制作後は4点を並べて比較し、線幅・モチーフサイズ・余白・配色を調整しました。
+              特に手洗いアイコンは手の形状をより簡略化し、他のアイコンと並べたときのバランスを整えました。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 制作で意識したこと -->
+      <section class="container closing-section" aria-labelledby="point-title">
+        <div class="closing">
+          <h2 id="point-title">制作で意識したこと</h2>
+          <p>
+            完成度だけでなく、「情報をどう整理し、どうすれば一瞬で伝わるか」という視点を意識して制作しました。
+            モチーフ選定から図形の簡略化、配色まで一貫したルールで設計し、シリーズとしての統一感も重視しています。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© Portfolio Works - Pictogram Design</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164.42 146.25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4276bb;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #4276bb;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="_ピクト1" data-name="ピクト1">
+    <g>
+      <rect class="cls-2" x="2.5" y="53.59" width="54.02" height="90.16" rx="12" ry="12"/>
+      <line class="cls-2" x1="17.23" y1="95.66" x2="41.79" y2="95.66"/>
+      <line class="cls-2" x1="29.51" y1="80.64" x2="29.51" y2="110.69"/>
+      <rect class="cls-2" x="17.23" y="34.15" width="25.49" height="19.44"/>
+      <line class="cls-2" x1="29.98" y1="34.15" x2="29.51" y2="17.53"/>
+      <rect class="cls-1" x="17.23" y="2.5" width="25.49" height="12.83"/>
+      <line class="cls-2" x1="42.73" y1="8.92" x2="67.32" y2="8.92"/>
+      <line class="cls-2" x1="64.58" y1="8.92" x2="71.75" y2="19.42"/>
+      <line class="cls-2" x1="71.75" y1="34.15" x2="76.8" y2="43.87"/>
+      <line class="cls-2" x1="79.88" y1="50.69" x2="84.49" y2="59.47"/>
+      <line class="cls-2" x1="93.1" y1="39.28" x2="99.76" y2="48.46"/>
+      <line class="cls-2" x1="82.85" y1="25.17" x2="89.51" y2="34.34"/>
+      <g>
+        <path class="cls-2" d="M152.79,119.51h-39.65c-.28-.18-.57-.34-.88-.48l-29.17-13.65c-4.13-1.93-9.09-.13-11.02,4l-1.06,2.27c-1.93,4.13-.13,9.09,4,11.02l27.86,13.03c1.58,1.29,3.59,2.07,5.77,2.07h44.16c5.02,0,9.13-4.11,9.13-9.13s-4.11-9.13-9.13-9.13Z"/>
+        <rect class="cls-2" x="108.27" y="101.25" width="50.23" height="18.26" rx="9.13" ry="9.13"/>
+      </g>
+      <line class="cls-2" x1="87.2" y1="64.64" x2="91.81" y2="73.42"/>
+      <line class="cls-2" x1="104.94" y1="54.88" x2="111.6" y2="64.06"/>
+    </g>
+  </g>
+</svg>

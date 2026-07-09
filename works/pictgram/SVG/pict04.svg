@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168.61 157.67">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 5px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-4, .cls-5 {
+        stroke: #695ba5;
+      }
+
+      .cls-1, .cls-5 {
+        fill: #695ba5;
+      }
+
+      .cls-2 {
+        stroke-width: 17px;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: #fff;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: none;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        stroke-width: 6px;
+      }
+    </style>
+  </defs>
+  <g id="_ピクト1" data-name="ピクト1">
+    <g>
+      <line class="cls-4" x1="84.65" y1="2.5" x2="2.05" y2="80.04"/>
+      <line class="cls-4" x1="166.55" y1="80.04" x2="84.65" y2="2.5"/>
+      <rect class="cls-1" x="116.75" y="2.5" width="17.71" height="42.75"/>
+      <line class="cls-4" x1="16.67" y1="67.6" x2="16.67" y2="154.67"/>
+      <line class="cls-4" x1="154.36" y1="67.6" x2="154.36" y2="154.67"/>
+      <line class="cls-4" x1="156.76" y1="154.67" x2="14.25" y2="154.67"/>
+      <rect class="cls-4" x="52.94" y="76.75" width="63.04" height="39.46" rx="6" ry="6"/>
+      <polygon class="cls-5" points="123.3 134.12 47.73 134.12 52.94 116.21 115.14 116.21 123.3 134.12"/>
+      <rect class="cls-3" x="69.63" y="122.97" width="29.66" height="4.4" rx="2.2" ry="2.2"/>
+      <line class="cls-2" x1="133.42" y1="64.92" x2="100.36" y2="33.45"/>
+    </g>
+  </g>
+</svg>
