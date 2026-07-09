@@ -24,19 +24,19 @@
       </a>
 
       <nav class="global-nav" aria-label="グローバルナビゲーション">
-        <a href="#works">Works</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#works">Works</a>
       </nav>
     </div>
   </header>
 
   <main>
     <!-- ==============================
-      Hero
+      About / Hero
       - Instagramのプロフィール画面をイメージ
+      - このポートフォリオの概要と更新方針をまとめる
     =============================== -->
-    <section class="hero">
+    <section id="about" class="hero">
       <div class="profile-card">
         <div class="profile-visual">
           <div class="profile-avatar">
@@ -49,8 +49,13 @@
           <h1>Portfolio<br>Works Feed</h1>
           <p class="lead">
             職業訓練・自主制作で作成したWebページをまとめたポートフォリオです。
-            LP、API連携、UI実装、計測デモなど、学習成果を投稿グリッドのように整理しています。
+            LP、API連携、UI実装、計測デモなどを投稿グリッドのように整理しています。
           </p>
+
+          <div class="update-note" aria-label="制作物の追加方法">
+            <strong>制作物の追加方法</strong>
+            <span>新しい制作物ができたら、worksフォルダに格納し、このトップページのカードを増やすだけで更新できます。</span>
+          </div>
 
           <div class="profile-stats" aria-label="制作カテゴリ">
             <div><strong>8</strong><span>works</span></div>
@@ -140,8 +145,8 @@
           </a>
           <div class="post-content">
             <div class="work-meta">
+              <span>Figma</span>
               <span>LP Design</span>
-              <span>Schoolbag</span>
             </div>
             <h3>ランドセルリメイクLP</h3>
             <p>
@@ -174,10 +179,12 @@
           </a>
           <div class="post-content">
             <div class="work-meta">
-              <span>Web Site</span>
-              <span>FutureTech</span>
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Website</span>
             </div>
-            <h3>FutureTech</h3>
+            <h3>企業Webサイト</h3>
             <p>
               企業サイト風のWebページ。レイアウト、余白、見出し設計、レスポンシブ対応の練習として制作しました。
             </p>
@@ -208,8 +215,8 @@
           </a>
           <div class="post-content">
             <div class="work-meta">
+              <span>Figma</span>
               <span>Design Comp</span>
-              <span>School Work</span>
             </div>
             <h3>パン耳ラスク デザインカンプ</h3>
             <p>
@@ -238,30 +245,6 @@
       </div>
     </section>
 
-    <!-- ==============================
-      About
-    =============================== -->
-    <section id="about" class="section about-section">
-      <div class="about-panel">
-        <p class="eyebrow">About this portfolio</p>
-        <h2>コードを書いて、動く形で見せる。</h2>
-        <p>
-          このポートフォリオでは、見た目のデザインだけでなく、HTML/CSSの構造化、JavaScriptによる動き、API連携、
-          レスポンシブ対応など、実装面での学習成果が伝わるように整理しています。
-        </p>
-      </div>
-    </section>
-
-    <!-- ==============================
-      Contact
-    =============================== -->
-    <section id="contact" class="section contact-section">
-      <p class="eyebrow">Contact</p>
-      <h2>制作物は随時追加していきます。</h2>
-      <p>
-        新しい制作物を追加したら、worksフォルダに格納し、このトップページのカードを増やすだけで更新できます。
-      </p>
-    </section>
   </main>
 
   <footer class="site-footer">

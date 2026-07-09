@@ -253,6 +253,32 @@ main,
   font-size: clamp(15px, 1.9vw, 18px);
 }
 
+.update-note {
+  max-width: 720px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+  border-radius: 18px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, var(--ig-purple), var(--ig-pink), var(--ig-yellow)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 26px rgba(80, 32, 80, 0.08);
+}
+
+.update-note strong {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.update-note span {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
 .profile-stats {
   margin-top: 28px;
   display: flex;
@@ -390,9 +416,7 @@ main,
   letter-spacing: -0.052em;
 }
 
-.section-heading p,
-.about-panel p,
-.contact-section p {
+.section-heading p {
   color: var(--color-muted);
   font-size: 16px;
 }
@@ -546,37 +570,6 @@ main,
 }
 
 /* ==============================
-  About / Contact
-============================== */
-.about-panel,
-.contact-section {
-  border-radius: var(--radius-large);
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  box-shadow: 0 14px 42px rgba(80, 32, 80, 0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.about-panel {
-  padding: clamp(32px, 7vw, 70px);
-}
-
-.about-panel p {
-  max-width: 820px;
-}
-
-.contact-section {
-  padding: clamp(32px, 7vw, 70px);
-  text-align: center;
-}
-
-.contact-section p {
-  max-width: 680px;
-  margin: 18px auto 0;
-}
-
-/* ==============================
   Footer
 ============================== */
 .site-footer {
@@ -654,6 +647,10 @@ main,
 
   .lead {
     font-size: 15px;
+  }
+
+  .update-note {
+    padding: 13px 14px;
   }
 
   .button {
