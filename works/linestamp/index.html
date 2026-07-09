@@ -71,62 +71,9 @@
       box-shadow: 0 16px 40px rgba(0,0,0,0.16);
     }
 
-    .purchase {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .qr-box {
-      background: #fff;
-      padding: 16px;
-      border-radius: 24px;
-      border: 4px solid #06c755;
-      text-align: center;
-    }
-
-    .qr-box img {
-      width: 100%;
-      max-width: 180px;
-      display: block;
-      margin: 0 auto;
-    }
-
-    .speech {
-      position: relative;
-      background: #e8ffd9;
-      border-radius: 28px;
-      padding: 24px 28px;
-      border: 3px solid #06c755;
-    }
-
-    .speech::before {
-      content: "";
-      position: absolute;
-      left: -16px;
-      top: 48%;
-      width: 28px;
-      height: 28px;
-      background: #e8ffd9;
-      border-left: 3px solid #06c755;
-      border-bottom: 3px solid #06c755;
-      transform: rotate(45deg);
-    }
-
-    .speech h2 {
-      font-size: 28px;
-      color: #06c755;
-      margin-bottom: 8px;
-    }
-
-    .speech p {
-      font-size: 20px;
-      font-weight: 700;
-    }
-
     .stamp-preview h2,
-    .info h2 {
+    .info h2,
+    .purchase h2 {
       font-size: 24px;
       margin-bottom: 18px;
       color: #06c755;
@@ -193,6 +140,96 @@
       opacity: 0.9;
     }
 
+    .purchase {
+      display: grid;
+      gap: 22px;
+    }
+
+    .purchase-inner {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .speech {
+      position: relative;
+      background: #e8ffd9;
+      border-radius: 28px;
+      padding: 24px 28px;
+      border: 3px solid #06c755;
+    }
+
+    .speech::before {
+      content: "";
+      position: absolute;
+      right: -16px;
+      top: 48%;
+      width: 28px;
+      height: 28px;
+      background: #e8ffd9;
+      border-right: 3px solid #06c755;
+      border-top: 3px solid #06c755;
+      transform: rotate(45deg);
+    }
+
+    .speech h3 {
+      font-size: 28px;
+      color: #06c755;
+      margin-bottom: 8px;
+    }
+
+    .speech p {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .line-url {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 2px dashed #06c755;
+      border-radius: 16px;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .line-url span {
+      display: block;
+      color: #06c755;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .line-url a {
+      color: #263238;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .qr-box {
+      background: #fff;
+      padding: 16px;
+      border-radius: 24px;
+      border: 4px solid #06c755;
+      text-align: center;
+    }
+
+    .qr-box img {
+      width: 100%;
+      max-width: 180px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .qr-caption {
+      margin-top: 8px;
+      color: #06c755;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .back {
       display: inline-block;
       margin-top: 32px;
@@ -210,20 +247,22 @@
         padding: 32px 16px 48px;
       }
 
-      .purchase {
+      .meta-list,
+      .process,
+      .purchase-inner {
         grid-template-columns: 1fr;
+      }
+
+      .purchase-inner {
         text-align: center;
       }
 
       .speech::before {
         left: 50%;
-        top: -16px;
+        right: auto;
+        top: auto;
+        bottom: -16px;
         transform: translateX(-50%) rotate(135deg);
-      }
-
-      .meta-list,
-      .process {
-        grid-template-columns: 1fr;
       }
 
       .card {
@@ -243,20 +282,6 @@
     </section>
 
     <div class="content">
-      <section class="card purchase">
-        <div class="qr-box">
-          <img src="img/qr.png" alt="LINEスタンプ購入用QRコード">
-        </div>
-
-        <div class="speech">
-          <h2>ぜひ買ってください！笑</h2>
-          <p>
-            QRコードからスタンプページにアクセスできます。<br>
-            日常でゆるく使える、ポップな雰囲気のスタンプを制作しました。
-          </p>
-        </div>
-      </section>
-
       <section class="card stamp-preview">
         <h2>Stamp Preview</h2>
         <div class="stamp-image">
@@ -294,6 +319,32 @@
           <div class="process-item">
             申請
             <small>10min</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="card purchase">
+        <h2>LINEスタンプはこちら</h2>
+
+        <div class="purchase-inner">
+          <div class="speech">
+            <h3>ぜひ買ってください！笑</h3>
+            <p>
+              QRコード、または下記URLからスタンプページにアクセスできます。<br>
+              日常でゆるく使える、ポップな雰囲気のスタンプを制作しました。
+            </p>
+
+            <div class="line-url">
+              <span>URL</span>
+              <a href="https://store.line.me/stickershop/product/35072447/ja?utm_source=gnsh_stickerDetail" target="_blank" rel="noopener noreferrer">
+                https://store.line.me/stickershop/product/35072447/ja?utm_source=gnsh_stickerDetail
+              </a>
+            </div>
+          </div>
+
+          <div class="qr-box">
+            <img src="img/qr.png" alt="LINEスタンプ購入用QRコード">
+            <p class="qr-caption">QRコードからもアクセスできます</p>
           </div>
         </div>
       </section>
