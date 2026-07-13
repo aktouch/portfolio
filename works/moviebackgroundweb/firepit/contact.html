@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>フォームの練習</title>
+<style type="text/css">
+.formtable {
+    border-collapse: collapse;
+    background-color: #86b8cb;
+    width: 600px;
+    color: #fff;
+}
+.formtable th, .formtable td {
+    border: 1px solid #fff;
+    padding: 10px;
+    text-align: center;
+}
+.formtable th {
+    background-color: #44737b;
+}
+#submit, #reset {
+    width: 200px;
+    padding: 5px 0;
+    background-color: #f1fbc6;
+}
+.formtable input[type="text"], .formtable textarea {
+    background-color: #fffce9;
+    padding: 5px 0;
+    border: 1px solid red;
+    width: 95%;
+}
+</style>
+</head>
+
+<body>
+<h1>フォームの練習</h1>
+<form action="abc" method="post" name="form1" id="form1">
+  <table width="700" class="formtable">
+    <tbody>
+      <tr>
+        <th scope="row">お名前</th>
+        <td><input name="textfield" type="text" autofocus="autofocus" required="required" id="textfield" placeholder="お名前を入力してください" size="40" maxlength="10"></td>
+      </tr>
+      <tr>
+        <th scope="row">ご感想</th>
+        <td><textarea name="textarea" cols="40" rows="10" id="textarea"></textarea></td>
+      </tr>
+      <tr>
+        <th scope="row">興味のあるアプリ</th>
+        <td><label>
+            <input name="CheckboxGroup1" type="checkbox" id="CheckboxGroup1_0" value="D" checked="checked">
+            Dreamweaver</label>
+          <label>
+            <input type="checkbox" name="CheckboxGroup1" value="P" id="CheckboxGroup1_1">
+          Photoshop</label>          <label>
+            <input type="checkbox" name="CheckboxGroup1" value="T" id="CheckboxGroup1_2">
+            TeraPad</label>        
+            <input type="checkbox" name="checkbox" id="abc">
+            <label for="abc">Checkbox </label></td>
+      </tr>
+      <tr>
+        <th scope="row">一番得意なアプリ</th>
+        <td><label>
+            <input name="RadioGroup1" type="radio" id="RadioGroup1_0" value="D" checked="checked">
+            Dreamweaver</label>
+          <label>
+            <input name="RadioGroup1" type="radio" id="RadioGroup1_1" value="P">
+          Photoshop</label>          <label>
+            <input name="RadioGroup1" type="radio" id="RadioGroup1_2" value="T">
+            TeraPad</label>        </td>
+      </tr>
+      <tr>
+        <th scope="row">学習時間</th>
+        <td><select name="select" id="select">
+          <option value="1">1時間</option>
+          <option value="2" selected="selected">2時間</option>
+          <option value="3">3時間</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td colspan="2" scope="row"><input type="submit" name="submit" id="submit" value="送信します">
+        <input type="reset" name="reset" id="reset" value="リセットするよ">
+        <input name="imageField" type="image" id="imageField" src="img/icon-kumao.png" alt="Kumao" width="70" height="70"></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<p>&nbsp;</p>
+</body>
+</html>

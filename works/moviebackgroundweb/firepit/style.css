@@ -1,0 +1,392 @@
+@charset "utf-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+img {
+    vertical-align: bottom;
+}
+body {
+    font-family: "BIZ UDPGothic", Meiryo, sans-serif;
+    font-size: 30px;
+    line-height: 1.7;
+    background-color: #C0B7A8;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.container {
+    width: 1000px;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+.box {
+    padding: 50px;
+    background-color: #fff;
+	opacity: 80%;
+}
+.box p {
+    margin-bottom: 1.7em;
+}
+.box p:last-child {
+    margin-bottom: 0px;
+}
+header {
+    height: 100vh;
+    /* [disabled]background-color: #00FFFB;
+*/
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+}
+header h1 {
+    color: #fff;
+    font-size: 300px;
+    line-height: 0.5em;
+    text-shadow: 10px 10px 10px rgba(248,248,248,0.5);
+
+}
+
+
+header h1 span {
+    font-size: 0.18em;
+    font-style: normal;
+    display: block;
+    margin-bottom: 20px;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #B67B03 0.1em, #DAAF08 0.2em, #FEE9A0 0.3em, #DAAF08 0.4em, #B67B03 0.5em); 
+	-webkit-background-clip: text;
+  
+}
+header h1 .aaa {
+	font-size: 60%;
+	  color: transparent;
+	background: repeating-linear-gradient(0deg, #B67B03 0.1em, #DAAF08 0.2em, #FEE9A0 0.3em, #DAAF08 0.4em, #B67B03 0.5em); 
+	-webkit-background-clip: text;
+	-webkit-box-reflect: below -0.01em -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, .4)), to(transparent));}
+
+section {
+    margin-bottom: 100px;
+}
+section h2 {
+    font-size: 60px;
+    text-align: center;
+}
+.section-subtitle {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -0.25em;
+}
+.section-subtitle span {
+    display: block;
+    font-size: 0.5em;
+}
+.kumao-box {
+    font-weight: bold;
+    background-color: #c2cf8c;
+    background-image: url(img/icon-kumao.png);
+    background-repeat: no-repeat;
+    background-position: 50px center;
+    min-height: 230px;
+    padding-left: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.kumao ol {
+    padding-left: 50px;
+}
+.solocamp h3 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+.solocamp h4 {
+    padding: 20px;
+    font-size: 36px;
+    line-height: 1;
+    background-color: #fac5c5;
+}
+.solocamp ul {
+    border-right: 5px solid #fac5c5;
+    border-bottom: 5px solid #fac5c5;
+    padding: 20px 0 20px 50px;
+    border-left: 5px solid #fac5c5;
+}
+.solocamp table {
+    width: 100%;
+    border: 5px solid #fac5c5;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+.solocamp td, .solocamp th {
+    border: 2px solid #fac5c5;
+    padding: 20px;
+}
+.articles-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	width:900px;
+}
+.articles-item {
+    width: 400px;
+    margin-top: 50px;
+}
+.footer-link {
+    font-size: 26px;
+    padding-bottom: 50px;
+    border-bottom: 1px dotted #000;
+    list-style-type: none;
+    columns: 2;
+}
+.footer-link li::before {
+    content: "＞";
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 50px;
+}
+.container .footer-logo {
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0px;
+}
+.footer-logo img {
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+}
+.footer-sns {
+    font-size: 20px;
+    display: flex;
+    list-style-type: none;
+}
+.footer-sns li {
+    margin-left: 40px;
+}
+.copyright {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 50px;
+}
+.comment h2+p {
+    text-align: center;
+}
+.comment textarea, .comment input[type="text"] {
+    display: block;
+    background-color: #c2cf8c;
+    color: #fff;
+    padding: 20px;
+    border: none;
+    font-size: 26px;
+    width: calc(100% - 40px);
+}
+.comment textarea {
+    height: 380px;
+    margin-bottom: 50px;
+}
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.form-buttons input {
+    color: #fff;
+    margin: 0 20px;
+    padding: 20px 0;
+    border: none;
+    font-size: 26px;
+    border-radius: 3em;
+    cursor: pointer;
+}
+#submit {
+    width: 400px;
+    background-color: #000;
+}
+#reset {
+    width: 300px;
+    background-color: #5e5c5c;
+}
+.form-buttons input:hover {
+    opacity: 0.7;
+}
+.bg {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.bg-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.youtube {
+    aspect-ratio: 16/9;
+}
+.youtube iframe {
+    width: 100%;
+    height: 100%;
+}
+.mfp-title {
+  font-size: 16px;
+}
+.container main video {
+}
+
+
+
+
+
+
+.comment ::placeholder {
+    color: #fff;
+    opacity: 0.7;
+}
+@media screen and (max-width:600px){
+body {
+    background-color: #00894B;
+    font-size: 20px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.container {
+    padding: 0 15px;
+    width: auto;
+}
+header h1 {
+    font-size: 90px;
+}
+section {
+    margin-bottom: 50px;
+}
+section h2 {
+    font-size: 30px;
+}
+.section-subtitle {
+    font-size: 20px;
+}
+.box {
+    padding: 20px;
+}
+.kumao-box {
+    background-size: 100px 100px;
+    background-position: center 20px;
+    padding-top: 140px;
+    min-height: 0px;
+}
+.kumao ol {
+    padding-left: 30px;
+
+}
+.solocamp h3, .solocamp h4 {
+    font-size: 24px;
+}
+.solocamp ul {
+    padding-left: 40px;
+}
+.solocamp th, .solocamp td {
+    display: block;
+}
+.solocamp table {
+    margin-top: 30px;
+    border-width: 3px;
+}
+.solocamp th {
+    text-align: left;
+    border-bottom-style: dashed;
+}
+.solocamp td {
+    border-top-style: none;
+}
+.solocamp tr+tr th {
+    border-top-style: none;
+}
+.comment textarea {
+    margin-bottom: 20px;
+}
+.form-buttons {
+    margin-top: 20px;
+}
+.form-buttons input {
+    margin: 0 10px;
+    padding: 10px 0;
+    font-size: 20px;
+}
+.articles-item {
+    width: 100%;
+    margin-top: 40px;
+}
+	.articles-area{
+		max-width: 100%;
+	}
+.footer-link {
+    columns: 1;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+.footer-link li {
+    margin-bottom: 10px;
+}
+.footer-bottom {
+    padding-top: 30px;
+    display: block;
+}
+.container .footer-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.footer-sns {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.footer-sns li {
+    margin: 0 20px 10px;
+}
+.copyright {
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

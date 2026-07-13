@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adobe Premiere Proで編集した動画を、Fire pit紹介ページの背景に実装した制作事例です。">
+  <title>Movie Background Web | Portfolio</title>
+
+  <style>
+    :root {
+      --text: #222222;
+      --muted: #6f6f6f;
+      --line: #e7e3de;
+      --accent: #e97832;
+      --accent-light: #fff4ec;
+      --code-bg: #111411;
+      --code-text: #e8eee9;
+      --content-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    code,
+    pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .page {
+      width: min(calc(100% - 40px), var(--content-width));
+      margin: 0 auto;
+      padding: 34px 0 80px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 64px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      max-width: 820px;
+      margin-bottom: 76px;
+    }
+
+    .label {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: clamp(40px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 18px);
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #4e4e4e;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .meta-line li::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      vertical-align: 1px;
+    }
+
+    .content-block {
+      margin-top: 88px;
+    }
+
+    .content-heading {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .content-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .preview-frame {
+      overflow: hidden;
+      border: 1px solid #d9d5d0;
+      border-radius: 12px;
+      background: #f4f4f4;
+      box-shadow: 0 14px 40px rgba(34, 34, 34, 0.08);
+    }
+
+    .preview-bar {
+      min-height: 46px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #d9d5d0;
+      background: #f7f5f2;
+    }
+
+    .preview-dots {
+      display: flex;
+      gap: 6px;
+      flex: 0 0 auto;
+    }
+
+    .preview-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #c7c1bb;
+    }
+
+    .preview-address {
+      min-width: 0;
+      overflow: hidden;
+      color: #77716b;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 11px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .site-preview {
+      display: block;
+      width: 100%;
+      height: min(76vh, 760px);
+      border: 0;
+      background: #ffffff;
+    }
+
+    .preview-links {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .code-wrap {
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--code-bg);
+    }
+
+    .code-label {
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bfc7c0;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    pre {
+      margin: 0;
+      padding: 24px;
+      overflow-x: auto;
+      color: var(--code-text);
+      font-size: 13px;
+      line-height: 1.75;
+      tab-size: 2;
+    }
+
+    .token-tag,
+    .token-selector {
+      color: #ffad70;
+    }
+
+    .token-attr,
+    .token-property {
+      color: #9fceff;
+    }
+
+    .token-value {
+      color: #b9df99;
+    }
+
+    .explanation {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 36px;
+      border-top: 1px solid var(--line);
+    }
+
+    .explanation-item {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .explanation-item h3 {
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .explanation-item code {
+      color: var(--accent);
+    }
+
+    .explanation-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .process-flow {
+      margin: 4px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .process-flow li {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 24px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .process-flow h3 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .process-flow p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary {
+      margin-top: 88px;
+      padding: 34px 0;
+      border-top: 2px solid var(--text);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 48px;
+    }
+
+    .summary h2 {
+      margin-bottom: 8px;
+    }
+
+    .summary-total {
+      margin-bottom: 0;
+      color: var(--accent);
+      font-size: clamp(44px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .summary-list li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .summary-list li:first-child {
+      padding-top: 0;
+    }
+
+    .summary-list strong {
+      font-weight: 800;
+    }
+
+    .summary-list span {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .folder-note {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-light);
+      color: #5a4a40;
+      font-size: 13px;
+    }
+
+    .folder-note pre {
+      margin-top: 10px;
+      padding: 0;
+      color: #5a4a40;
+      background: transparent;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding-top: 52px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(calc(100% - 28px), var(--content-width));
+        padding-top: 24px;
+      }
+
+      .back-link {
+        margin-bottom: 44px;
+      }
+
+      .hero {
+        margin-bottom: 58px;
+      }
+
+      .content-block,
+      .summary {
+        margin-top: 64px;
+      }
+
+      .site-preview {
+        height: 600px;
+      }
+
+      .explanation,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .explanation {
+        gap: 0;
+      }
+
+      .process-flow li {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .summary {
+        gap: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <a class="back-link" href="../../index.html">← Portfolio Top</a>
+
+    <div class="hero">
+      <p class="label">Video Editing × Web Design</p>
+      <h1>動画を背景にした<br><span>Fire pit紹介ページ</span></h1>
+      <p class="lead">
+        既存のアウトドア製品紹介ページに、Adobe Premiere Proで編集した動画を背景として実装しました。
+        昼から夜、使用前から使用中へと場面をつなぎ、キャンプでFire pitを使う流れが伝わる映像にしています。
+      </p>
+      <ul class="meta-line">
+        <li>Adobe Premiere Pro</li>
+        <li>HTML / CSS</li>
+        <li>制作時間 30min</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <div class="content-heading">
+        <p class="label">Preview</p>
+        <h2>完成したWebページ</h2>
+        <p>下の画面内に、動画背景を実装した <code>firepit/index.html</code> を表示しています。</p>
+      </div>
+
+      <div class="preview-frame">
+        <div class="preview-bar" aria-hidden="true">
+          <div class="preview-dots"><span></span><span></span><span></span></div>
+          <div class="preview-address">works/moviebackgroundweb/firepit/index.html</div>
+        </div>
+        <iframe
+          class="site-preview"
+          src="./firepit/index.html"
+          title="Fire pit 動画背景Webページ"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="preview-links">
+        <a class="text-link" href="./firepit/index.html" target="_blank" rel="noopener noreferrer">完成ページを別タブで開く ↗</a>
+        <span>動画が自動再生されない場合は、別タブで開いて確認してください。</span>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="content-heading">
+        <p class="label">Implementation</p>
+        <h2>背景動画の実装</h2>
+        <p>
+          HTMLの <code>video</code> 要素でMP4を読み込み、CSSでヘッダー全体に広げています。
+          動画を背面、見出しを前面に配置することで、映像の上に文字が表示される構成にしました。
+        </p>
+      </div>
+
+      <div class="code-wrap">
+        <div class="code-label">HTML / firepit/index.html</div>
+        <pre><code><span class="token-tag">&lt;header&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"bg"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;video</span>
+      <span class="token-attr">class</span>=<span class="token-value">"bg-media"</span>
+      <span class="token-attr">autoplay</span>
+      <span class="token-attr">muted</span>
+      <span class="token-attr">loop</span>
+      <span class="token-attr">playsinline</span>
+      <span class="token-attr">preload</span>=<span class="token-value">"auto"</span><span class="token-tag">&gt;</span>
+      <span class="token-tag">&lt;source</span>
+        <span class="token-attr">src</span>=<span class="token-value">"img/firepit_bg.mp4"</span>
+        <span class="token-attr">type</span>=<span class="token-value">"video/mp4"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;/video&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+
+  <span class="token-tag">&lt;h1&gt;</span>Fire pit<span class="token-tag">&lt;/h1&gt;</span>
+<span class="token-tag">&lt;/header&gt;</span></code></pre>
+      </div>
+
+      <div class="code-wrap" style="margin-top: 18px;">
+        <div class="code-label">CSS / background layout</div>
+        <pre><code><span class="token-selector">header</span> {
+  <span class="token-property">position</span>: relative;
+  <span class="token-property">overflow</span>: hidden;
+}
+
+<span class="token-selector">.bg</span> {
+  <span class="token-property">position</span>: absolute;
+  <span class="token-property">inset</span>: 0;
+  <span class="token-property">z-index</span>: 0;
+}
+
+<span class="token-selector">.bg-media</span> {
+  <span class="token-property">width</span>: 100%;
+  <span class="token-property">height</span>: 100%;
+  <span class="token-property">object-fit</span>: cover;
+}
+
+<span class="token-selector">header h1</span> {
+  <span class="token-property">position</span>: relative;
+  <span class="token-property">z-index</span>: 1;
+}</code></pre>
+      </div>
+
+      <div class="explanation">
+        <div class="explanation-item">
+          <h3><code>autoplay + muted</code></h3>
+          <p>ページを開いたときに動画を自動再生するための指定です。</p>
+        </div>
+        <div class="explanation-item">
+          <h3><code>loop</code></h3>
+          <p>動画終了後に先頭へ戻し、背景映像を繰り返します。</p>
+        </div>
+        <div class="explanation-item">
+          <h3><code>playsinline</code></h3>
+          <p>スマートフォンでも全画面に切り替えず、ページ内で再生します。</p>
+        </div>
+        <div class="explanation-item">
+          <h3><code>object-fit: cover</code></h3>
+          <p>縦横比を保ちながら、動画をヘッダー領域いっぱいに表示します。</p>
+        </div>
+        <div class="explanation-item">
+          <h3><code>position: absolute</code></h3>
+          <p>動画をヘッダー全体に重ね、背景として配置します。</p>
+        </div>
+        <div class="explanation-item">
+          <h3><code>z-index</code></h3>
+          <p>動画を背面、タイトルなどのコンテンツを前面に表示します。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="content-heading">
+        <p class="label">Editing Process</p>
+        <h2>動画編集から実装まで</h2>
+        <p>Webページの背景として自然に見えるよう、時間帯と使用シーンの変化を意識して素材を並べました。</p>
+      </div>
+
+      <ol class="process-flow">
+        <li>
+          <span class="step">Step 01</span>
+          <div>
+            <h3>動画の構成を決める</h3>
+            <p>「プロダクトの紹介 → キャンプで火を使う場面 → 夜のキャンプ」という流れを設計しました。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step">Step 02</span>
+          <div>
+            <h3>素材を並べてカットする</h3>
+            <p>昼から夜、使用前から使用中へと変化するように素材を並べ、不要な部分をカットしました。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step">Step 03</span>
+          <div>
+            <h3>場面切り替えを調整する</h3>
+            <p>場面のつながりを滑らかにするため、ビデオエフェクトの「イマーシブ」を追加しました。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step">Step 04</span>
+          <div>
+            <h3>MP4で書き出してWebへ実装する</h3>
+            <p>約60秒の動画としてMP4形式で書き出し、VS CodeでFire pit紹介ページの背景に組み込みました。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="summary">
+      <div>
+        <p class="label">Production Details</p>
+        <h2>制作方法と時間</h2>
+        <p class="summary-total">30min</p>
+      </div>
+
+      <div>
+        <ul class="summary-list">
+          <li><strong>使用ツール</strong><span>Adobe Premiere Pro / VS Code</span></li>
+          <li><strong>構想</strong><span>5min</span></li>
+          <li><strong>動画編集・書き出し</strong><span>15min</span></li>
+          <li><strong>HTML実装</strong><span>10min</span></li>
+        </ul>
+
+        <div class="folder-note">
+          <strong>想定フォルダ構成</strong>
+          <pre>works/
+└── moviebackgroundweb/
+    ├── index.html
+    └── firepit/
+        ├── index.html
+        └── img/
+            └── firepit_bg.mp4</pre>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Movie Background Web / Portfolio</p>
+    </footer>
+  </main>
+</body>
+</html>
