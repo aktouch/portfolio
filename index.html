@@ -12,7 +12,7 @@
   <!-- ==============================
     Instagram風 Portfolio Top
     - プロフィール / ストーリー / 投稿グリッドの雰囲気で作品を眺めやすく整理
-    - Worksは linestamp → moviebackgroundweb → pictgram → 既存作品 の順で配置
+    - Worksは最新版の event-marketing を先頭に、制作順・カテゴリを意識して配置
   =============================== -->
   <div class="bg-scene" aria-hidden="true"></div>
 
@@ -58,7 +58,7 @@
           </div>
 
           <div class="profile-stats" aria-label="制作カテゴリ">
-            <div><strong>9</strong><span>works</span></div>
+            <div><strong>10</strong><span>works</span></div>
             <div><strong>HTML</strong><span>coding</span></div>
             <div><strong>JS</strong><span>motion</span></div>
           </div>
@@ -68,25 +68,6 @@
             <a class="button secondary" href="https://github.com/aktouch/" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
-      </div>
-
-      <div class="story-row" aria-label="注目作品">
-        <a class="story-item" href="./works/linestamp/">
-          <span>💬</span>
-          <small>linestamp</small>
-        </a>
-        <a class="story-item" href="./works/pictgram/">
-          <span>◎</span>
-          <small>pictgram</small>
-        </a>
-        <a class="story-item" href="./works/schoolbag/">
-          <span>🎒</span>
-          <small>schoolbag</small>
-        </a>
-        <a class="story-item" href="./works/LPAnalyticsDemo/">
-          <span>📊</span>
-          <small>analytics</small>
-        </a>
       </div>
     </section>
 
@@ -105,7 +86,28 @@
       </div>
 
       <div class="works-grid">
-        <article class="work-card featured">
+        <article class="work-card featured work-card--latest">
+          <a class="post-thumb thumb-event" href="./works/event-marketing/" aria-label="イベント集客プロジェクトを見る">
+            <span>EVENT<br>MARKETING</span>
+          </a>
+          <div class="post-content">
+            <div class="work-meta">
+              <span>Marketing</span>
+              <span>Information Design</span>
+              <span>HTML / CSS</span>
+              <span>Figma / Photoshop</span>
+            </div>
+            <p class="latest-label">LATEST PROJECT</p>
+            <h3>イベント集客プロジェクト</h3>
+            <p>
+              東中野の参加型ミュージックライブを題材に、LP・SNS・チラシの役割を整理。
+              ターゲット設計から申込導線、制作物、運用計画までを一貫してまとめました。
+            </p>
+            <a class="card-link" href="./works/event-marketing/">View project</a>
+          </div>
+        </article>
+
+        <article class="work-card">
           <a class="post-thumb thumb-line" href="./works/linestamp/" aria-label="LINEスタンプ制作を見る">
             <span>LINE<br>STAMP</span>
           </a>

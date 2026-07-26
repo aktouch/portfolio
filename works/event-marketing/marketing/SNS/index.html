@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNSクリエイティブ設計</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">SNS CREATIVE &amp; OPERATION PLAN</p>
+        <h1>SNSクリエイティブ設計</h1>
+        <p class="lead">何を・いつ・どう投稿し、未達時にどう動くかを3段階で整理</p>
+      </div>
+      <div class="event-mark" aria-label="イベント名">
+        <span>一夜限りのミュージックライブ</span>
+        <strong>大人のハロウィン</strong>
+        <small>in 東中野</small>
+      </div>
+    </header>
+
+    <section class="panel plan" aria-labelledby="plan-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">01</p>
+          <h2 id="plan-title">制作物と投稿時期</h2>
+        </div>
+        <p class="heading-note">数字＝ストーリーズの投稿順</p>
+      </div>
+
+      <button class="banner-card thumb-button" type="button" data-index="0" aria-label="SNSバナーを拡大表示">
+        <span class="banner-thumb"><img src="images/banner.png" alt="SNSバナー"><span class="zoom-icon" aria-hidden="true">＋</span></span>
+        <span class="banner-copy">
+          <small>FEED POST</small>
+          <strong>⓪ SNSバナー</strong>
+          <span>フィード投稿・プロフィール固定用</span>
+        </span>
+        <span class="expand-label">拡大表示 ＋</span>
+      </button>
+
+      <div class="table-scroll">
+        <table class="schedule-table phase-schedule-table">
+          <thead>
+            <tr class="role-row">
+              <th class="timeline-group-head" colspan="2" scope="colgroup">時系列</th>
+              <th class="period-head" rowspan="2" scope="col">時期</th>
+              <th class="goal-head" rowspan="2" scope="col">累計<br>目標</th>
+              <th class="focus-head" rowspan="2" scope="col">主訴求</th>
+              <th class="role-awareness" colspan="4" scope="colgroup">認知・興味</th>
+              <th class="role-check" scope="colgroup">確認</th>
+              <th class="role-action" scope="colgroup">申込</th>
+            </tr>
+            <tr class="creative-row">
+              <th class="timeline-head awareness-head" scope="col">認知</th>
+              <th class="timeline-head application-head" scope="col">申込</th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="1" aria-label="メインビジュアルを拡大表示"><span class="thumb"><img src="images/story-01.jpg" alt="メインビジュアル"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>①</b> メイン</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="2" aria-label="参加型体験を拡大表示"><span class="thumb"><img src="images/story-02.jpg" alt="参加型体験"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>②</b> 体験</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="3" aria-label="演者情報を拡大表示"><span class="thumb"><img src="images/story-03.jpg" alt="演者情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>③</b> 演者</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="4" aria-label="演奏曲情報を拡大表示"><span class="thumb"><img src="images/story-04.jpg" alt="演奏曲情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>④</b> 楽曲</span></button></th>
+              <th class="creative-head check-head" scope="col"><button class="thumb-button" type="button" data-index="5" aria-label="開催情報を拡大表示"><span class="thumb"><img src="images/story-05.jpg" alt="開催情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑤</b> 開催</span></button></th>
+              <th class="creative-head action-head" scope="col"><button class="thumb-button" type="button" data-index="6" aria-label="チケット案内を拡大表示"><span class="thumb"><img src="images/story-06.jpg" alt="チケット案内"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑥</b> 申込</span></button></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="release-row">
+              <td class="timeline-cell awareness-cell phase-start"><span class="phase-dot"></span><span class="phase-rail"></span></td>
+              <td class="timeline-cell application-cell"></td>
+              <th scope="row"><strong>8/28</strong><small>情報解禁</small></th><td class="goal"><b>10</b>人</td><td class="focus">全体</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+            </tr>
+            <tr><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell"></td><th scope="row"><strong>9/4</strong></th><td></td><td class="focus">体験</td><td></td><td>1</td><td></td><td></td><td>2</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell"></td><th scope="row"><strong>9/11</strong></th><td></td><td class="focus">演者</td><td></td><td></td><td>1</td><td></td><td>2</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell"></td><th scope="row"><strong>9/18</strong></th><td></td><td class="focus">楽曲</td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+            <tr class="application-start"><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell phase-start"><span class="phase-dot"></span><span class="phase-rail"></span></td><th scope="row"><strong>9/25</strong><small>1か月前</small></th><td class="goal"><b>25</b>人</td><td class="focus">全体</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+            <tr><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell"><span class="phase-rail"></span></td><th scope="row"><strong>10/2</strong></th><td></td><td class="focus">体験</td><td></td><td>1</td><td></td><td></td><td>2</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell"><span class="phase-rail"></span></td><td class="timeline-cell application-cell"><span class="phase-rail"></span></td><th scope="row"><strong>10/9</strong></th><td></td><td class="focus">演者</td><td></td><td></td><td>1</td><td></td><td>2</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell phase-end"><span class="phase-arrow"></span></td><td class="timeline-cell application-cell"><span class="phase-rail"></span></td><th scope="row"><strong>10/16</strong><small>2週間前</small></th><td class="goal"><b>50</b>人</td><td class="focus">楽曲</td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell"></td><td class="timeline-cell application-cell"><span class="phase-rail"></span></td><th scope="row"><strong>10/23</strong><small>1週間前</small></th><td class="goal"><b>65</b>人</td><td class="focus">開催</td><td></td><td>2</td><td></td><td></td><td>1</td><td>3</td></tr>
+            <tr><td class="timeline-cell awareness-cell"></td><td class="timeline-cell application-cell"><span class="phase-rail"></span></td><th scope="row"><strong>10/29</strong><small>前日</small></th><td class="goal"><b>80</b>人</td><td class="focus">最終</td><td></td><td></td><td></td><td></td><td>1</td><td>2</td></tr>
+            <tr class="day-row"><td class="timeline-cell awareness-cell"></td><td class="timeline-cell application-cell phase-end"><span class="phase-arrow"></span></td><th scope="row"><strong>10/30</strong><small>当日</small></th><td></td><td class="focus">当日</td><td></td><td></td><td></td><td></td><td>1</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="followup-banner">9/25以降、累計目標が未達の場合はフォローアップを開始 <a href="#followup-title">→ 詳細は03</a></p>
+    </section>
+
+    <section class="panel rules" aria-labelledby="rules-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">02</p>
+          <h2 id="rules-title">投稿時の共通ルール</h2>
+        </div>
+      </div>
+
+      <ol class="rule-list rule-list-reordered">
+        <li><span>01</span><p><strong>投稿時間</strong><small>金曜18:00｜仕事後・週末の予定検討時に届ける<br>当日12:00｜昼休みに本日開催と残席を再案内</small></p></li>
+        <li><span>02</span><p><strong>最後は⑥＋リンクスタンプ</strong><small>申込みページへ直接誘導</small></p></li>
+      </ol>
+
+      <div class="preview-block rule-inline-preview">
+        <div class="story-phone" aria-label="リンクスタンプ投稿イメージ">
+          <div class="story-top"><span></span><b>your_account</b><i>•••</i></div>
+          <div class="ticket-scene">
+            <small>10.30 FRI｜東中野</small>
+            <strong>一夜限りの<br>ミュージックライブ</strong>
+            <p>1ドリンク付き｜税込4,180円</p>
+            <div class="link-sticker">🔗 チケットはこちら</div>
+          </div>
+          <div class="story-reply">メッセージを送信…</div>
+        </div>
+        <div class="preview-copy">
+          <p class="preview-label">LINK STICKER IMAGE</p>
+          <h3>最後の⑥にリンクスタンプを設置</h3>
+          <div class="story-sequence"><span>② 体験</span><i>→</i><span>⑤ 開催情報</span><i>→</i><b>⑥ 申込＋リンク</b></div>
+          <p>閲覧者がプロフィールへ戻らなくても、その場で申込みページへ進めるようにします。</p>
+        </div>
+      </div>
+
+      <ol class="rule-list rule-list-continuation" start="3">
+        <li><span>03</span><p><strong>③使用時は出演者3名をメンション</strong></p></li>
+      </ol>
+
+      <p class="schedule-reference">投稿順は「01 制作物と投稿時期」のスケジュール表に従う</p>
+      <p class="facebook-support"><strong>補足｜Facebookアカウントがある場合</strong><br>期間中のみInstagramとの自動シェアをオンにし、同じストーリーズを掲載。Facebook用の別素材は作成しない。</p>
+    </section>
+
+    <section class="panel followup" aria-labelledby="followup-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">03</p>
+          <h2 id="followup-title">目標未達時のフォロー</h2>
+        </div>
+      </div>
+
+      <section class="followup-section basic-policy" aria-labelledby="basic-policy-title">
+        <p class="mini-label">基本方針</p>
+        <h3 id="basic-policy-title">申込みに近い人へ絞ってフォローアップ</h3>
+        <p>9/25以降は見込み客を把握し、2週間前以降に累計申込目標が未達の場合、申込みに近い人へ絞ってフォローアップを実施します。</p>
+      </section>
+
+      <section class="followup-section" aria-labelledby="measures-title">
+        <p class="mini-label">採用施策</p>
+        <h3 id="measures-title">申込みへ直接つながる3施策</h3>
+
+        <div class="measure-stack">
+          <div class="measure-group">
+            <article class="measure-card measure-primary measure-card-split-top">
+              <span>01</span>
+              <div>
+                <h3>見込み客のリストアップ＆フォロー</h3>
+                <div class="flow-step survey-intro">
+                  <b>9/25以降</b>
+                  <p>ストーリーズの最後にアンケートを毎回設置</p>
+                  <small>「10/30のミュージックライブ、気になりますか？」<br>［行きたい！］［予定を確認中］</small>
+                </div>
+              </div>
+            </article>
+
+            <div class="measure-preview poll-inline-preview" aria-labelledby="poll-preview-title">
+              <div class="story-phone poll-phone" aria-label="アンケートスタンプ投稿イメージ">
+                <div class="story-top"><span></span><b>your_account</b><i>•••</i></div>
+                <div class="poll-scene"><small>10.30 FRI｜東中野</small><strong>一夜限りの<br>ミュージックライブ</strong></div>
+                <div class="poll-sticker"><b>10/30のライブ、<br>気になりますか？</b><span>行きたい！</span><span>予定を確認中</span></div>
+                <div class="story-reply">メッセージを送信…</div>
+              </div>
+              <div class="measure-preview-copy">
+                <p class="preview-label">POLL STICKER</p>
+                <h3 id="poll-preview-title">アンケートスタンプ投稿</h3>
+                <p>⑥の後、ストーリーズの最後に設置します。</p>
+              </div>
+            </div>
+
+            <article class="measure-card measure-card-split-bottom">
+              <span aria-hidden="true"></span>
+              <div>
+                <div class="measure-flow flow-after-preview" aria-label="見込み客フォローの流れ">
+                  <div class="flow-step"><b>投稿後24時間以内</b><p>回答画面をスクリーンショットで保存</p></div>
+                  <i aria-hidden="true">↓</i>
+                  <div class="flow-step"><b>2週間前以降</b><p>累計申込目標と実績を確認</p></div>
+                  <i aria-hidden="true">↓</i>
+                  <div class="flow-result">
+                    <p><strong>目標達成</strong><span>通常投稿を継続</span></p>
+                    <p class="result-alert"><strong>目標未達</strong><span>回答者へフォローDM</span></p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="measure-group">
+            <article class="measure-card">
+              <span>02</span>
+              <div>
+                <h3>演者の知人への個別フォローDM</h3>
+                <p>2週間前以降、累計申込目標が未達の場合に実施。目標との差に応じて、演者3名から連絡する人数を調整します。</p>
+              </div>
+            </article>
+
+            <div class="measure-preview" aria-labelledby="dm-preview-title">
+              <div class="dm-phone" aria-label="DMフォローメッセージ例">
+                <div class="dm-head">○○さん</div>
+                <div class="dm-bubble">先日はライブのアンケートに反応いただき、ありがとうございました！<br><br>その後、ご予定はいかがでしょうか？まだでしたら、残席がありますので改めてご案内しました。</div>
+                <div class="dm-link">申込みページを見る</div>
+              </div>
+              <div class="measure-preview-copy">
+                <p class="preview-label">FOLLOW-UP DM</p>
+                <h3 id="dm-preview-title">DMフォローメッセージ</h3>
+                <p>2週間前以降、累計目標が未達の場合のみ送付します。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="measure-group">
+            <article class="measure-card">
+              <span>03</span>
+              <div>
+                <h3>カウントダウン・残席投稿</h3>
+                <p>1週間前〜当日に実施。開催までの日数や残席情報を⑤・⑥に追記して投稿します。</p>
+                <small>※最後の申込みを後押し</small>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="selection-notes">
+          <h3>施策の方針・採用理由</h3>
+          <ul>
+            <li>申込みに近い人へ直接アプローチできる施策を優先</li>
+            <li>目標との差に応じて、実施人数や投稿回数を調整できる</li>
+            <li>必要なタイミングで、こちら側から実施できる</li>
+          </ul>
+          <p><strong>優先しない例｜地域アカウントとの相互紹介</strong><br>認知拡大には有効ですが、申込数へ直接つながるかをコントロールしにくいため優先しません。</p>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <div class="modal" id="creative-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <button class="modal-backdrop" type="button" aria-label="閉じる"></button>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="閉じる">×</button>
+      <button class="modal-nav modal-prev" type="button" aria-label="前の制作物">‹</button>
+      <figure>
+        <img id="modal-image" src="" alt="">
+        <figcaption><p id="modal-number"></p><h2 id="modal-title"></h2><p id="modal-description"></p></figcaption>
+      </figure>
+      <button class="modal-nav modal-next" type="button" aria-label="次の制作物">›</button>
+    </div>
+  </div>
+
+  <script>
+    const creatives = [
+      { src: "images/banner.png", number: "⓪", title: "SNSバナー", description: "情報解禁時のフィード投稿とプロフィール固定に使用します。" },
+      { src: "images/story-01.jpg", number: "①", title: "メインビジュアル／世界観", description: "イベントの入口として、名称と世界観を印象づけます。" },
+      { src: "images/story-02.jpg", number: "②", title: "参加型体験", description: "聴く・飲む・踊る体験への興味を高めます。" },
+      { src: "images/story-03.jpg", number: "③", title: "演者情報", description: "演者の実績や人柄から関心を高めます。" },
+      { src: "images/story-04.jpg", number: "④", title: "演奏曲情報", description: "予定曲から当日の魅力を具体的に伝えます。" },
+      { src: "images/story-05.jpg", number: "⑤", title: "開催情報", description: "日時・会場・料金など、参加判断に必要な情報を整理します。" },
+      { src: "images/story-06.jpg", number: "⑥", title: "チケット案内", description: "リンクスタンプから申込みページへ直接誘導します。" }
+    ];
+
+    const modal = document.querySelector("#creative-modal");
+    const modalImage = document.querySelector("#modal-image");
+    const modalNumber = document.querySelector("#modal-number");
+    const modalTitle = document.querySelector("#modal-title");
+    const modalDescription = document.querySelector("#modal-description");
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    function renderModal(index) {
+      currentIndex = (index + creatives.length) % creatives.length;
+      const item = creatives[currentIndex];
+      modalImage.src = item.src;
+      modalImage.alt = item.title;
+      modalNumber.textContent = item.number;
+      modalTitle.textContent = item.title;
+      modalDescription.textContent = item.description;
+    }
+
+    function openModal(index, trigger) {
+      lastFocused = trigger;
+      renderModal(index);
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      document.querySelector(".modal-close").focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll(".thumb-button").forEach((button) => {
+      button.addEventListener("click", () => openModal(Number(button.dataset.index), button));
+    });
+    document.querySelector(".modal-close").addEventListener("click", closeModal);
+    document.querySelector(".modal-backdrop").addEventListener("click", closeModal);
+    document.querySelector(".modal-prev").addEventListener("click", () => renderModal(currentIndex - 1));
+    document.querySelector(".modal-next").addEventListener("click", () => renderModal(currentIndex + 1));
+    document.addEventListener("keydown", (event) => {
+      if (modal.hidden) return;
+      if (event.key === "Escape") closeModal();
+      if (event.key === "ArrowLeft") renderModal(currentIndex - 1);
+      if (event.key === "ArrowRight") renderModal(currentIndex + 1);
+    });
+  </script>
+</body>
+</html>
