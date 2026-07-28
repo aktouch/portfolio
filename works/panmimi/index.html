@@ -3,23 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hill Bread｜PCデザインカンプ</title>
+  <title>Hill Bread｜食パン耳ラスク 商品LP・販促提案</title>
 
   <style>
-    /* ==============================
-      基本設定
-      - 余白、フォント、背景色を整える
-    ============================== */
+    :root {
+      --bg: #f4efe8;
+      --paper: #fffdf9;
+      --ink: #23201d;
+      --muted: #6f665d;
+      --line: #ddd1c4;
+      --accent: #b80000;
+      --accent-dark: #780000;
+      --gold: #c49a45;
+      --black: #1f1f1f;
+      --soft-red: #f6e8e5;
+      --soft-gold: #f3ead7;
+      --shadow: 0 18px 42px rgba(57, 42, 28, 0.12);
+    }
+
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
       font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", sans-serif;
-      color: #222;
-      background: #f4efe8;
-      line-height: 1.7;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.75;
     }
 
     img {
@@ -33,85 +48,337 @@
       text-decoration: none;
     }
 
-    /* ==============================
-      ページ全体の枠
-    ============================== */
     .page {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 48px 20px 72px;
+      padding: 52px 20px 72px;
     }
 
-    /* ==============================
-      上部タイトルエリア
-    ============================== */
     .work-header {
-      margin-bottom: 36px;
+      padding: 44px 28px;
       text-align: center;
+      background:
+        linear-gradient(rgba(255, 253, 249, 0.92), rgba(255, 253, 249, 0.92)),
+        radial-gradient(circle at top left, rgba(196, 154, 69, 0.2), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(184, 0, 0, 0.12), transparent 35%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
     }
 
     .work-label {
       display: inline-block;
-      margin-bottom: 12px;
-      padding: 6px 14px;
+      margin-bottom: 14px;
+      padding: 7px 15px;
       color: #fff;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      background: #b80000;
+      background: var(--accent);
       border-radius: 999px;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(28px, 4vw, 46px);
-      line-height: 1.25;
+      margin: 0;
+      font-size: clamp(31px, 5vw, 54px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--accent-dark);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 700;
     }
 
     .lead {
-      max-width: 760px;
-      margin: 0 auto;
-      color: #555;
+      max-width: 790px;
+      margin: 20px auto 0;
+      color: #554d46;
       font-size: 15px;
     }
 
-    /* ==============================
-      各セクション
-    ============================== */
+    .meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meta-list li {
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
     .section {
-      margin-top: 52px;
+      margin-top: 58px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-number {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
     }
 
     .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 18px;
-      font-size: clamp(22px, 3vw, 30px);
+      margin: 0;
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.3;
     }
 
-    .section-title::before {
-      content: "";
-      width: 14px;
-      height: 14px;
-      background: #b80000;
-      border-radius: 50%;
-    }
-
-    .section-text {
-      margin: 0 0 18px;
-      color: #555;
+    .section-intro {
+      margin: -4px 0 22px;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    /* ==============================
-      PCブラウザ風の外枠
-      - デザインカンプを「PCで表示している」ように見せる部分
-    ============================== */
+    .card {
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 10px 28px rgba(57, 42, 28, 0.08);
+    }
+
+    .summary-grid,
+    .planning-grid,
+    .design-grid,
+    .output-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .summary-item,
+    .planning-item,
+    .design-item,
+    .output-item {
+      min-height: 100%;
+      padding: 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+    }
+
+    .item-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .item-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .project-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    .project-box ul,
+    .learning-list {
+      margin: 14px 0 0;
+      padding-left: 1.2em;
+    }
+
+    .project-box li,
+    .learning-list li {
+      margin-top: 8px;
+    }
+
+    .deliverables {
+      display: grid;
+      gap: 12px;
+    }
+
+    .deliverable {
+      padding: 16px 18px;
+      background: var(--soft-gold);
+      border-left: 5px solid var(--gold);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .process-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+    }
+
+    .process-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    .process-table th,
+    .process-table td {
+      padding: 16px 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-table th {
+      color: #fff;
+      font-size: 13px;
+      background: var(--black);
+    }
+
+    .process-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .process-table td:first-child {
+      width: 90px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .process-table td:nth-child(2) {
+      width: 220px;
+      font-weight: 700;
+    }
+
+    .process-table td:nth-child(3) {
+      width: 130px;
+      white-space: nowrap;
+    }
+
+    .process-highlight {
+      background: var(--soft-red);
+    }
+
+    .note-box {
+      margin-top: 18px;
+      padding: 22px;
+      background: #fff;
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+    }
+
+    .note-box h3 {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 19px;
+    }
+
+    .note-box p {
+      margin: 0;
+      color: #514841;
+      font-size: 14px;
+    }
+
+    .planning-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .concept-card {
+      grid-column: 1 / -1;
+      padding: 30px;
+      color: #fff;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(31,31,31,0.98), rgba(83,10,10,0.96));
+      border-radius: 18px;
+    }
+
+    .concept-card p {
+      margin: 0;
+    }
+
+    .concept-title {
+      margin-top: 6px !important;
+      font-size: clamp(23px, 3vw, 34px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .concept-copy {
+      max-width: 700px;
+      margin: 12px auto 0 !important;
+      color: #f3e9df;
+      font-size: 15px;
+    }
+
+    .design-grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+
+    .color-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .color-chip {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .color-swatch {
+      width: 54px;
+      height: 54px;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+    }
+
+    .swatch-black { background: #1f1f1f; }
+    .swatch-gold { background: #c49a45; }
+    .swatch-red { background: #b80000; }
+
+    .content-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .content-list div {
+      padding: 14px 16px;
+      background: #f8f3ed;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
     .browser-frame {
       overflow: hidden;
       background: #fff;
-      border: 1px solid #ddd;
+      border: 1px solid #d9d9d9;
       border-radius: 18px;
       box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
     }
@@ -151,10 +418,6 @@
       text-overflow: ellipsis;
     }
 
-    /* ==============================
-      スクリーンショット表示エリア
-      - LPが縦長なので、PC画面内をスクロールして確認できるようにする
-    ============================== */
     .screenshot-viewport {
       position: relative;
       max-height: 780px;
@@ -188,12 +451,44 @@
       backdrop-filter: blur(6px);
     }
 
-    /* ==============================
-      戻るボタン
-    ============================== */
+    .output-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .output-item h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .output-item p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .presentation-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .presentation-list span {
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--soft-gold);
+      border-radius: 12px;
+    }
+
+    .learning-card {
+      border-top: 6px solid var(--accent);
+    }
+
     .back-link {
       display: inline-block;
-      margin-top: 40px;
+      margin-top: 44px;
       padding: 12px 22px;
       color: #fff;
       font-weight: 700;
@@ -206,12 +501,44 @@
       opacity: 0.78;
     }
 
-    /* ==============================
-      スマホ表示時の調整
-    ============================== */
+    @media (max-width: 900px) {
+      .summary-grid,
+      .project-box,
+      .planning-grid,
+      .design-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .concept-card {
+        grid-column: auto;
+      }
+
+      .presentation-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 768px) {
       .page {
-        padding: 32px 14px 56px;
+        padding: 28px 14px 56px;
+      }
+
+      .work-header {
+        padding: 34px 18px;
+        border-radius: 18px;
+      }
+
+      .section {
+        margin-top: 46px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .content-list,
+      .presentation-list {
+        grid-template-columns: 1fr;
       }
 
       .browser-frame {
@@ -240,59 +567,290 @@
 </head>
 <body>
   <main class="page">
-    <!-- ページ見出し -->
     <header class="work-header">
-      <span class="work-label">WORKS / DESIGN COMP</span>
-      <h1>Hill Bread<br>PCデザインカンプ</h1>
+      <span class="work-label">WORKS / TEAM PROJECT</span>
+      <h1>Hill Bread 食パン耳ラスク</h1>
+      <p class="subtitle">商品LP・販促提案</p>
       <p class="lead">
-        Figmaで制作したパン耳ラスクLPのPC版デザインカンプです。画像をそのまま並べるのではなく、PCブラウザの外枠に入れて、実際の表示イメージが伝わるようにしています。
+        与えられた商品情報をもとに、ターゲット・コンセプト・コンテンツ構成・LPデザインを3人のチームで設計し、プレゼン資料まで制作した3日間の課題です。
       </p>
+      <ul class="meta-list" aria-label="制作概要">
+        <li>制作期間：3日間</li>
+        <li>制作人数：3名</li>
+        <li>使用ツール：Figma / PowerPoint</li>
+        <li>担当：企画・デザイン・資料制作</li>
+      </ul>
     </header>
 
-    <!-- PC版トップページのデザインカンプ -->
-    <section class="section" aria-labelledby="pc-top-title">
-      <h2 class="section-title" id="pc-top-title">PCトップページ</h2>
-      <p class="section-text">縦長のLPデザインのため、ブラウザ風の枠内をスクロールして全体を確認できます。</p>
+    <section class="section" aria-labelledby="summary-title">
+      <div class="section-heading">
+        <span class="section-number">SUMMARY</span>
+        <h2 class="section-title" id="summary-title">サマリ</h2>
+      </div>
+      <div class="summary-grid">
+        <article class="summary-item">
+          <p class="eyebrow">PROJECT</p>
+          <h3 class="item-title">商品LPと販促提案</h3>
+          <p class="item-text">商品情報と基本構成をもとに、コピー・コンテンツ・デザインを具体化しました。</p>
+        </article>
+        <article class="summary-item">
+          <p class="eyebrow">TEAM</p>
+          <h3 class="item-title">3人で分担して制作</h3>
+          <p class="item-text">方向性をすり合わせたうえで作業を分担し、最後に全体のトーンを統一しました。</p>
+        </article>
+        <article class="summary-item">
+          <p class="eyebrow">OUTPUT</p>
+          <h3 class="item-title">LPデザイン＋発表資料</h3>
+          <p class="item-text">PC版デザインカンプと、ターゲット・コンセプトを説明するプレゼン資料を制作しました。</p>
+        </article>
+      </div>
+    </section>
 
-      <div class="browser-frame">
-        <div class="browser-bar" aria-hidden="true">
-          <div class="browser-dots">
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-          </div>
-          <div class="browser-url">https://example.com/hill-bread/</div>
+    <section class="section" aria-labelledby="project-title">
+      <div class="section-heading">
+        <span class="section-number">01 PROJECT</span>
+        <h2 class="section-title" id="project-title">課題</h2>
+      </div>
+      <div class="card project-box">
+        <div>
+          <h3 class="item-title">Hill Breadの食パン耳ラスク販売ページを企画・提案</h3>
+          <p class="item-text">
+            依頼内容と商品情報、ページの基本構成はあらかじめ提示されており、空欄となっている要素をチームで検討して完成させる課題でした。
+          </p>
+          <ul>
+            <li>キャッチコピー</li>
+            <li>リード文</li>
+            <li>ターゲットとコンセプト</li>
+            <li>コンテンツ内容・見せ方</li>
+            <li>カラーとLPデザイン</li>
+          </ul>
         </div>
-
-        <div class="screenshot-viewport">
-          <span class="scroll-note">Scroll preview</span>
-          <img src="img/LP_PC.jpg" alt="Hill Bread PCトップページのデザインカンプ">
+        <div class="deliverables">
+          <div class="deliverable">提案内容の設計</div>
+          <div class="deliverable">PC版LPデザインカンプ</div>
+          <div class="deliverable">プレゼン資料・発表</div>
         </div>
       </div>
     </section>
 
-    <!-- メニューを開いた状態のPC表示 -->
-    <section class="section" aria-labelledby="menu-title">
-      <h2 class="section-title" id="menu-title">メニュー展開時</h2>
-      <p class="section-text">ハンバーガーメニューを開いたときのPC表示イメージです。</p>
+    <section class="section" aria-labelledby="process-title">
+      <div class="section-heading">
+        <span class="section-number">02 PROCESS</span>
+        <h2 class="section-title" id="process-title">進め方</h2>
+      </div>
+      <p class="section-intro">3日間の中で、検討・制作・発表準備を順番に進めました。時間はおおよその目安です。</p>
 
-      <div class="browser-frame">
-        <div class="browser-bar" aria-hidden="true">
-          <div class="browser-dots">
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-          </div>
-          <div class="browser-url">https://example.com/hill-bread/menu-open/</div>
-        </div>
+      <div class="process-table-wrap">
+        <table class="process-table">
+          <thead>
+            <tr>
+              <th>STEP</th>
+              <th>内容</th>
+              <th>工数目安</th>
+              <th>進め方</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>スケジューリング</td>
+              <td>約30分</td>
+              <td>3日間で必要な検討・制作・発表準備を整理し、分担のタイミングを決めました。</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>項目の洗い出し</td>
+              <td>約2時間</td>
+              <td>ターゲット、キャッチコピー、リード文、コンテンツなど、埋めるべき項目を整理しました。</td>
+            </tr>
+            <tr class="process-highlight">
+              <td>03</td>
+              <td>紙でラフ作成・方針共有</td>
+              <td>約1時間</td>
+              <td>15分程度で案を紙に描き、短時間で複数案を出してから、チームの方向性をすり合わせました。</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>制作・分担</td>
+              <td>約12時間</td>
+              <td>方向性を決めた後、3人でデザイン・文章・プレゼン資料を分担して制作しました。</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>すり合わせ・最終調整</td>
+              <td>約2時間</td>
+              <td>各担当の成果物を持ち寄り、コピー、カラー、見せ方、説明内容を統一しました。</td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td>まとめ・発表</td>
+              <td>約1時間</td>
+              <td>提案の狙いと制作物を発表できるように整理し、プレゼンを行いました。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <div class="screenshot-viewport screenshot-viewport--menu">
-          <img src="img/menu.jpg" alt="Hill Bread メニュー展開時のPCデザインカンプ">
-        </div>
+      <aside class="note-box">
+        <h3>工夫したこと：制作前に紙で方向性を揃える</h3>
+        <p>
+          いきなりFigmaで作り始めず、まず15分程度でスライド案を紙に描きました。短時間で案を可視化して比較したことで、3人の認識を早い段階で揃え、方針決定後の制作を分担しやすくしました。
+        </p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="planning-title">
+      <div class="section-heading">
+        <span class="section-number">03 PLANNING</span>
+        <h2 class="section-title" id="planning-title">提案の方向性</h2>
+      </div>
+
+      <div class="planning-grid">
+        <article class="planning-item">
+          <p class="eyebrow">TARGET</p>
+          <h3 class="item-title">新しい購入者層の開拓</h3>
+          <p class="item-text">
+            地元の顧客に加え、30〜50代の男女やビジネスパーソンなど、大人の時間を楽しむ層へ購入者を広げる方向で検討しました。
+          </p>
+        </article>
+
+        <article class="planning-item">
+          <p class="eyebrow">SCENE</p>
+          <h3 class="item-title">平日と休日の利用シーンを提案</h3>
+          <p class="item-text">
+            ゴルフ帰りの一杯や映画を観る夜など、商品そのものだけでなく「いつ楽しむか」が想像できる見せ方を意識しました。
+          </p>
+        </article>
+
+        <article class="concept-card">
+          <p class="eyebrow">CONCEPT</p>
+          <p class="concept-title">パン職人の焼く、時間を愉しむ大人のラスク</p>
+          <p class="concept-copy">
+            大人の一息に寄り添う、少し贅沢なラスクとして提案。商品の特徴と利用シーンを結びつけ、購入者層・楽しむ時間・購入金額の拡大を目指しました。
+          </p>
+        </article>
       </div>
     </section>
 
-    <!-- ポートフォリオ一覧へ戻る導線 -->
+    <section class="section" aria-labelledby="design-title">
+      <div class="section-heading">
+        <span class="section-number">04 DESIGN</span>
+        <h2 class="section-title" id="design-title">デザイン設計</h2>
+      </div>
+
+      <div class="design-grid">
+        <article class="design-item">
+          <p class="eyebrow">COLOR</p>
+          <h3 class="item-title">大人の高級感を伝える配色</h3>
+          <div class="color-list">
+            <div class="color-chip">
+              <span class="color-swatch swatch-black" aria-hidden="true"></span>
+              <div><strong>黒</strong><br><span class="item-text">大人らしさ・高級感</span></div>
+            </div>
+            <div class="color-chip">
+              <span class="color-swatch swatch-gold" aria-hidden="true"></span>
+              <div><strong>金</strong><br><span class="item-text">上質感・特別感</span></div>
+            </div>
+            <div class="color-chip">
+              <span class="color-swatch swatch-red" aria-hidden="true"></span>
+              <div><strong>赤</strong><br><span class="item-text">視線を集めるアクセント</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="design-item">
+          <p class="eyebrow">CONTENTS</p>
+          <h3 class="item-title">商品説明＋利用シーンで構成</h3>
+          <p class="item-text">
+            商品情報を並べるだけでなく、平日・休日それぞれの過ごし方と結びつけることで、購入後の体験を想像しやすくしました。
+          </p>
+          <div class="content-list">
+            <div>商品の特徴</div>
+            <div>フレーバー紹介</div>
+            <div>平日のひととき</div>
+            <div>休日のひととき</div>
+            <div>店舗情報</div>
+            <div>注文導線</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="output-title">
+      <div class="section-heading">
+        <span class="section-number">05 OUTPUT</span>
+        <h2 class="section-title" id="output-title">完成した成果物</h2>
+      </div>
+
+      <div class="output-grid">
+        <article class="output-item">
+          <h3>PC版トップページ</h3>
+          <p>縦長のLPデザインのため、ブラウザ風の枠内をスクロールして全体を確認できます。</p>
+
+          <div class="browser-frame">
+            <div class="browser-bar" aria-hidden="true">
+              <div class="browser-dots">
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+              </div>
+              <div class="browser-url">https://example.com/hill-bread/</div>
+            </div>
+            <div class="screenshot-viewport">
+              <span class="scroll-note">Scroll preview</span>
+              <img src="img/LP_PC.jpg" alt="Hill Bread PCトップページのデザインカンプ">
+            </div>
+          </div>
+        </article>
+
+        <article class="output-item">
+          <h3>メニュー展開時</h3>
+          <p>ハンバーガーメニューを開いた状態のPC表示イメージです。</p>
+
+          <div class="browser-frame">
+            <div class="browser-bar" aria-hidden="true">
+              <div class="browser-dots">
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+              </div>
+              <div class="browser-url">https://example.com/hill-bread/menu-open/</div>
+            </div>
+            <div class="screenshot-viewport screenshot-viewport--menu">
+              <img src="img/menu.jpg" alt="Hill Bread メニュー展開時のPCデザインカンプ">
+            </div>
+          </div>
+        </article>
+
+        <article class="output-item">
+          <h3>プレゼン資料</h3>
+          <p>LPの完成イメージだけでなく、提案の背景と狙いを説明できるようにまとめました。</p>
+          <div class="presentation-list" aria-label="プレゼン資料の内容">
+            <span>ターゲット</span>
+            <span>コンセプト</span>
+            <span>カラー設計</span>
+            <span>販促・売上向上案</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="learning-title">
+      <div class="section-heading">
+        <span class="section-number">06 LEARNING</span>
+        <h2 class="section-title" id="learning-title">学んだこと</h2>
+      </div>
+
+      <div class="card learning-card">
+        <ul class="learning-list">
+          <li>制作前にラフを共有すると、チーム内の認識を早い段階で合わせられ、手戻りを減らしやすいこと。</li>
+          <li>役割を分けるだけでなく、コピーやデザインの判断基準を揃えてから制作することが重要であること。</li>
+          <li>商品情報だけでなく、ターゲットと利用シーンまで設計すると、提案全体に一貫性を持たせられること。</li>
+          <li>制作物とあわせて意図をプレゼンすることで、デザインの狙いをより明確に伝えられること。</li>
+        </ul>
+      </div>
+    </section>
+
     <a class="back-link" href="../../index.html">Works一覧へ戻る</a>
   </main>
 </body>
