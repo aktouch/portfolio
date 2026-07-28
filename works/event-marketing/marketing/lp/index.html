@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="東中野の参加型ミュージックライブに向けたLPの役割・世界観・情報設計をまとめた制作ページです。">
+  <meta name="description" content="東中野の参加型ミュージックライブに向けたLP設計と情報設計をまとめた紹介ページです。">
   <title>LP設計｜Event Marketing Project</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,20 +12,20 @@
     <div class="container header-inner">
       <a class="brand" href="../index.html">EVENT MARKETING PROJECT</a>
       <nav class="global-nav" aria-label="ページ内ナビゲーション">
-        <a href="#role">役割と世界観</a>
-        <a href="#structure">情報設計</a>
+        <a href="#product">制作物</a>
+        <a href="#design">設計思想・情報設計</a>
         <a class="nav-cta" href="./lp_html/index.html" target="_blank" rel="noopener">LPを開く ↗</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <section class="page-hero">
+  <main>
+    <section class="page-hero" aria-labelledby="page-title">
       <div class="container hero-inner">
-        <div>
+        <div class="hero-copy-block">
           <p class="eyebrow">LP DESIGN &amp; CONVERSION PLAN</p>
-          <h1>LP設計</h1>
-          <p class="hero-copy">東中野の参加型体験を、申込みにつなげる情報設計</p>
+          <h1 id="page-title">LP設計</h1>
+          <p class="hero-copy">世界観を表現し、申込みにつなげる情報設計</p>
         </div>
         <div class="event-signature" aria-label="対象イベント">
           <span>一夜限りの</span>
@@ -35,163 +35,108 @@
       </div>
     </section>
 
-    <section class="design-section" id="role">
-      <div class="container">
-        <header class="section-heading">
-          <div class="section-number">01</div>
-          <div>
-            <p class="eyebrow">ROLE &amp; VISUAL IDENTITY</p>
-            <h2>LPの役割と世界観</h2>
-            <p>世界観・参加判断に必要な情報・申込導線を、一つのページに集約します。</p>
+    <section class="page-section" id="product" aria-labelledby="product-title">
+      <div class="container section-shell">
+        <div class="section-heading-row">
+          <div class="section-title-group">
+            <span class="section-number">01</span>
+            <h2 id="product-title">制作物</h2>
           </div>
-        </header>
+          <span class="section-meta">PC / SMARTPHONE</span>
+        </div>
 
-        <div class="section-grid role-grid">
-          <div class="preview-card">
-            <div class="preview-switcher role-switcher">
-              <input class="view-radio" type="radio" name="role-view" id="role-pc" checked>
-              <input class="view-radio" type="radio" name="role-view" id="role-mobile">
+        <div class="preview-switcher product-switcher">
+          <input class="view-radio" type="radio" name="product-view" id="product-pc" checked>
+          <input class="view-radio" type="radio" name="product-view" id="product-mobile">
 
-              <div class="preview-toolbar">
-                <div class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-                <div class="view-tabs" aria-label="表示サイズ切り替え">
-                  <label for="role-pc">PC</label>
-                  <label for="role-mobile">SMARTPHONE</label>
-                </div>
-                <a href="./lp_html/index.html" target="_blank" rel="noopener">別画面で見る ↗</a>
-              </div>
+          <div class="preview-toolbar">
+            <div class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="view-tabs" aria-label="表示サイズ切り替え">
+              <label for="product-pc">PC</label>
+              <label for="product-mobile">SMARTPHONE</label>
+            </div>
+            <a href="./lp_html/index.html" target="_blank" rel="noopener">別画面でLPを見る ↗</a>
+          </div>
 
-              <div class="browser-stage">
-                <div class="device-frame">
-                  <iframe src="./lp_html/index.html" title="イベントLPのプレビュー"></iframe>
-                </div>
-              </div>
+          <div class="preview-stage product-stage">
+            <div class="device-frame product-frame">
+              <iframe src="./lp_html/index.html" title="イベントLPプレビュー"></iframe>
             </div>
           </div>
-
-          <aside class="summary-panel" aria-label="LPの役割と世界観の要約">
-            <section class="summary-block">
-              <p class="summary-label">TARGET</p>
-              <h3>30〜50代の音楽好き</h3>
-              <p>中野区とその周辺に暮らし、上質な生演奏を気軽に楽しみたい大人。</p>
-            </section>
-
-            <section class="summary-block">
-              <p class="summary-label">CONCEPT</p>
-              <h3>聴く、飲む、踊る</h3>
-              <ul class="keyword-list">
-                <li><strong>東中野</strong><span>地域で出会える身近さ</span></li>
-                <li><strong>参加型体験</strong><span>観るだけでは終わらない</span></li>
-                <li><strong>大人が気軽</strong><span>上質だが堅苦しくない</span></li>
-              </ul>
-            </section>
-
-            <section class="summary-block compact-role">
-              <p class="summary-label">ROLE</p>
-              <ul class="dot-list">
-                <li>写真とコピーで世界観を伝える</li>
-                <li>参加判断に必要な情報を集約する</li>
-                <li>チケット申込みまで完結させる</li>
-              </ul>
-            </section>
-
-            <section class="summary-block color-block">
-              <p class="summary-label">COLOR</p>
-              <div class="color-row">
-                <span class="swatch swatch-teal" aria-hidden="true"></span>
-                <p><strong>Deep Teal</strong><small>夜と生演奏の上質感。黒より柔らかく、地域イベントの親しみも残す。</small></p>
-              </div>
-              <div class="color-row">
-                <span class="swatch swatch-amber" aria-hidden="true"></span>
-                <p><strong>Amber</strong><small>舞台照明や秋の夜の温かさ。見出しとCTAを明確にする。</small></p>
-              </div>
-              <div class="color-row">
-                <span class="swatch swatch-ivory" aria-hidden="true"></span>
-                <p><strong>Ivory</strong><small>大人らしい落ち着きと、堅苦しくない気軽さを両立する。</small></p>
-              </div>
-            </section>
-          </aside>
         </div>
-
-        <div class="channel-flow" aria-label="SNSとチラシからLPを経由して申込みへ進む導線">
-          <div class="channel-sources">
-            <div class="flow-chip source-sns"><span>SNS</span><strong>バナー・ストーリーズ</strong></div>
-            <div class="flow-chip source-flyer"><span>FLYER</span><strong>地域掲示チラシ</strong></div>
-          </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="flow-chip flow-lp"><span>LANDING PAGE</span><strong>世界観・詳細確認</strong></div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="flow-chip flow-ticket"><span>GOAL</span><strong>チケット申込</strong></div>
-        </div>
-        <p class="flow-note">LPを大元の情報として設計し、SNSとチラシでは、ターゲットや接触場面に合わせて必要な要素を抜き出して展開する。</p>
       </div>
     </section>
 
-    <section class="design-section alternate" id="structure">
-      <div class="container">
-        <header class="section-heading">
-          <div class="section-number">02</div>
-          <div>
-            <p class="eyebrow">INFORMATION ARCHITECTURE</p>
-            <h2>申込みにつなげる情報設計</h2>
-            <p>興味を持つところから申込みまで、参加者の判断順に情報を配置します。</p>
+    <section class="page-section alternate" id="design" aria-labelledby="design-title">
+      <div class="container section-shell">
+        <div class="section-heading-row">
+          <div class="section-title-group">
+            <span class="section-number">02</span>
+            <h2 id="design-title">設計思想・情報設計</h2>
           </div>
-        </header>
-
-        <div class="section-grid structure-grid">
-          <div class="preview-card preview-card-tall">
-            <div class="preview-switcher structure-switcher">
-              <input class="view-radio" type="radio" name="structure-view" id="structure-pc" checked>
-              <input class="view-radio" type="radio" name="structure-view" id="structure-mobile">
-
-              <div class="preview-toolbar">
-                <div class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-                <div class="view-tabs" aria-label="表示サイズ切り替え">
-                  <label for="structure-pc">PC</label>
-                  <label for="structure-mobile">SMARTPHONE</label>
-                </div>
-                <a href="./lp_html/index.html" target="_blank" rel="noopener">別画面で見る ↗</a>
-              </div>
-
-              <div class="browser-stage browser-stage-tall">
-                <div class="device-frame">
-                  <iframe src="./lp_html/index.html" title="イベントLP全体構成のプレビュー" loading="lazy"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <aside class="structure-panel" aria-label="LP掲載項目と役割">
-            <ol class="structure-list">
-              <li><span>01</span><div><strong>MAIN VISUAL</strong><p>「聴く・飲む・踊る」と東中野、日時・料金・CTAを一目で伝える。</p></div></li>
-              <li><span>02</span><div><strong>CONCEPT</strong><p>イベントの魅力3点を示し、参加する価値を伝える。</p></div></li>
-              <li><span>03</span><div><strong>FREE DANCE</strong><p>観るだけではない参加型体験を具体化する。</p></div></li>
-              <li><span>04</span><div><strong>ARTIST / MUSIC</strong><p>演者と代表曲を示し、本格的な演奏への期待をつくる。</p></div></li>
-              <li><span>05</span><div><strong>FOOD &amp; DRINK</strong><p>飲食を楽しみながら過ごす、気軽な参加イメージを伝える。</p></div></li>
-              <li><span>06</span><div><strong>NIGHT FLOW</strong><p>開場から終演までを時間軸で示し、当日の過ごし方を伝える。</p></div></li>
-              <li><span>07</span><div><strong>INFORMATION</strong><p>日時・会場・料金・地図など、参加判断に必要な詳細をまとめる。</p></div></li>
-              <li><span>08</span><div><strong>FAQ</strong><p>服装・ダンス・飲食など、参加前の不安を解消する。</p></div></li>
-              <li><span>09</span><div><strong>TICKET</strong><p>判断に必要な情報を再提示し、チケット申込みへつなげる。</p></div></li>
-            </ol>
-          </aside>
         </div>
 
-        <div class="information-note">
-          <div class="note-heading">
-            <p class="eyebrow">INFORMATION DESIGN</p>
-            <h3>情報粒度の設計</h3>
-          </div>
-          <p class="note-lead">参加を判断するための情報に絞り、会場に来てから分かればよい情報は、あえて掲載しない。</p>
-          <div class="note-columns">
-            <div>
-              <span class="note-tag include">掲載する</span>
-              <p>コンセプト／魅力／体験／演者／代表曲／飲食イメージ／タイムスケジュール／日時・場所・料金／FAQ／申込ボタン</p>
+        <div class="design-grid">
+          <div class="mobile-preview-card">
+            <div class="mobile-preview-label">SMARTPHONE VIEW</div>
+            <div class="phone-frame">
+              <iframe src="./lp_html/index.html" title="イベントLPスマートフォン表示" loading="lazy"></iframe>
             </div>
-            <div>
-              <span class="note-tag omit">詳細を掲載しない</span>
-              <p>全曲目と演奏順／フード・ドリンクの全メニュー／ダンスの小道具や細かな演出内容</p>
-            </div>
+            <a class="mobile-preview-link" href="./lp_html/index.html" target="_blank" rel="noopener">別画面でLPを見る ↗</a>
           </div>
+
+          <aside class="design-panel" aria-label="LPの設計思想と情報設計">
+            <div class="design-column architecture-column">
+              <section class="design-block architecture-block">
+                <p class="block-label">INFORMATION ARCHITECTURE</p>
+
+                <div class="definition-list">
+                  <div>
+                    <span>Target</span>
+                    <strong>30〜50代の音楽好き</strong>
+                  </div>
+                  <div>
+                    <span>Concept</span>
+                    <strong>聴く・飲む・踊る</strong>
+                  </div>
+                </div>
+
+                <ol class="architecture-list">
+                  <li><span>01</span><strong>メインビジュアル</strong></li>
+                  <li><span>02</span><strong>コンセプト</strong></li>
+                  <li><span>03</span><strong>自由ダンス</strong></li>
+                  <li><span>04</span><strong>演者・楽曲</strong></li>
+                  <li><span>05</span><strong>飲食</strong></li>
+                  <li><span>06</span><strong>タイムスケジュール</strong></li>
+                  <li><span>07</span><strong>開催情報</strong></li>
+                  <li><span>08</span><strong>FAQ</strong></li>
+                  <li><span>09</span><strong>チケット</strong></li>
+                </ol>
+              </section>
+            </div>
+
+            <div class="design-column detail-column">
+              <section class="design-block color-block">
+                <p class="block-label">COLOR</p>
+                <div class="color-list">
+                  <div><span class="swatch swatch-teal" aria-hidden="true"></span><strong>Deep Teal</strong><p>夜と生演奏の上質感</p></div>
+                  <div><span class="swatch swatch-amber" aria-hidden="true"></span><strong>Amber</strong><p>舞台照明・CTA</p></div>
+                  <div><span class="swatch swatch-ivory" aria-hidden="true"></span><strong>Ivory</strong><p>温かさ・読みやすさ</p></div>
+                </div>
+              </section>
+
+              <section class="design-block information-block">
+                <p class="block-label">INFORMATION DESIGN</p>
+                <p class="information-lead">参加を判断するための情報に絞り、会場に来てから分かればよい情報は、あえて掲載しない。</p>
+                <p class="example-label">例）</p>
+                <ul class="example-list">
+                  <li>全曲目</li>
+                  <li>全メニュー</li>
+                  <li>細かな演出</li>
+                </ul>
+              </section>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

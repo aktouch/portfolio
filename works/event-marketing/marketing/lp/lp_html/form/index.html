@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一夜限りのミュージックライブ 大人のハロウィン in 東中野 チケット申込フォーム">
+  <title>チケット申込｜大人のハロウィン in 東中野</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="header-brand" href="../index.html" aria-label="イベント詳細ページへ戻る">
+      <span class="header-brand-name">Brilliant Motion <span>×</span> Tera House ICA</span>
+    </a>
+    <a class="back-link" href="../index.html">EVENT PAGE</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="form-title">
+      <div class="hero-line" aria-hidden="true"></div>
+      <p class="eyebrow">TICKET APPLICATION</p>
+      <h1 id="form-title">チケット申込</h1>
+      <p class="hero-copy">必要事項をご入力後、Stripeの決済画面へお進みください。<br>決済完了後にチケットが確定します。</p>
+      <div class="event-summary" aria-label="開催概要">
+        <div><span>DATE</span><strong>2026.10.30 FRI</strong></div>
+        <div><span>OPEN / START</span><strong>19:00 / 19:30</strong></div>
+        <div><span>PRICE</span><strong>4,180円 / 1名</strong><small>1ドリンク付・税込</small></div>
+      </div>
+    </section>
+
+    <div class="page-grid">
+      <section class="form-card" aria-labelledby="entry-heading">
+        <div class="section-heading">
+          <p class="section-number">01</p>
+          <div>
+            <h2 id="entry-heading">お申込者情報</h2>
+            <p><span class="required-mark">必須</span>の項目をご入力ください。</p>
+          </div>
+        </div>
+
+        <form id="ticket-form" novalidate>
+          <fieldset>
+            <legend>代表者のお名前</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="last-name">姓 <span class="required">必須</span></label>
+                <input type="text" id="last-name" name="last_name" autocomplete="family-name" placeholder="山田" required maxlength="30">
+                <p class="error-message" id="last-name-error"></p>
+              </div>
+              <div class="field">
+                <label for="first-name">名 <span class="required">必須</span></label>
+                <input type="text" id="first-name" name="first_name" autocomplete="given-name" placeholder="太郎" required maxlength="30">
+                <p class="error-message" id="first-name-error"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>お名前（カタカナ）</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="last-name-kana">セイ <span class="required">必須</span></label>
+                <input type="text" id="last-name-kana" name="last_name_kana" autocomplete="off" placeholder="ヤマダ" required maxlength="30" inputmode="text">
+                <p class="error-message" id="last-name-kana-error"></p>
+              </div>
+              <div class="field">
+                <label for="first-name-kana">メイ <span class="required">必須</span></label>
+                <input type="text" id="first-name-kana" name="first_name_kana" autocomplete="off" placeholder="タロウ" required maxlength="30" inputmode="text">
+                <p class="error-message" id="first-name-kana-error"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="field-grid field-grid--2">
+            <div class="field">
+              <label for="tel">電話番号 <span class="required">必須</span></label>
+              <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="0312345678" required maxlength="15">
+              <p class="help-text">ハイフンあり・なし、どちらでも入力できます。</p>
+              <p class="error-message" id="tel-error"></p>
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス <span class="required">必須</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="example@email.com" required maxlength="254">
+              <p class="help-text">決済完了メールと開催案内をお送りします。</p>
+              <p class="error-message" id="email-error"></p>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>チケット</legend>
+            <div class="ticket-row">
+              <div class="field ticket-count">
+                <label for="people">申込人数 <span class="required">必須</span></label>
+                <select id="people" name="people" required>
+                  <option value="1">1名</option>
+                  <option value="2">2名</option>
+                  <option value="3">3名</option>
+                  <option value="4">4名</option>
+                </select>
+              </div>
+              <div class="price-box" aria-live="polite">
+                <span>お支払い合計</span>
+                <strong id="total-price">4,180円</strong>
+                <small>税込・1ドリンク付</small>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="optional-fields">
+            <legend>アンケート <span>任意</span></legend>
+            <p class="fieldset-note">今後の企画運営の参考として伺います。回答しなくてもお申込みいただけます。</p>
+            <div class="field-grid field-grid--3">
+              <div class="field">
+                <label for="gender">性別</label>
+                <select id="gender" name="gender">
+                  <option value="">選択しない</option>
+                  <option value="male">男性</option>
+                  <option value="female">女性</option>
+                  <option value="other">その他</option>
+                  <option value="no_answer">回答しない</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="generation">年代</label>
+                <select id="generation" name="generation">
+                  <option value="">選択しない</option>
+                  <option value="under20">20代以下</option>
+                  <option value="30s">30代</option>
+                  <option value="40s">40代</option>
+                  <option value="50s">50代</option>
+                  <option value="60s">60代以上</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="relationship">お連れ様</label>
+                <select id="relationship" name="relationship">
+                  <option value="">選択しない</option>
+                  <option value="spouse">配偶者・パートナー</option>
+                  <option value="friend">友人</option>
+                  <option value="parent_child">親子</option>
+                  <option value="sibling">兄弟姉妹</option>
+                  <option value="other">その他</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="consent-box">
+            <label class="checkbox-label" for="privacy-consent">
+              <input type="checkbox" id="privacy-consent" name="privacy_consent" required>
+              <span><a href="./privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>を確認し、個人情報の取扱いに同意します。 <b class="required">必須</b></span>
+            </label>
+            <p class="error-message" id="privacy-consent-error"></p>
+          </div>
+
+          <div id="form-error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+            <strong>入力内容をご確認ください。</strong>
+            <ul></ul>
+          </div>
+
+          <button class="submit-button" type="submit" id="submit-button">
+            <span>Stripeの決済画面へ進む</span>
+            <small>クレジットカード等で安全にお支払い</small>
+          </button>
+          <p class="submit-note">この時点では申込みは確定しません。決済完了後にチケットが確定します。</p>
+        </form>
+      </section>
+
+      <aside class="side-column">
+        <section class="info-card sticky-card" aria-labelledby="flow-heading">
+          <p class="section-number">FLOW</p>
+          <h2 id="flow-heading">お申込みの流れ</h2>
+          <ol class="flow-list">
+            <li><span>1</span><div><strong>フォーム入力</strong><p>代表者情報と人数を入力</p></div></li>
+            <li><span>2</span><div><strong>Stripeで決済</strong><p>安全な決済画面へ移動</p></div></li>
+            <li><span>3</span><div><strong>申込完了</strong><p>決済完了メールをご確認ください</p></div></li>
+          </ol>
+          <div class="security-note">
+            <strong>カード情報は当サイトで保持しません</strong>
+            <p>決済情報はStripeの決済画面で入力され、Stripeが安全に処理します。</p>
+          </div>
+        </section>
+
+        <section class="info-card" aria-labelledby="guide-heading">
+          <p class="section-number">GUIDE</p>
+          <h2 id="guide-heading">当日のご案内</h2>
+          <ul class="guide-list">
+            <li>ドレスコードはありません。くつろげて踊りやすい服装がおすすめです。</li>
+            <li>全席自由席です。ご入場順にお好きな席へお座りください。</li>
+            <li>演奏中も飲食をお楽しみいただけます。</li>
+            <li>会場内のお支払いはキャッシュレスのみです。</li>
+            <li>途中入退場も可能です。</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <p class="eyebrow">CONTACT</p>
+      <h2 id="contact-heading">お問い合わせ</h2>
+      <p>申込み・決済についてご不明な点がございましたら、下記までお問い合わせください。</p>
+      <div class="contact-details">
+        <p><span>運営</span>専門学校 東京テクニカルカレッジ テラハウスICA</p>
+        <p><span>EMAIL</span><a href="mailto:event.261031@ica.co.jp">event.261031@ica.co.jp</a></p>
+        <p><span>TEL</span><a href="tel:0312345678">03-1234-5678</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <a class="footer-brand" href="../index.html">Brilliant Motion × Tera House ICA</a>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../index.html">イベント詳細</a>
+        <a href="./privacy-policy/">プライバシーポリシー</a>
+      </nav>
+    </div>
+    <p class="footer-copyright">© 2026 Tera House ICA. 職業訓練授業課題</p>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
