@@ -3,22 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>父の日キャンペーンバナー｜表示イメージ</title>
+  <meta name="description" content="百貨店の父の日フェアをテーマに制作した、3サイズのバナーデザイン制作事例です。">
+  <title>父の日フェア｜バナーデザイン制作</title>
 
   <style>
-    /* ==============================
-      基本設定
-    ============================== */
+    :root {
+      --bg: #f4f0e8;
+      --paper: #fffdf9;
+      --ink: #26231f;
+      --muted: #706a62;
+      --line: #ddd4c7;
+      --navy: #263449;
+      --blue: #526b84;
+      --gold: #b9924f;
+      --gold-soft: #f1e6d1;
+      --blue-soft: #eaf0f5;
+      --shadow: 0 18px 44px rgba(53, 44, 33, 0.11);
+    }
+
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      color: var(--ink);
       font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", sans-serif;
-      color: #24313a;
-      background: #eef7fa;
-      line-height: 1.7;
+      line-height: 1.75;
+      background:
+        radial-gradient(circle at top left, rgba(185, 146, 79, 0.13), transparent 30%),
+        var(--bg);
     }
 
     img {
@@ -32,561 +50,698 @@
       text-decoration: none;
     }
 
-    /* ==============================
-      ページ全体
-    ============================== */
     .page {
-      max-width: 1180px;
+      width: min(1160px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 20px 72px;
+      padding: 52px 0 72px;
     }
 
-    /* ==============================
-      上部タイトルエリア
-    ============================== */
-    .work-header {
-      margin-bottom: 38px;
+    .hero {
+      overflow: hidden;
+      position: relative;
+      padding: 58px 32px;
       text-align: center;
+      background: rgba(255, 253, 249, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      top: -110px;
+      left: -90px;
+      width: 260px;
+      height: 260px;
+      background: rgba(82, 107, 132, 0.12);
+    }
+
+    .hero::after {
+      right: -80px;
+      bottom: -130px;
+      width: 290px;
+      height: 290px;
+      background: rgba(185, 146, 79, 0.15);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .work-label {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 16px;
       color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      background: #2d8db3;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      background: var(--navy);
       border-radius: 999px;
     }
 
     h1 {
-      margin: 0 0 12px;
-      color: #12394b;
-      font-size: clamp(28px, 4vw, 46px);
+      margin: 0;
+      font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", serif;
+      font-size: clamp(34px, 5vw, 58px);
       line-height: 1.25;
+      letter-spacing: 0.035em;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--gold);
+      font-size: clamp(17px, 2.2vw, 23px);
+      font-weight: 800;
     }
 
     .lead {
       max-width: 760px;
-      margin: 0 auto;
-      color: #4b6572;
+      margin: 22px auto 0;
+      color: #575149;
       font-size: 15px;
     }
 
-    /* ==============================
-      セクション共通
-    ============================== */
+    .meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meta-list li {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
     .section {
-      margin-top: 54px;
+      margin-top: 58px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 21px;
+    }
+
+    .section-number {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
     }
 
     .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 18px;
-      color: #12394b;
-      font-size: clamp(22px, 3vw, 30px);
+      margin: 0;
+      font-size: clamp(25px, 3vw, 33px);
+      line-height: 1.35;
     }
 
-    .section-title::before {
-      content: "";
-      width: 14px;
-      height: 14px;
-      background: #f0c24f;
-      border: 3px solid #2d8db3;
-      border-radius: 50%;
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
     }
 
-    .section-text {
-      margin: 0 0 20px;
-      color: #4b6572;
+    .summary-item,
+    .card,
+    .output-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(53, 44, 33, 0.07);
+    }
+
+    .summary-item {
+      padding: 22px;
+      border-radius: 17px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .item-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .item-text {
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    /* ==============================
-      制作バナー一覧
-      - まず実寸に近い状態で3種類を確認する
-    ============================== */
-    .banner-list {
+    .card {
+      padding: 30px;
+      border-radius: 21px;
+    }
+
+    .assignment-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .banner-card {
-      padding: 18px;
-      background: #fff;
-      border: 1px solid rgba(45, 141, 179, 0.22);
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(45, 141, 179, 0.12);
-    }
-
-    .banner-card h3 {
-      margin: 0 0 12px;
-      color: #12394b;
-      font-size: 16px;
-    }
-
-    .banner-card__image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 260px;
-      padding: 16px;
-      background: #d5eef6;
-      border-radius: 12px;
-    }
-
-    .banner-card__image--wide {
-      min-height: 180px;
-    }
-
-    .banner-size {
-      margin: 12px 0 0;
-      color: #5d7078;
-      font-size: 13px;
-      text-align: center;
-    }
-
-    /* ==============================
-      PCブラウザ風の外枠
-      - バナーを実際のWebページに配置したイメージにする
-    ============================== */
-    .browser-frame {
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid #d5e5ea;
-      border-radius: 18px;
-      box-shadow: 0 18px 42px rgba(16, 53, 67, 0.16);
-    }
-
-    .browser-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 0 18px;
-      background: #e8edf0;
-      border-bottom: 1px solid #d5e0e5;
-    }
-
-    .browser-dots {
-      display: flex;
-      gap: 7px;
-      flex-shrink: 0;
-    }
-
-    .browser-dot {
-      width: 12px;
-      height: 12px;
-      background: #a8b7bd;
-      border-radius: 50%;
-    }
-
-    .browser-url {
-      flex: 1;
-      padding: 6px 12px;
-      color: #6a7b83;
-      font-size: 13px;
-      background: #fff;
-      border-radius: 999px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* ==============================
-      PCページの中身の仮レイアウト
-    ============================== */
-    .mock-pc {
-      padding: 28px;
-      background: #f7fbfd;
-    }
-
-    .mock-pc__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid #d9e9ee;
-    }
-
-    .mock-logo {
-      font-size: 22px;
-      font-weight: 800;
-      color: #2d8db3;
-    }
-
-    .mock-nav {
-      display: flex;
-      gap: 18px;
-      color: #71848c;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .mock-pc__top-ad {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 24px;
-      padding: 18px;
-      background: #e1f3f8;
-      border-radius: 16px;
-    }
-
-    .mock-pc__layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
-      gap: 28px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
       align-items: start;
     }
 
-    .mock-article {
-      padding: 24px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 22px rgba(23, 80, 101, 0.08);
+    .assignment-grid h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      line-height: 1.5;
     }
 
-    .mock-hero {
-      height: 220px;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #d9eef5, #ffffff);
-      border-radius: 14px;
+    .assignment-grid p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .mock-heading {
-      width: 72%;
-      height: 26px;
-      margin-bottom: 14px;
-      background: #bddfea;
-      border-radius: 999px;
-    }
-
-    .mock-line {
-      height: 12px;
-      margin-top: 12px;
-      background: #dcebf0;
-      border-radius: 999px;
-    }
-
-    .mock-line--short {
-      width: 68%;
-    }
-
-    .mock-sidebar {
+    .conditions {
       display: grid;
-      gap: 18px;
+      gap: 11px;
     }
 
-    .mock-adbox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: #e1f3f8;
-      border: 1px dashed #97c9d8;
-      border-radius: 16px;
+    .condition {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--gold-soft);
+      border-radius: 12px;
     }
 
-    /* ==============================
-      スマホ外枠
-      - スマホで広告を見たときの雰囲気を確認する
-    ============================== */
-    .phone-area {
-      display: flex;
-      justify-content: center;
+    .condition span:first-child {
+      color: #7a5f2e;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
     }
 
-    .phone-frame {
-      width: min(100%, 390px);
-      padding: 14px;
-      background: #1f272b;
-      border-radius: 38px;
-      box-shadow: 0 18px 42px rgba(16, 53, 67, 0.22);
-    }
-
-    .phone-screen {
-      max-height: 720px;
-      overflow-y: auto;
-      background: #f7fbfd;
-      border-radius: 28px;
-    }
-
-    .mock-sp {
-      padding: 18px;
-    }
-
-    .mock-sp__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .mock-sp__logo {
-      color: #2d8db3;
-      font-size: 18px;
+    .condition span:last-child {
+      font-size: 14px;
       font-weight: 800;
     }
 
-    .mock-sp__menu {
-      width: 30px;
-      height: 20px;
-      border-top: 3px solid #2d8db3;
-      border-bottom: 3px solid #2d8db3;
+    .process-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .process-step {
       position: relative;
+      display: grid;
+      grid-template-columns: 72px 1fr 100px;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
     }
 
-    .mock-sp__menu::before {
-      content: "";
+    .process-step:last-child {
+      border-bottom: 0;
+    }
+
+    .process-step:not(:last-child)::after {
+      content: "↓";
       position: absolute;
-      left: 0;
-      top: 6px;
-      width: 100%;
-      border-top: 3px solid #2d8db3;
+      bottom: -17px;
+      left: 25px;
+      z-index: 2;
+      width: 28px;
+      color: var(--gold);
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+      background: var(--paper);
     }
 
-    .mock-sp__ad {
-      display: flex;
-      justify-content: center;
-      margin: 18px 0;
-      padding: 12px;
-      background: #e1f3f8;
-      border-radius: 14px;
+    .step-number {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
     }
 
-    .mock-sp__card {
-      padding: 18px;
-      background: #fff;
+    .step-body h3 {
+      margin: 0 0 7px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .step-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .step-time {
+      justify-self: end;
+      align-self: start;
+      padding: 5px 11px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      background: var(--blue-soft);
+      border-radius: 999px;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .insight-box {
+      padding: 23px;
       border-radius: 16px;
-      box-shadow: 0 8px 22px rgba(23, 80, 101, 0.08);
     }
 
-    .mock-sp__image {
-      height: 150px;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #d9eef5, #ffffff);
-      border-radius: 14px;
+    .insight-box--point {
+      background: var(--navy);
+      color: #fff;
     }
 
-    /* ==============================
-      戻るボタン
-    ============================== */
+    .insight-box--learning {
+      background: var(--gold-soft);
+      border: 1px solid #dfc99e;
+    }
+
+    .insight-box h3 {
+      margin: 0 0 11px;
+      font-size: 18px;
+    }
+
+    .insight-box p,
+    .insight-box ul {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .insight-box--point p {
+      color: #e5eaf0;
+    }
+
+    .insight-box ul {
+      padding-left: 1.2em;
+    }
+
+    .insight-box li + li {
+      margin-top: 8px;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .output-card {
+      overflow: hidden;
+      border-radius: 19px;
+    }
+
+    .output-card--square {
+      grid-column: span 5;
+    }
+
+    .output-card--vertical {
+      grid-column: span 3;
+    }
+
+    .output-card--horizontal {
+      grid-column: span 4;
+    }
+
+    .output-image {
+      display: grid;
+      place-items: center;
+      min-height: 280px;
+      padding: 18px;
+      background:
+        linear-gradient(45deg, #f4f1ec 25%, transparent 25%),
+        linear-gradient(-45deg, #f4f1ec 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f4f1ec 75%),
+        linear-gradient(-45deg, transparent 75%, #f4f1ec 75%);
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+      background-size: 24px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .output-image img {
+      width: 100%;
+      max-height: 560px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 18px rgba(36, 31, 25, 0.17));
+    }
+
+    .output-image.is-missing::before {
+      content: attr(data-placeholder);
+      display: grid;
+      place-items: center;
+      width: 100%;
+      min-height: 220px;
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px dashed #cfc5b7;
+      border-radius: 12px;
+    }
+
+    .output-info {
+      padding: 18px 20px 20px;
+    }
+
+    .output-info h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+    }
+
+    .output-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .file-note {
+      margin-top: 16px;
+      padding: 14px 17px;
+      color: #625b52;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px dashed #c9bdad;
+      border-radius: 12px;
+    }
+
     .back-link {
-      display: inline-block;
-      margin-top: 42px;
+      display: inline-flex;
+      margin-top: 46px;
       padding: 12px 22px;
       color: #fff;
-      font-weight: 700;
-      background: #12394b;
+      font-size: 14px;
+      font-weight: 800;
+      background: var(--navy);
       border-radius: 999px;
-      transition: opacity 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
     .back-link:hover {
-      opacity: 0.78;
+      opacity: 0.86;
+      transform: translateY(-2px);
     }
 
-    /* ==============================
-      レスポンシブ調整
-    ============================== */
     @media (max-width: 900px) {
-      .banner-list {
-        grid-template-columns: 1fr;
-      }
-
-      .mock-pc__layout {
-        grid-template-columns: 1fr;
-      }
-
-      .mock-sidebar {
+      .summary-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .assignment-grid,
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .output-card--square,
+      .output-card--vertical,
+      .output-card--horizontal {
+        grid-column: span 12;
+      }
+
+      .output-image img {
+        max-height: 620px;
+      }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 650px) {
       .page {
-        padding: 32px 14px 56px;
+        width: min(100% - 28px, 1160px);
+        padding: 28px 0 54px;
       }
 
-      .browser-frame {
-        border-radius: 12px;
+      .hero {
+        padding: 38px 18px;
+        border-radius: 20px;
       }
 
-      .browser-bar {
-        min-height: 38px;
-        padding: 0 10px;
+      .section {
+        margin-top: 46px;
       }
 
-      .browser-dot {
-        width: 9px;
-        height: 9px;
-      }
-
-      .browser-url {
-        font-size: 11px;
-      }
-
-      .mock-pc {
-        padding: 18px;
-      }
-
-      .mock-nav {
-        display: none;
-      }
-
-      .mock-sidebar {
+      .summary-grid {
         grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 21px;
+      }
+
+      .process-step {
+        grid-template-columns: 54px 1fr;
+        gap: 12px;
+      }
+
+      .step-time {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .process-step:not(:last-child)::after {
+        left: 14px;
+      }
+
+      .condition {
+        grid-template-columns: 64px 1fr;
       }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <!-- ページ見出し -->
-    <header class="work-header">
-      <span class="work-label">WORKS / BANNER</span>
-      <h1>父の日キャンペーンバナー<br>表示イメージ</h1>
-      <p class="lead">
-        制作したバナーを単体で見せるだけでなく、PCサイト・スマホサイトに配置したときの見え方が伝わるように、外枠と仮レイアウトを作っています。
-      </p>
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="work-label">WORKS / BANNER DESIGN</span>
+        <h1>父の日フェア バナー制作</h1>
+        <p class="subtitle">百貨店向け・3サイズ展開</p>
+        <p class="lead">
+          指定されたテーマとサイズをもとに、参考バナーのリサーチ、素材収集、Photoshopでのレイアウト制作を行い、スクエア・縦長・横長の3種類へ展開しました。
+        </p>
+        <ul class="meta-list" aria-label="制作概要">
+          <li>テーマ：父の日</li>
+          <li>業種：百貨店</li>
+          <li>制作時間：約3時間</li>
+          <li>使用ツール：Photoshop</li>
+        </ul>
+      </div>
     </header>
 
-    <!-- 制作したバナーの一覧 -->
-    <section class="section" aria-labelledby="banner-list-title">
-      <h2 class="section-title" id="banner-list-title">制作バナー</h2>
-      <p class="section-text">サイズ違いの3パターンを、まずは単体で確認できるようにしています。</p>
+    <section class="section" aria-labelledby="summary-title">
+      <div class="section-heading">
+        <span class="section-number">SUMMARY</span>
+        <h2 class="section-title" id="summary-title">サマリ</h2>
+      </div>
 
-      <div class="banner-list">
-        <article class="banner-card">
-          <h3>レクタングル</h3>
-          <div class="banner-card__image">
-            <img src="img/banner1-1.jpg" alt="父の日キャンペーン 300×250バナー">
-          </div>
-          <p class="banner-size">300 × 250px</p>
+      <div class="summary-grid">
+        <article class="summary-item">
+          <p class="eyebrow">PROJECT</p>
+          <h3 class="item-title">父の日フェア</h3>
+          <p class="item-text">百貨店の父の日企画を想定したバナー制作課題です。</p>
         </article>
-
-        <article class="banner-card">
-          <h3>スカイスクレイパー</h3>
-          <div class="banner-card__image">
-            <img src="img/banner1-2.jpg" alt="父の日キャンペーン 160×600バナー">
-          </div>
-          <p class="banner-size">160 × 600px</p>
+        <article class="summary-item">
+          <p class="eyebrow">FORMAT</p>
+          <h3 class="item-title">3サイズ展開</h3>
+          <p class="item-text">スクエア、縦長、横長の指定サイズで制作しました。</p>
         </article>
-
-        <article class="banner-card">
-          <h3>モバイルバナー</h3>
-          <div class="banner-card__image banner-card__image--wide">
-            <img src="img/banner1-3.jpg" alt="父の日キャンペーン 320×100バナー">
-          </div>
-          <p class="banner-size">320 × 100px</p>
+        <article class="summary-item">
+          <p class="eyebrow">PROCESS</p>
+          <h3 class="item-title">調査から制作まで</h3>
+          <p class="item-text">参考事例と素材を探し、Photoshop上で構成を仕上げました。</p>
+        </article>
+        <article class="summary-item">
+          <p class="eyebrow">TIME</p>
+          <h3 class="item-title">約3時間</h3>
+          <p class="item-text">午後の授業時間内で、調査・制作・サイズ展開まで行いました。</p>
         </article>
       </div>
     </section>
 
-    <!-- PCサイト内での表示イメージ -->
-    <section class="section" aria-labelledby="pc-preview-title">
-      <h2 class="section-title" id="pc-preview-title">PCビューでの見え方</h2>
-      <p class="section-text">Webページの上部・サイドバーにバナーを配置した想定のプレビューです。</p>
+    <section class="section" aria-labelledby="assignment-title">
+      <div class="section-heading">
+        <span class="section-number">01 PROJECT</span>
+        <h2 class="section-title" id="assignment-title">課題</h2>
+      </div>
 
-      <div class="browser-frame">
-        <div class="browser-bar" aria-hidden="true">
-          <div class="browser-dots">
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-            <span class="browser-dot"></span>
-          </div>
-          <div class="browser-url">https://example.com/fathers-day-campaign/</div>
+      <div class="card assignment-grid">
+        <div>
+          <h3>指定されたテーマとサイズで、父の日フェアのバナーを制作</h3>
+          <p>
+            「父の日」「百貨店」というテーマと、制作する3種類の大きさはあらかじめ指定されていました。指定条件を満たしながら、参考デザインと使用素材を自分で探し、バナーとして仕上げる課題でした。
+          </p>
         </div>
 
-        <div class="mock-pc">
-          <div class="mock-pc__header">
-            <div class="mock-logo">Marumi Department</div>
-            <nav class="mock-nav" aria-label="サンプルナビゲーション">
-              <span>Event</span>
-              <span>Gift</span>
-              <span>Access</span>
-            </nav>
-          </div>
-
-          <div class="mock-pc__top-ad">
-            <img src="img/banner1-3.jpg" alt="PCページ上部に配置した父の日キャンペーンバナー">
-          </div>
-
-          <div class="mock-pc__layout">
-            <article class="mock-article" aria-label="サンプル記事エリア">
-              <div class="mock-hero"></div>
-              <div class="mock-heading"></div>
-              <div class="mock-line"></div>
-              <div class="mock-line"></div>
-              <div class="mock-line mock-line--short"></div>
-            </article>
-
-            <aside class="mock-sidebar" aria-label="広告表示エリア">
-              <div class="mock-adbox">
-                <img src="img/banner1-1.jpg" alt="PCサイドバーに配置した300×250バナー">
-              </div>
-              <div class="mock-adbox">
-                <img src="img/banner1-2.jpg" alt="PCサイドバーに配置した160×600バナー">
-              </div>
-            </aside>
-          </div>
+        <div class="conditions" aria-label="指定条件">
+          <div class="condition"><span>テーマ</span><span>父の日</span></div>
+          <div class="condition"><span>業種</span><span>百貨店</span></div>
+          <div class="condition"><span>サイズ</span><span>スクエア・縦長・横長</span></div>
+          <div class="condition"><span>ツール</span><span>Adobe Photoshop</span></div>
         </div>
       </div>
     </section>
 
-    <!-- スマホサイト内での表示イメージ -->
-    <section class="section" aria-labelledby="sp-preview-title">
-      <h2 class="section-title" id="sp-preview-title">スマホビューでの見え方</h2>
-      <p class="section-text">スマホ画面の中に、横長バナーとレクタングルバナーを配置した想定です。画面内はスクロールできます。</p>
+    <section class="section" aria-labelledby="process-title">
+      <div class="section-heading">
+        <span class="section-number">02 PROCESS</span>
+        <h2 class="section-title" id="process-title">進め方</h2>
+      </div>
 
-      <div class="phone-area">
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="mock-sp">
-              <div class="mock-sp__header">
-                <div class="mock-sp__logo">Marumi</div>
-                <div class="mock-sp__menu" aria-hidden="true"></div>
-              </div>
-
-              <div class="mock-sp__ad">
-                <img src="img/banner1-3.jpg" alt="スマホ上部に配置した320×100バナー">
-              </div>
-
-              <article class="mock-sp__card" aria-label="スマホ表示のサンプル記事">
-                <div class="mock-sp__image"></div>
-                <div class="mock-heading"></div>
-                <div class="mock-line"></div>
-                <div class="mock-line mock-line--short"></div>
-              </article>
-
-              <div class="mock-sp__ad">
-                <img src="img/banner1-1.jpg" alt="スマホ記事内に配置した300×250バナー">
-              </div>
-
-              <article class="mock-sp__card" aria-label="スマホ表示のサンプル記事2">
-                <div class="mock-sp__image"></div>
-                <div class="mock-heading"></div>
-                <div class="mock-line"></div>
-                <div class="mock-line"></div>
-              </article>
-
-              <div class="mock-sp__ad">
-                <img src="img/banner1-2.jpg" alt="スマホ画面内に配置した160×600バナー">
-              </div>
+      <div class="card">
+        <ol class="process-list">
+          <li class="process-step">
+            <span class="step-number">STEP 01</span>
+            <div class="step-body">
+              <h3>構成・レイアウトを考える</h3>
+              <p>どの情報や素材を中心に見せるか、全体の構成を検討しました。</p>
             </div>
-          </div>
+            <span class="step-time">約20分</span>
+          </li>
+
+          <li class="process-step">
+            <span class="step-number">STEP 02</span>
+            <div class="step-body">
+              <h3>父の日の参考バナーを探す</h3>
+              <p>類似バナーを探すことに時間がかかったため、まず父の日に関係するバナーへ検索対象を絞り、百貨店らしいテイストや配色、文字の見せ方を確認しました。</p>
+            </div>
+            <span class="step-time">約50分</span>
+          </li>
+
+          <li class="process-step">
+            <span class="step-number">STEP 03</span>
+            <div class="step-body">
+              <h3>使用する素材を検索・収集する</h3>
+              <p>父の日バナーに使える写真や装飾素材を検索し、制作に必要なデータをダウンロードしました。</p>
+            </div>
+            <span class="step-time">約30分</span>
+          </li>
+
+          <li class="process-step">
+            <span class="step-number">STEP 04</span>
+            <div class="step-body">
+              <h3>Photoshopで素材とテキストを配置する</h3>
+              <p>集めた素材をPhotoshop上に配置し、テキストを入力。余白や大きさを調整しながら、最初のスクエアバナーを完成させました。</p>
+            </div>
+            <span class="step-time">約70分</span>
+          </li>
+
+          <li class="process-step">
+            <span class="step-number">STEP 05</span>
+            <div class="step-body">
+              <h3>スクエアから縦長・横長へ展開する</h3>
+              <p>スクエアを最初に制作し、そのデザインを基準に縦長、最後に横長の順でレイアウトを調整しました。</p>
+            </div>
+            <span class="step-time">約30分</span>
+          </li>
+        </ol>
+
+        <div class="insight-grid">
+          <aside class="insight-box insight-box--point">
+            <h3>工夫したこと</h3>
+            <p>
+              最初にスクエアで基準となるデザインを完成させ、そのレイアウトを縦長・横長へ展開しました。サイズごとにゼロから作り直さず、統一感を保ちながら効率よく制作しました。
+            </p>
+          </aside>
+
+          <aside class="insight-box insight-box--learning">
+            <h3>学んだこと</h3>
+            <ul>
+              <li>参考デザインを調査してから制作すると、レイアウトや配色の方向性を決めやすいこと。</li>
+              <li>基準となるサイズを先に完成させると、他サイズへの展開を進めやすいこと。</li>
+              <li>同じデザインでも、サイズに応じて文字量や余白を調整する必要があること。</li>
+            </ul>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- ポートフォリオ一覧へ戻る導線 -->
+    <section class="section" aria-labelledby="output-title">
+      <div class="section-heading">
+        <span class="section-number">03 OUTPUT</span>
+        <h2 class="section-title" id="output-title">完成物</h2>
+      </div>
+
+      <div class="output-grid">
+        <article class="output-card output-card--square">
+          <div class="output-image" data-placeholder="img/banner-square.jpg を配置してください">
+            <img src="img/banner1-1.jpg" alt="父の日フェアのスクエアバナー">
+          </div>
+          <div class="output-info">
+            <h3>スクエア</h3>
+            <p>最初に制作し、ほかのサイズ展開の基準としたデザインです。</p>
+          </div>
+        </article>
+
+        <article class="output-card output-card--vertical">
+          <div class="output-image" data-placeholder="img/banner-vertical.jpg を配置してください">
+            <img src="img/banner1-2.jpg" alt="父の日フェアの縦長バナー">
+          </div>
+          <div class="output-info">
+            <h3>縦長</h3>
+            <p>スクエア版の要素を縦方向に再配置しました。</p>
+          </div>
+        </article>
+
+        <article class="output-card output-card--horizontal">
+          <div class="output-image" data-placeholder="img/banner-horizontal.jpg を配置してください">
+            <img src="img/banner1-3.jpg" alt="父の日フェアの横長バナー">
+          </div>
+          <div class="output-info">
+            <h3>横長</h3>
+            <p>横幅に合わせて素材と文字の位置・余白を調整しました。</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="file-note">
+        画像ファイル名は仮設定です。実際の画像名が異なる場合は、上記3か所の <code>src</code> を変更してください。
+      </p>
+    </section>
+
     <a class="back-link" href="../../index.html">Works一覧へ戻る</a>
   </main>
+
+  <script>
+    document.querySelectorAll(".output-image img").forEach((image) => {
+      image.addEventListener("error", () => {
+        image.parentElement.classList.add("is-missing");
+        image.remove();
+      });
+    });
+  </script>
 </body>
 </html>
