@@ -131,7 +131,10 @@ h1 {
 .form-card { padding: clamp(34px, 5vw, 64px); }
 .info-card { padding: 34px; }
 .info-card + .info-card { margin-top: 24px; }
-.sticky-card { position: sticky; top: 24px; }
+/* FLOWカードだけを sticky にすると、スクロール時に本来の位置から下へずれて
+   直後の「当日のご案内」カードに重なる（sticky は positioned なので静的な兄弟より前面に描かれ、
+   .side-column の下端まで滑り続ける）。重なりを防ぐため通常フローに戻す */
+.sticky-card { position: static; }
 .section-heading {
   display: grid;
   grid-template-columns: 60px 1fr;
@@ -188,10 +191,40 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--er
 .price-box span { font-size: 13px; }
 .price-box strong { color: var(--amber); font-family: var(--font-serif); font-size: 30px; font-weight: 500; }
 .price-box small { grid-column: 1 / -1; text-align: right; font-size: 11px; opacity: .75; }
-.consent-box { padding: 22px; background: rgba(217,154,61,.12); border: 1px solid rgba(217,154,61,.5); }
-.checkbox-label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 14px; }
-.checkbox-label input { width: 20px; min-height: 20px; margin-top: 4px; accent-color: var(--soft); }
-.checkbox-label a { border-bottom: 1px solid var(--amber); }
+.application-policy {
+  padding: 26px 28px;
+  background: rgba(217,154,61,.10);
+  border: 1px solid rgba(217,154,61,.45);
+}
+.application-policy h3 {
+  margin: 0 0 20px;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.5;
+}
+.policy-summary-item + .policy-summary-item {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(18,54,53,.14);
+}
+.policy-summary-item h4 {
+  margin: 0 0 8px;
+  color: var(--soft);
+  font-family: var(--font-serif);
+  font-size: 16px;
+}
+.policy-summary-item p,
+.policy-summary-item li {
+  font-size: 13px;
+  line-height: 1.85;
+}
+.policy-summary-item p { margin: 0; }
+.policy-summary-item .policy-detail { margin-top: 8px; }
+.policy-summary-item ul {
+  margin: 0;
+  padding-left: 1.4em;
+}
+.policy-summary-item li + li { margin-top: 6px; }
 .error-summary { padding: 18px 20px; color: var(--error); background: #fff2f2; border-left: 3px solid var(--error); }
 .error-summary ul { margin: 8px 0 0; padding-left: 1.4em; }
 .submit-button {
@@ -267,6 +300,7 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--er
   .section-heading .section-number { padding-top: 0; }
   .field-grid--2, .field-grid--3, .ticket-row, .side-column { grid-template-columns: 1fr; }
   .optional-fields { padding: 22px 18px; }
+  .application-policy { padding: 22px 18px; }
   .price-box { min-height: 98px; }
   .submit-button { min-height: 76px; }
   .contact-section { margin-bottom: 80px; padding: 46px 22px; }

@@ -365,3 +365,209 @@ iframe { border: 0; }
   .product-frame { height: min(100%, 540px); }
   .phone-frame { height: min(100%, 540px); }
 }
+
+
+/* =============================================================
+   01 制作物：PCプレビューを1920px相当で表示する
+   -------------------------------------------------------------
+   このブロックを丸ごと削除すれば元の挙動に戻ります。
+
+   【元の実装の問題】
+   .device-frame iframe が width/height ともに 100% なので、
+   iframe内部のビューポート幅＝枠の実寸そのものだった。
+   枠は height:100% + aspect-ratio:16/9 で高さから幅が決まるため、
+   実効幅は「ビューポート高さ - 318px」× 16/9 になる。
+     H=1080 → 1353px ／ H=950 → 1122px ／ H=768 → 802px
+   つまりウィンドウの高さ次第で描画幅が変わり、
+   高さが約896pxを下回るとLP側の1024pxブレイクポイントに落ちて
+   タブレット版が表示されていた。
+
+   【ここでの対処】
+   iframeを 1920×1080 の固定値にし、transform: scale() で縮小する。
+   transformはレイアウト完了後のペイント処理なので、
+   iframe内部のビューポートは常に1920pxのまま保たれる。
+   これに伴い枠は高さ追従をやめ、1920×1080×倍率の固定サイズにする
+   （.preview-stage が flex中央寄せなので、余白が出ても
+     マットの上にウィンドウが浮いた見た目になり破綻しない）。
+
+   倍率はウィンドウサイズごとに段階指定する。CSSでは
+   「枠幅 ÷ 1920px」を無単位の数値として計算できないため、
+   倍率を連続的に追従させることはできない。
+   max-width / max-height を保険に入れてあるので、
+   段が合わない場合でもはみ出しは起きず、端が切れるだけで済む。
+
+   セレクタを #product-pc:checked に限定しているのは、
+   SMARTPHONEタブ選択時に .product-frame の指定を巻き込まないため。
+============================================================= */
+#product-pc:checked ~ .product-stage .product-frame {
+  /* iframe内部のビューポート。表示するPC幅を変えるならここ */
+  --frame-w: 1920px;
+  --frame-h: 1080px;
+  /* 既定値は1366×768クラスのノートPCに合わせた下限
+     （この帯では枠の高さ上限が452pxしかない） */
+  --preview-scale: 0.41;
+
+  /* +2px は .device-frame の border 1px×2 ぶん。
+     これで内寸＝縮小後のiframeサイズがちょうど一致する */
+  width: calc(var(--frame-w) * var(--preview-scale) + 2px);
+  height: calc(var(--frame-h) * var(--preview-scale) + 2px);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ベース側の width/height:100% を固定値で打ち消す。
+   ここが1920pxである一点が、この対応の本体 */
+#product-pc:checked ~ .product-stage .product-frame iframe {
+  width: var(--frame-w);
+  height: var(--frame-h);
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* 以降、ウィンドウに余裕がある場合は倍率を上げて大きく見せる。
+   幅・高さ両方に条件を付けているのは、どちらか一方でも足りないと
+   max-width / max-height で切れてしまうため */
+@media (min-width: 1120px) and (min-height: 880px) {
+  #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.51; }
+}
+
+@media (min-width: 1400px) and (min-height: 1000px) {
+  #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.62; }
+}
+
+/* -------------------------------------------------------------
+   980px以下：.section-shell が height:auto になり、
+   .preview-switcher が固定高（680px／700px以下は620px）になる帯。
+   ここからは高さではなく「幅」が制約になる。
+
+   ステージの内寸は
+     701〜980px … ビューポート幅 - 136px
+     700px以下   … ビューポート幅 -  92px（shellのpaddingが16pxに変わるため）
+   で、倍率の理想値は (ステージ内寸 - 2px) ÷ 1920px。
+   これはビューポート幅に対して連続的に変化するが、CSSでは
+   長さ同士の除算で無単位の数値を作れないため追従できない。
+   そこで帯を細かく切り、各帯の「下端の幅」で収まる値を置いている
+   （下端基準にするのは、はみ出して切れるより、
+     少し小さくてマットが見える方が破綻しないため）。
+   帯の上端でも実寸との差は最大15%程度に収まる。
+------------------------------------------------------------- */
+@media (max-width: 980px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.397; } }
+@media (max-width: 900px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.355; } }
+@media (max-width: 820px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.314; } }
+@media (max-width: 740px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.293; } }
+/* ここから .section-shell の padding が 16px、.preview-switcher が 620px */
+@media (max-width: 700px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.284; } }
+@media (max-width: 640px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.243; } }
+@media (max-width: 560px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.211; } }
+@media (max-width: 500px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.180; } }
+@media (max-width: 440px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.149; } }
+/* 375px（iPhone SE〜14の主要幅）がこの帯の中に来るよう境界を380pxに置いている */
+@media (max-width: 380px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.139; } }
+@media (max-width: 360px) { #product-pc:checked ~ .product-stage .product-frame { --preview-scale: 0.117; } }
+
+
+/* =============================================================
+   スマホプレビューを440px相当で表示する（01のSMARTPHONEタブ／02の設計思想）
+   -------------------------------------------------------------
+   このブロックを丸ごと削除すれば元の挙動に戻ります。
+
+   【元の実装の問題】
+   iframe が width/height ともに100%だったため、内部のビューポート幅＝
+   枠の実寸だった。枠は height:100% + aspect-ratio:402/874 で
+   高さから幅が決まるため、実効幅は210〜336px程度にしかならず、
+   LPの設計基準である440pxを大きく下回っていた。
+   結果、ブランド名が4行に折れる・リード文が「生演／奏」で切れるなど、
+   実機では起きない崩れがプレビュー上だけで発生していた。
+
+   【ここでの対処】
+   PC枠と同じく iframe を固定値（440×880）にし、transform: scale() で縮小する。
+   440×880 は 1:2。iPhone実機の 402:874（≒0.46）より寸胴だが、
+   同じ高さでより横に広く取れるぶん縮小率が緩み、文字が読みやすくなる
+   （0.46比なら62%、1:2なら約68〜70%）。
+
+   倍率は「幅から決まる上限」と「高さから決まる上限」の
+   小さい方を min() で採用する。両方をメディアクエリの組み合わせで
+   書くと条件が掛け算で増えるため、変数を2本に分けている。
+============================================================= */
+
+/* ---- 01 制作物：SMARTPHONEタブ ---- */
+#product-mobile:checked ~ .product-stage .product-frame {
+  --frame-w: 440px;
+  --frame-h: 880px;
+  --scale-w: 0.80;   /* ステージ幅は余裕があるので、狭い帯以外では効かない */
+  --scale-h: 0.48;   /* 既定はステージ高が最小になる帯に合わせた値 */
+  --preview-scale: min(var(--scale-w), var(--scale-h));
+
+  /* +16px は border 8px×2 ぶん。内寸＝縮小後のiframeサイズに一致させる */
+  width: calc(var(--frame-w) * var(--preview-scale) + 16px);
+  height: calc(var(--frame-h) * var(--preview-scale) + 16px);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#product-mobile:checked ~ .product-stage .product-frame iframe {
+  width: var(--frame-w);
+  height: var(--frame-h);
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* ステージ高は「ビューポート高 - 318px」。min-width で絞っているのは、
+   980px以下では .section-shell が height:auto になり高さが無関係になるため */
+@media (min-width: 981px) and (min-height:  800px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.52; } }
+@media (min-width: 981px) and (min-height:  860px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.59; } }
+@media (min-width: 981px) and (min-height:  920px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.66; } }
+@media (min-width: 981px) and (min-height:  980px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.73; } }
+@media (min-width: 981px) and (min-height: 1040px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.80; } }
+
+/* 幅が狭い帯は .preview-switcher が固定高になるので、高さ側を上書きし直す。
+   min-height 群より後ろに置くことで確実に勝たせている */
+@media (max-width: 980px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.66; } }
+@media (max-width: 700px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-h: 0.59; } }
+/* ここから先はステージ幅の方が先に足りなくなる */
+@media (max-width: 400px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-w: 0.57; } }
+@media (max-width: 360px) { #product-mobile:checked ~ .product-stage .product-frame { --scale-w: 0.48; } }
+
+
+/* ---- 02 設計思想：SMARTPHONE VIEW ---- */
+.phone-frame {
+  --frame-w: 440px;
+  --frame-h: 880px;
+  --scale-w: 0.50;
+  --scale-h: 0.47;
+  --preview-scale: min(var(--scale-w), var(--scale-h));
+
+  width: calc(var(--frame-w) * var(--preview-scale) + 16px);
+  height: calc(var(--frame-h) * var(--preview-scale) + 16px);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.phone-frame iframe {
+  width: var(--frame-w);
+  height: var(--frame-h);
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* 02は左カラムが minmax(270px, 0.62fr) なので、01と違い「幅」が先に効く。
+   カラム内寸は概ね (コンテナ幅 - 50 - 22) × 0.31 - 30 */
+@media (min-width: 1100px) { .phone-frame { --scale-w: 0.58; } }
+@media (min-width: 1200px) { .phone-frame { --scale-w: 0.65; } }
+@media (min-width: 1300px) { .phone-frame { --scale-w: 0.72; } }
+@media (min-width: 1416px) { .phone-frame { --scale-w: 0.80; } }
+
+/* 高さ側の上限。カード高は「ビューポート高 - 202px」からラベルとリンクぶんを引いた値 */
+@media (min-width: 981px) and (min-height:  800px) { .phone-frame { --scale-h: 0.52; } }
+@media (min-width: 981px) and (min-height:  860px) { .phone-frame { --scale-h: 0.59; } }
+@media (min-width: 981px) and (min-height:  920px) { .phone-frame { --scale-h: 0.66; } }
+@media (min-width: 981px) and (min-height:  980px) { .phone-frame { --scale-h: 0.72; } }
+@media (min-width: 981px) and (min-height: 1040px) { .phone-frame { --scale-h: 0.79; } }
+
+/* 980px以下は .design-grid が1カラムになり、.mobile-preview-card の
+   min-height（720px／700px以下は650px）が高さを決める */
+@media (max-width: 980px) { .phone-frame { --scale-w: 0.80; --scale-h: 0.70; } }
+@media (max-width: 700px) { .phone-frame { --scale-h: 0.62; } }
+@media (max-width: 460px) { .phone-frame { --scale-w: 0.66; } }
+@media (max-width: 400px) { .phone-frame { --scale-w: 0.57; } }
+@media (max-width: 360px) { .phone-frame { --scale-w: 0.48; } }

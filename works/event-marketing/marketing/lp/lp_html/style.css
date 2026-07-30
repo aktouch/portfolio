@@ -1,15 +1,6 @@
-/* =============================================================
-  変数
-============================================================= */
 :root {
-  /* 全体の基本フォント */
   --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  /* 見出しと一部の欧文に使う明朝
-     游明朝を先頭にしているのは、Google Fonts版のNoto Serif JPには
-     palt（文字詰め）が含まれておらず、font-feature-settingsが効かないため。
-     游明朝・ヒラギノ明朝にはpaltがあるので、そちらを優先する */
   --font-serif: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
-
   --ink: #0b1515;
   --deep: #071c1d;
   --teal: #0b2f30;
@@ -19,23 +10,21 @@
   --paper: #f5f0e6;
   --line: rgba(18, 54, 53, .16);
 }
-
-/* =============================================================
-  ベース
-============================================================= */
 * {
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
-  /* 固定ヘッダー分だけアンカー飛び先を下げ、見出しがヘッダーに隠れないようにする。
-     ヘッダー高さはBPで 92 → 76 → 60px と変わるので、各メディアクエリで合わせている */
   scroll-padding-top: 92px;
-  /* height: auto への transition を許可（FAQ開閉アニメーション用） */
   interpolate-size: allow-keywords;
 }
-
+.is-embedded {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.is-embedded::-webkit-scrollbar {
+  display: none;
+}
 body {
   margin: 0;
   background: var(--paper);
@@ -44,31 +33,26 @@ body {
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "palt";
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
 img {
   display: block;
   width: 100%;
+  height: auto;
 }
-
 button {
   font: inherit;
 }
-
 h1 {
   font-family: var(--font-serif);
   font-weight: 500;
 }
-
-/* h2共通：全セクションで同じサイズ・行間にそろえる
-   （下マージンだけは各セクションの ○○-title で個別指定）
-
-   font-size は 440px→35px ／ 1920px→68px の2点を直線で結んだ値。
-   最小値は直線を360pxまで延ばした 33.2px（360px以下で頭打ち） */
 h2 {
   margin: 0;
   font-family: var(--font-serif);
@@ -76,50 +60,28 @@ h2 {
   font-size: clamp(33.2px, 25.19px + 2.23vw, 68px);
   line-height: 1.4;
 }
-
-/* h2は勝手に折り返さず、<wbr>を置いた文節でだけ改行する。
-   overflow-wrap: anywhere は、文節が枠より長い極端な狭幅でのはみ出し防止の保険 */
 .section-title-heading {
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
-
-/* =============================================================
-  共通レイアウト
-============================================================= */
-/* セクション：上下の余白と背景色を受け持つ
-   440px→100px ／ 1920px→160px。最小値は360px時の96.7px */
 .section {
   padding-block: clamp(96.7px, 82.16px + 4.05vw, 160px);
 }
-
-/* コンテナ：コンテンツ幅と左右の余白を受け持つ（1280 − 40×2 ＝ 1200）
-   左右padding は 440px→20px ／ 1920px→40px。最小値は360px時の18.9px */
 .container {
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: clamp(18.9px, 14.05px + 1.35vw, 40px);
 }
-
-/* =============================================================
-  見出しブロック（全セクション共通）
-  ラベル → h2 → リード文 を縦に積み、間隔はgapで管理する。
-  リード文がないセクションでも余りマージンが出ない。
-============================================================= */
-/* 下マージンは 440px→80px ／ 1920px→100px。最小値は360px時の78.9px */
 .section-title {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-bottom: clamp(78.9px, 74.05px + 1.35vw, 100px);
 }
-
-/* センター揃え（チケット・協賛） */
 .section-title-center {
   align-items: center;
   text-align: center;
 }
-
 .section-title-label {
   margin: 0;
   color: var(--amber);
@@ -129,31 +91,20 @@ h2 {
   line-height: 1;
   letter-spacing: .2em;
 }
-
-/* h2そのものの指定は共通ルール（h2セレクタ）が受け持つ */
 .section-title-heading {
   margin: 0;
 }
-
 .section-title-lead-text {
   margin: 0;
   color: var(--ink);
   font-size: 16px;
   line-height: 1.8;
 }
-
-/* =============================================================
-  共通パーツ
-============================================================= */
-/* 見出しの中に欧文を差し込む（Noto Serif JPにイタリック体がないため斜体は使わない） */
 .en {
   font-family: var(--font-serif);
   font-weight: 400;
   font-style: normal;
 }
-
-/* ボタンの「見た目」だけを持つ。寸法は下のピルルールが持つ。
-   幅・余白・文字サイズ・並びは必ずピル側で指定されるので、ここには置かない */
 .button {
   display: inline-flex;
   align-items: center;
@@ -163,16 +114,10 @@ h2 {
   font-weight: 500;
   transition: transform .25s, filter .25s;
 }
-
 .button:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
 }
-
-/* ピル型ボタン：メインビジュアル（.hero-button）とチケット（.ticket-button）で共通。
-   ここは768px以上の値。SP（767px以下）は 172×34px / 12px に切り替える（下の767pxブロック）。
-   矢印（.button-arrow）は font-size を指定せず親から継承するので、文字サイズに自動で追従する。
-   nowrapは、游ゴシックなど別フォントに落ちて字幅が変わったときの折り返し防止 */
 .hero-button,
 .ticket-button {
   width: 235px;
@@ -185,8 +130,6 @@ h2 {
   line-height: 1.5;
   white-space: nowrap;
 }
-
-/* 視覚的に隠して読み上げのみ有効にする */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -194,20 +137,10 @@ h2 {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
-
-/* =============================================================
-  ヘッダー
-============================================================= */
-/* 上部固定。MVに乗っている間はすりガラス（背後がぼける）、
-   MVを抜けると .is-solid が付いてべた塗りになる（JSで制御）。
-
-   透過だとMVの見出しがヘッダーの下を素通りしてロゴと重なり読めなくなるため、
-   backdrop-filter で背後をぼかし、薄い暗幕（--deep の25%）を重ねて文字を浮かせる。
-   ぼかしは弱め（8px）にして、MVの写真の雰囲気を残している */
 .header {
   position: fixed;
   inset: 0 0 auto;
@@ -223,44 +156,34 @@ h2 {
   color: var(--ivory);
   transition: background-color .3s ease;
 }
-
-/* backdrop-filter が使えない環境ではぼかせないので、暗幕を濃くして可読性を確保する */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .header {
     background-color: rgba(7, 28, 29, .72);
   }
 }
-
 .header.is-solid {
   background-color: var(--soft);
 }
-
 .header-brand {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
-
-/* ロゴ代わりの表記。字送りは詰めずフォント本来の字面にする */
 .header-brand-name {
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
 }
-
-/* ナビ3つ＋TICKET をまとめたグループ */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 120px;
 }
-
 .header-nav {
   display: flex;
   gap: 120px;
 }
-
 .header-nav-link {
   position: relative;
   opacity: .86;
@@ -270,14 +193,9 @@ h2 {
   line-height: 1.5;
   letter-spacing: .12em;
 }
-
-/* TOPはハンバーガーメニュー専用。1025px以上のフルナビでは出さない
-   （PCはロゴがトップへのリンクを兼ねているため）。1024px以下で表示に戻す */
 .header-nav-link-top {
   display: none;
 }
-
-/* ホバーで下線が左から伸びる */
 .header-nav-link:after {
   content: "";
   position: absolute;
@@ -288,11 +206,9 @@ h2 {
   background: var(--amber);
   transition: right .25s;
 }
-
 .header-nav-link:hover:after {
   right: 0;
 }
-
 .header-cta {
   border: 1px solid var(--amber);
   padding: 6px 41px;
@@ -304,8 +220,6 @@ h2 {
   line-height: 1;
   letter-spacing: .14em;
 }
-
-/* ハンバーガーメニュー。開くと3本のバーが中央に集まって × になる */
 .header-toggle {
   display: none;
   background: transparent;
@@ -313,11 +227,6 @@ h2 {
   color: var(--ivory);
   padding: 8px;
 }
-
-/* バーの間隔は5px（marginが相殺されるので中心どうしは 1 + 5 = 6px 離れている）。
-   移動と回転を transform ではなく translate / rotate の個別プロパティで書いているのは、
-   2つに別々の遅延を効かせて「集まる → 回る」の2段階にするため。
-   ここは閉じるときの指定：先に回転を戻し、0.2秒遅れて上下へ散る */
 .header-toggle-bar {
   display: block;
   width: 22px;
@@ -326,50 +235,31 @@ h2 {
   background: currentColor;
   transition: rotate .2s ease, translate .2s ease .2s, opacity .2s ease .2s;
 }
-
-/* 開いた状態。aria-expanded は script.js が付け替えるので、JS側の追加は不要。
-   先に中央（＝真ん中のバーの位置）へ集まり、0.2秒遅れて斜めに開く */
 .header-toggle[aria-expanded="true"] .header-toggle-bar {
   transition: translate .2s ease, rotate .2s ease .2s, opacity .2s ease;
 }
-
 .header-toggle[aria-expanded="true"] .header-toggle-bar:nth-child(1) {
   translate: 0 6px;
   rotate: 45deg;
 }
-
-/* 真ん中の1本は消す（×は2本で作る） */
 .header-toggle[aria-expanded="true"] .header-toggle-bar:nth-child(2) {
   opacity: 0;
 }
-
 .header-toggle[aria-expanded="true"] .header-toggle-bar:nth-child(3) {
   translate: 0 -6px;
   rotate: -45deg;
 }
-
-/* =============================================================
-  メインビジュアル
-============================================================= */
 .hero {
   position: relative;
-  /* 全画面表示。100vh はフォールバックで、svh対応ブラウザは2行目が勝つ。
-     svh はモバイルのアドレスバー分を含まないので、バー裏へのはみ出しが起きない。
-     min-height なので中身が画面より高いときは伸びる */
   min-height: 100vh;
   min-height: 100svh;
   background: var(--deep);
   color: var(--ivory);
   overflow: hidden;
 }
-
-/* <picture> は画像を切り替えるためだけの入れ物。display: contents で箱を作らせず、
-   中の <img> が今までどおり .hero を基準に絶対配置されるようにする
-   （箱を作らせると .hero が縦並びflexになる1024px以下で、高さ0のアイテムが1つ増える） */
 .hero-picture {
   display: contents;
 }
-
 .hero-image {
   position: absolute;
   inset: 0;
@@ -378,7 +268,6 @@ h2 {
   object-position: center;
   animation: heroZoom 18s ease-out both;
 }
-
 .hero-shade {
   position: absolute;
   inset: 0;
@@ -386,17 +275,12 @@ h2 {
     linear-gradient(90deg, rgba(3, 20, 21, .98), rgba(3, 20, 21, .9) 30%, rgba(3, 20, 21, .28) 68%, rgba(3, 20, 21, .12)),
     linear-gradient(0deg, rgba(3, 20, 21, .7), transparent 38%);
 }
-
 .hero-content {
   position: relative;
   z-index: 2;
-  /* 1025〜1280pxで固定1080pxがはみ出すのを防ぐ（1281px以上は1080px） */
   width: min(1080px, 100%);
-  /* ボタンを hero-content の外（hero-facts の後ろ）へ出したので下paddingは0 */
   padding: 180px 0 0 132px;
 }
-
-/* キャッチ1行目。font-size は 440px→18px ／ 1920px→32px の2点を直線補間（最小は360px時17.2px） */
 .hero-catch {
   margin: 0 0 4px;
   color: var(--amber);
@@ -405,8 +289,6 @@ h2 {
   font-size: clamp(17.2px, 13.84px + 0.95vw, 32px);
   line-height: 1.5;
 }
-
-/* font-size は 440px→24px ／ 1920px→32px の2点を直線補間（最小は360px時23.6px） */
 .hero-subtitle {
   margin: 0 0 24px;
   color: var(--amber);
@@ -415,18 +297,12 @@ h2 {
   font-size: clamp(23.6px, 21.62px + 0.54vw, 32px);
   line-height: 1.5;
 }
-
-/* font-size は 440px→44px ／ 1920px→112px の2点を直線補間（最小は360px時40.3px） */
 .hero-title {
   margin: 0;
   font-size: clamp(40.3px, 23.78px + 4.59vw, 112px);
   line-height: 1.18;
   white-space: nowrap;
 }
-
-/* 768px以上は元のまま。font-size は 440px→16px ／ 1920px→18px の2点を直線補間したもので、
-   この帯では 16.5px（768px）〜18px（1920px以上）になる。
-   SP（767px以下）だけ、h1（44px）に対して大きすぎたため14pxに落としている（下の767pxブロック） */
 .hero-lead {
   margin: 60px 0;
   max-width: 650px;
@@ -434,41 +310,29 @@ h2 {
   line-height: 1.5;
   letter-spacing: .1em;
 }
-
-/* 申し込みボタン（hero-facts の後ろに移動）。
-   PCではコンテンツ左カラム（padding-left 132px）に揃え、下に元の余白180pxを持たせる。
-   position:relative + z-index で hero-shade より前面に出す */
 .hero-button {
   position: relative;
   z-index: 2;
   margin: 0 0 180px 132px;
 }
-
-/* 下部の概要バー */
 .hero-facts {
   position: absolute;
   z-index: 3;
   left: 50%;
   transform: translateX(-50%);
-  /* 1025〜1280pxで固定1200pxがはみ出すのを防ぐ（1281px以上は1200px） */
   width: min(1200px, 100%);
   bottom: 40px;
   display: flex;
   border-top: 1px solid rgba(242, 232, 213, .25);
 }
-
-/* 4等分。flex:1 ではなく width で分けているのは、1つ目だけ
-   左paddingが0のため、flex:1（中身を等分）だと1つ目が狭くなるから */
 .hero-facts-item {
   width: 25%;
   padding: 12px 36px;
   border-right: 1px solid rgba(242, 232, 213, .25);
 }
-
 .hero-facts-item:last-child {
   border: 0;
 }
-
 .hero-facts-label {
   display: block;
   margin-bottom: 12px;
@@ -479,7 +343,6 @@ h2 {
   line-height: 1.5;
   letter-spacing: .2em;
 }
-
 .hero-facts-value {
   font-family: var(--font-serif);
   font-weight: 400;
@@ -487,10 +350,6 @@ h2 {
   line-height: 1.5;
   letter-spacing: .05em;
 }
-
-/* =============================================================
-  CONCEPT
-============================================================= */
 .concept-cards {
   margin: 0;
   padding: 0;
@@ -500,23 +359,17 @@ h2 {
   background: #80908b;
   border: 1px solid #80908b;
 }
-
-/* gap 1px から親の背景色がのぞくことで区切り線に見せている */
 .concept-card {
   flex: 1;
   padding: 40px;
   background: var(--paper);
 }
-
 .concept-card-image {
   width: 100%;
   aspect-ratio: 8 / 5;
   object-fit: cover;
   margin-bottom: 24px;
 }
-
-/* font-size は 440px→24px ／ 1920px→26px の2点を直線で結んだ値。
-   最小値は直線を360pxまで延ばした 23.9px（360px以下で頭打ち） */
 .concept-card-title {
   margin: 0 0 16px;
   font-family: var(--font-serif);
@@ -524,7 +377,6 @@ h2 {
   font-size: clamp(23.9px, 23.41px + 0.14vw, 26px);
   line-height: 1.4;
 }
-
 .concept-card-text {
   margin: 0;
   color: var(--ink);
@@ -532,24 +384,17 @@ h2 {
   font-size: 16px;
   line-height: 1.8;
 }
-
-/* =============================================================
-  FREE DANCE TIME
-============================================================= */
 .dance {
   position: relative;
   min-height: 800px;
   background: var(--deep);
   overflow: hidden;
 }
-
 .dance-image {
   height: 800px;
   object-fit: cover;
   object-position: top;
 }
-
-/* 右半分を覆う960px角の暗幕。写真がこの下から透ける */
 .dance-overlay {
   position: absolute;
   z-index: 2;
@@ -561,27 +406,16 @@ h2 {
   background: rgba(11, 47, 48, .65);
   color: var(--ivory);
 }
-
-/* 暗幕の中に置くテキストブロック（1920px時は 960 − 140×2 ＝ 680）
-
-   左右paddingは 1281px→80px ／ 1920px→140px の2点を直線補間している。
-   140px固定だと、1280px以下（80px）から1281pxへ変わった瞬間に
-   内側が473px→353pxと120pxも狭くなり、h2が1文字だけ落ちて割れる。
-   1280pxのメディアクエリ側が80pxなので、ここは1281px以上でのみ効く */
 .dance-panel {
   width: 100%;
   padding-inline: clamp(80px, -40.29px + 9.39vw, 140px);
 }
-
-/* このセクションだけ見出しブロックの下を詰める */
 .section-title-dance {
   margin-bottom: 48px;
 }
-
 .dance .section-title-lead-text {
   color: var(--ivory);
 }
-
 .dance-time {
   margin: 0;
   display: inline-block;
@@ -594,10 +428,6 @@ h2 {
   line-height: 1.8;
   letter-spacing: .16em;
 }
-
-/* =============================================================
-  ARTISTS & PROGRAM
-============================================================= */
 .artist-cards {
   margin: 0;
   padding: 0;
@@ -605,7 +435,6 @@ h2 {
   display: flex;
   gap: 30px;
 }
-
 .artist-card {
   flex: 1;
   position: relative;
@@ -619,7 +448,6 @@ h2 {
   color: var(--ivory);
   background: var(--deep);
 }
-
 .artist-card:after {
   content: "";
   position: absolute;
@@ -627,7 +455,6 @@ h2 {
   z-index: -1;
   background: linear-gradient(180deg, rgba(3, 20, 21, .05) 32%, rgba(3, 20, 21, .9) 86%, rgba(3, 20, 21, .98));
 }
-
 .artist-card-image {
   position: absolute;
   inset: 0;
@@ -635,19 +462,15 @@ h2 {
   height: 100%;
   object-fit: cover;
 }
-
 .artist-card:nth-child(1) .artist-card-image {
   object-position: center 14%;
 }
-
 .artist-card:nth-child(2) .artist-card-image {
   object-position: center 24%;
 }
-
 .artist-card:nth-child(3) .artist-card-image {
   object-position: center 32%;
 }
-
 .artist-card-mark {
   position: absolute;
   top: 32px;
@@ -659,12 +482,10 @@ h2 {
   line-height: 1;
   text-shadow: 0 2px 18px rgba(0, 0, 0, .45);
 }
-
 .artist-card-meta {
   position: relative;
   z-index: 1;
 }
-
 .artist-card-part {
   margin: 0;
   color: var(--amber);
@@ -674,7 +495,6 @@ h2 {
   line-height: 1.8;
   letter-spacing: .2em;
 }
-
 .artist-card-name {
   margin: 0;
   font-family: var(--font-serif);
@@ -682,18 +502,14 @@ h2 {
   font-size: 26px;
   line-height: 1.8;
 }
-
-/* --- セットリスト --- */
 .setlist {
   display: flex;
   gap: 240px;
   margin-top: 100px;
 }
-
 .setlist-column {
   flex: 1;
 }
-
 .setlist-title {
   margin: 0 0 24px;
   color: var(--soft);
@@ -702,21 +518,18 @@ h2 {
   font-size: 20px;
   line-height: 1.4;
 }
-
 .setlist-list {
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--line);
 }
-
 .setlist-item {
   display: flex;
   gap: 24px;
   padding: 20px 0;
   border-bottom: 1px solid var(--line);
 }
-
 .setlist-number {
   color: var(--amber);
   font-family: var(--font-serif);
@@ -724,67 +537,50 @@ h2 {
   font-size: 14px;
   line-height: 1.4;
 }
-
 .setlist-name {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.4;
 }
-
 .setlist-note {
   margin-top: 20px;
   color: var(--ink);
   font-size: 12px;
   line-height: 1.4;
 }
-
-/* =============================================================
-  FOOD & DRINK
-============================================================= */
 .food {
   display: flex;
   min-height: 800px;
   background: var(--teal);
   color: var(--ivory);
 }
-
-/* 左右half。padding込みで半分にしたいので flex:1 ではなく width で指定 */
 .food-image-area {
   width: 50%;
   overflow: hidden;
 }
-
 .food-image {
   height: 100%;
   object-fit: cover;
 }
-
-/* 左右paddingは 1281px→80px ／ 1920px→140px の2点を直線補間（→ .dance-panel の説明） */
 .food-body {
   width: 50%;
   align-self: center;
   padding-inline: clamp(80px, -40.29px + 9.39vw, 140px);
 }
-
-/* このセクションだけ見出しブロックの下を詰める */
 .section-title-food {
   margin-bottom: 40px;
 }
-
 .food .section-title-lead-text {
   color: var(--ivory);
 }
-
 .food-menu {
   border-top: 1px solid rgba(242, 232, 213, .16);
 }
-
 .food-menu-item {
   padding: 20px 0;
   border-bottom: 1px solid rgba(242, 232, 213, .16);
 }
-
 .food-menu-label {
   display: block;
   margin-bottom: 6px;
@@ -794,16 +590,11 @@ h2 {
   font-size: 14px;
   line-height: 1.4;
 }
-
 .food-menu-value {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
 }
-
-/* =============================================================
-  NIGHT FLOW（タイムライン）
-============================================================= */
 .flow-list {
   margin: 0;
   padding: 0;
@@ -812,14 +603,11 @@ h2 {
   gap: 50px;
   border-top: 1px solid rgba(49, 95, 91, .8);
 }
-
 .flow-item {
   flex: 1;
   position: relative;
   padding-top: 40px;
 }
-
-/* タイムライン上の丸ポイント */
 .flow-item:before {
   content: "";
   position: absolute;
@@ -831,7 +619,6 @@ h2 {
   border-radius: 50%;
   background: var(--paper);
 }
-
 .flow-item-time {
   color: var(--amber);
   font-family: var(--font-serif);
@@ -839,7 +626,6 @@ h2 {
   font-size: 24px;
   line-height: 1.4;
 }
-
 .flow-item-title {
   margin: 24px 0 12px;
   font-family: var(--font-serif);
@@ -847,7 +633,6 @@ h2 {
   font-size: 24px;
   line-height: 1.4;
 }
-
 .flow-item-text {
   margin: 0;
   color: var(--ink);
@@ -855,40 +640,28 @@ h2 {
   font-size: 14px;
   line-height: 1.4;
 }
-
-/* =============================================================
-  INFORMATION
-============================================================= */
 .info {
   display: flex;
   min-height: 800px;
   background: var(--deep);
   color: var(--ivory);
 }
-
-/* 左右half。padding込みで半分にしたいので flex:1 ではなく width で指定。
-   左右paddingは 1281px→80px ／ 1920px→120px の2点を直線補間（→ .dance-panel の説明） */
 .info-body {
   width: 50%;
   align-self: center;
   padding-inline: clamp(80px, -0.19px + 6.26vw, 120px);
 }
-
-/* このセクションだけ見出しブロックの下を詰める */
 .section-title-info {
   margin-bottom: 64px;
 }
-
 .info-list {
   margin: 0;
 }
-
 .info-row {
   display: flex;
   padding: 24px 0;
   border-bottom: 1px solid rgba(242, 232, 213, .16);
 }
-
 .info-term {
   width: 120px;
   flex-shrink: 0;
@@ -897,57 +670,39 @@ h2 {
   font-size: 16px;
   line-height: 1.2;
 }
-
 .info-desc {
   margin: 0;
   color: var(--ivory);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.2;
-  /* 数字や語句のまとまりを勝手に折らず、<wbr>を置いた所でだけ折り返す。
-     overflow-wrap: anywhere は極端な狭幅でのはみ出し防止の保険 */
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
-
-/* アクセス地図（画像） */
 .info-map {
   width: 50%;
   background: var(--ivory);
   overflow: hidden;
 }
-
 .info-map-image {
   height: 100%;
   object-fit: cover;
 }
-
-/* =============================================================
-  FAQ（アコーディオン）
-============================================================= */
-/* gapは2カラムの最小の隙間。space-betweenだけだと 768px・1025px で
-   見出し列と質問リストが接触する（隙間0px）ため、下限を持たせている */
 .faq-inner {
   display: flex;
   justify-content: space-between;
   gap: 40px;
 }
-
-/* このセクションだけ見出しブロックの下マージンを消す
-   （左カラムに単独で置くため。レスポンシブで縦積みにする際に見直す） */
 .section-title-faq {
   margin-bottom: 0;
 }
-
 .faq-list {
   width: 780px;
   border-top: 1px solid var(--line);
 }
-
 .faq-item {
   border-bottom: 1px solid var(--line);
 }
-
 .faq-question {
   list-style: none;
   position: relative;
@@ -958,12 +713,9 @@ h2 {
   font-size: 16px;
   line-height: 1.4;
 }
-
 .faq-question::-webkit-details-marker {
   display: none;
 }
-
-/* 開閉マーク（+ / −）：20px角・線1pxの十字を2本の罫線で描く */
 .faq-question:before,
 .faq-question:after {
   content: "";
@@ -971,34 +723,24 @@ h2 {
   background: var(--amber);
   transition: opacity .3s ease, transform .3s ease;
 }
-
-/* 開くと横線が半回転しながら縦線が消えて「−」になる */
 .faq-item[open] .faq-question:after {
   transform: rotate(180deg);
 }
-
-/* 横線 */
 .faq-question:after {
   right: 24px;
   top: 34px;
   width: 16px;
   height: 2px;
 }
-
-/* 縦線（開いたら消えて「−」になる） */
 .faq-question:before {
   right: 31px;
   top: 27px;
   width: 2px;
   height: 16px;
 }
-
 .faq-item[open] .faq-question:before {
   opacity: 0;
 }
-
-/* 回答の開閉：高さ0⇔autoを補間する（interpolate-size対応ブラウザ）。
-   未対応ブラウザは即時開閉にフォールバック */
 .faq-item::details-content {
   overflow: hidden;
   block-size: 0;
@@ -1008,12 +750,10 @@ h2 {
     opacity .3s ease,
     content-visibility .35s allow-discrete;
 }
-
 .faq-item[open]::details-content {
   block-size: auto;
   opacity: 1;
 }
-
 .faq-answer {
   margin: 0;
   padding: 0 0 24px 24px;
@@ -1022,10 +762,6 @@ h2 {
   font-size: 15px;
   line-height: 1.8;
 }
-
-/* =============================================================
-  チケット（CTA）
-============================================================= */
 .ticket {
   position: relative;
   overflow: hidden;
@@ -1036,7 +772,6 @@ h2 {
   background: var(--deep);
   color: var(--ivory);
 }
-
 .ticket-inner {
   position: relative;
   z-index: 2;
@@ -1045,36 +780,29 @@ h2 {
   align-items: center;
   text-align: center;
 }
-
-/* このセクションだけ見出しブロックの下を詰める */
 .section-title-ticket {
   margin-bottom: 60px;
 }
-
 .ticket .section-title-lead-text {
   color: var(--ivory);
   font-size: 24px;
 }
-
 .ticket-price {
   display: flex;
   flex-direction: column;
   margin: 0 0 48px;
 }
-
 .ticket-price-note {
   margin-bottom: 12px;
   color: var(--amber);
   font-size: 24px;
 }
-
 .ticket-price-value {
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 68px;
   line-height: 1.3;
 }
-
 .ticket-price-unit {
   margin-left: 8px;
   font-family: var(--font-sans);
@@ -1082,10 +810,6 @@ h2 {
   font-size: 24px;
   line-height: 1;
 }
-
-/* =============================================================
-  協賛（SPONSORS）
-============================================================= */
 .sponsor-list {
   margin: 0;
   padding: 0;
@@ -1093,44 +817,32 @@ h2 {
   display: flex;
   gap: 40px;
 }
-
 .sponsor-item {
   flex: 1;
   background: var(--ivory);
 }
-
 .sponsor-image {
   aspect-ratio: 1 / 1;
   object-fit: contain;
 }
-
-/* =============================================================
-  フッター
-============================================================= */
 .footer {
   background: var(--teal);
   color: var(--ivory);
 }
-
-/* ラベル＋値のブロックを中央に置く上段。
-   高さはpaddingで確保する。左右40pxは画面が狭くなったときの逃げ幅 */
 .footer-inner {
   display: flex;
   justify-content: center;
   padding: 64px 40px;
 }
-
 .footer-list {
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-
 .footer-row {
   display: flex;
 }
-
 .footer-term {
   width: 160px;
   flex-shrink: 0;
@@ -1139,14 +851,11 @@ h2 {
   font-size: 16px;
   line-height: 1.6;
 }
-
 .footer-desc {
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
 }
-
-/* 下段：一段濃い帯にコピーライトを中央配置 */
 .footer-copyright {
   margin: 0;
   padding: 24px 40px;
@@ -1157,208 +866,114 @@ h2 {
   line-height: 1.6;
   letter-spacing: .08em;
 }
-
-/* =============================================================
-  アニメーション
-============================================================= */
 @keyframes heroZoom {
   from {
     transform: scale(1.05);
   }
-
   to {
     transform: scale(1);
   }
 }
-
-/* =============================================================
-  レスポンシブ
-
-  カンプは PC 1920px ／ SP 440px の2枚。
-  ブレイクポイントは max-width の降順で並べる（後ろほど狭い幅が勝つ）。
-
-    1280px以下 … タブレット大（ヘッダーはナビのgapを詰めて維持）
-    1024px以下 … タブレット（ヘッダー簡易化＋ハンバーガー、MVを1カラム化）
-     767px以下 … SP（440pxカンプ基準）
-     480px以下 … 小型スマホ（協賛を1列に）
-
-  ・カラム数や並び順が変わるときだけBPを足す
-  ・大きさが合わないだけなら clamp() / % で直す（BPは足さない）
-============================================================= */
-
-/* -------------------------------------------------------------
-  タブレット大（1280px以下）
-------------------------------------------------------------- */
 @media (max-width: 1280px) {
-
-  /* ヘッダー：1025〜1280pxはフルナビを維持。PCの120px gapは広すぎて
-     この帯で収まらないため詰める（左右paddingも80→40px） */
   .header {
     padding: 0 40px;
   }
-
   .header-actions {
     gap: 40px;
   }
-
   .header-nav {
     gap: 40px;
   }
-
-  /* 左右分割セクションの内側余白（PC 140px）を段階的に詰める */
   .dance-panel,
   .food-body,
   .info-body {
     padding-inline: 80px;
   }
-
   .setlist {
     gap: 120px;
   }
 }
-
-/* -------------------------------------------------------------
-  タブレット（1024px以下）
-------------------------------------------------------------- */
 @media (max-width: 1024px) {
-
-  /* アンカー飛び先をこの帯のヘッダー高さ（76px）に合わせる */
   html {
     scroll-padding-top: 76px;
   }
-
-  /* ヘッダー：1024px以下はハンバーガー＋ロゴ2行＋TICKET。
-     ナビはトグルで開くドロップダウン（script.js が .is-open を付け外しする） */
   .header {
     height: 76px;
     padding: 0 20px;
     justify-content: flex-start;
     gap: 16px;
   }
-
-  /* × 区切りの1行 → 2行スタックへ */
   .header-brand-name {
     display: flex;
     flex-direction: column;
     line-height: 1.4;
   }
-
   .header-brand-sep {
     display: none;
   }
-
-  /* ハンバーガーを表示（並びは ロゴ … TICKET ☰）。
-     右寄せは .header-actions の margin-left: auto が担当するので、ここには書かない */
   .header-toggle {
     display: block;
   }
-
-  /* ロゴとの間を空けて、TICKET＋ハンバーガーのまとまりを右端へ寄せる */
   .header-actions {
     margin-left: auto;
   }
-
-  /* この帯からハンバーガーメニューになるので、TOPを表示する */
   .header-nav-link-top {
     display: block;
   }
-
-  /* メニューを開いたとき、全画面オーバーレイの上にヘッダーの中身を出す。
-     これが無いと×ボタンがオーバーレイの下に隠れて閉じられなくなる */
   .header-brand,
   .header-cta,
   .header-toggle {
     position: relative;
     z-index: 1;
   }
-
-  /* ナビは画面全体を覆うオーバーレイ。
-     基準になる .header は position:fixed なので、absolute の起点は画面の左上と同じ。
-     ただし絶対配置の基準は「padding box」で、.header は padding: 0 20px を持つため
-     左右が20px内側から始まる。-20px を指定して画面幅いっぱいまで戻している
-     （100vw は縦スクロールバーの分だけはみ出すので使わない）。
-     高さは 100svh でヘッダーの裏側まで覆い、上padding（＝ヘッダー高さ76px）で中身を下げる。
-     画面が低い端末で項目がはみ出しても操作できるよう overflow-y: auto を保険に入れている */
-  /* display は base の flex のまま。display はアニメーションできないので、
-     出し入れは clip-path の円で行う（下の「円が広がる演出」参照） */
   .header-nav {
     position: absolute;
-    inset: 0 -20px auto;
+    inset: 0 0 auto;
     height: 100vh;
-    height: 100svh;
+    height: 100dvh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 32px;
     padding: 76px 20px 24px;
     overflow-y: auto;
-    /* べた塗り。透過にすると、メニューを開いたまま裏がスクロールしたときに
-       背後のページが透けてちらつくため不透明にしている。
-       色はスクロール後のヘッダー（.is-solid）と同じ --soft */
     background: var(--soft);
-
-    /* 円が広がる演出。中心は画面の右上角より外側（右へ40px・上へ40px）に置く。
-       中心を画面内に置くと、開いた瞬間に小さな丸が画面の中に現れてから育つ動きになり
-       不自然なため、半径が57px（角までの距離）を超えるまで見えない位置へ逃がしている。
-       これで最初から画面の角を弧が横切る形で入ってくる。
-       半径170%は中心が外に出たぶんも含めて画面のどの角にも届く長さ
-       （circleの%は要素の対角線を基準に解決される）。
-       visibility は閉じるとき0.45秒遅らせて、円が縮み終わってから消えるようにしている */
     --menu-origin-x: calc(100% + 40px);
     --menu-origin-y: -40px;
     visibility: hidden;
     clip-path: circle(0 at var(--menu-origin-x) var(--menu-origin-y));
     transition: clip-path .45s ease, visibility 0s linear .45s;
   }
-
   .header-nav.is-open {
     visibility: visible;
     clip-path: circle(170% at var(--menu-origin-x) var(--menu-origin-y));
     transition: clip-path .45s ease, visibility 0s;
   }
-
   .header-cta {
     padding: 10px 17px;
   }
-
-  /* --- メインビジュアル（440pxカンプ：1カラムで縦に流す） ---
-     画像とシェードは絶対配置のまま背景。コンテンツ→概要バー→ボタンを縦に積む */
   .hero {
     display: flex;
     flex-direction: column;
-    /* content / facts / ボタン共通の左右ガター。440px→20px ／ 1024px→60px（タブレットほど広い）。
-       最小20pxで、440pxより狭い端末でも20pxで下げ止まる */
     --hero-gutter: clamp(20px, -10.1px + 6.85vw, 60px);
   }
-
   .hero-image {
     object-position: 58% center;
   }
-
-  /* 全幅にテキストが乗るので、上→下の縦グラデで全体を暗くして可読性を確保 */
   .hero-shade {
     background: linear-gradient(180deg, rgba(3, 20, 21, .9), rgba(3, 20, 21, .5) 42%, rgba(3, 20, 21, .82));
   }
-
   .hero-content {
     width: 100%;
     padding: 100px var(--hero-gutter) 0;
   }
-
-  /* 文字サイズは基準ルールの clamp() が担当（440px↔1920pxを補間）。
-     ここでは1カラム化に伴う折り返し許可と余白だけ指定する */
   .hero-title {
     white-space: normal;
   }
-
   .hero-lead {
     margin: 32px 0 0;
     max-width: none;
   }
-
-  /* 下部固定バーをやめ、流れの中に縦1列で置く。
-     baseの絶対配置オフセット（left/bottom/transform）を打ち消し、
-     relative＋z-indexで hero-shade より前面に出す */
   .hero-facts {
     position: relative;
     z-index: 2;
@@ -1370,142 +985,90 @@ h2 {
     flex-direction: column;
     border-top: 0;
   }
-
   .hero-facts-item {
     width: 100%;
     padding: 0 0 20px;
     border: 0;
   }
-
-  .hero-facts-item:first-child {
-    padding-left: 0;
-  }
-
-  /* ボタンは概要バーの後ろ・最下部。左右はコンテンツと同じガターに揃える */
   .hero-button {
     margin: 40px var(--hero-gutter);
   }
-
   .dance-panel,
   .food-body,
   .info-body {
     padding-inline: 48px;
   }
-
-  /* 左右50%の横並びを解除して縦積みへ。
-     この帯では中身が288pxまで痩せ、42pxのh2が収まらないため */
   .dance {
     min-height: 0;
   }
-
   .dance-image {
     height: 600px;
     object-position: 35% center;
   }
-
-  /* 右半分だけを覆っていた暗幕を全幅へ */
   .dance-overlay {
     width: 100%;
   }
-
   .dance-panel {
     padding-block: 80px;
   }
-
   .food,
   .info {
     flex-direction: column;
     min-height: 0;
   }
-
   .food-image-area {
     width: 100%;
     height: 420px;
   }
-
-  /* .section を使わないセクションなので、上下余白はここで持つ */
   .food-body,
   .info-body {
     width: 100%;
     padding-block: 100px;
   }
-
   .info-map {
     width: 100%;
   }
-
-  /* 高さを固定せず、地図の縦横比のまま置く */
   .info-map-image {
     height: auto;
   }
-
-  /* 多カラムはまだ維持したまま、内側の余白と間隔だけ詰める */
   .concept-card {
     padding: 24px;
   }
-
   .artist-cards {
     gap: 20px;
   }
-
   .artist-card {
     padding: 24px 24px 20px;
   }
-
   .setlist {
     gap: 80px;
   }
-
   .flow-list {
     gap: 24px;
   }
-
   .faq-list {
     width: 600px;
   }
-
   .sponsor-list {
     gap: 24px;
   }
 }
-
-/* -------------------------------------------------------------
-  SP（767px以下）：440pxカンプ基準
-
-  440pxは「現行スマホの最大幅」なので、実機の大半はこれより狭い。
-  幅は % / auto で流動させ、clamp() は文字サイズと余白に使う。
-------------------------------------------------------------- */
 @media (max-width: 767px) {
-
-  /* アンカー飛び先をこの帯のヘッダー高さ（60px）に合わせる */
   html {
     scroll-padding-top: 60px;
   }
-
-  /* --- ヘッダー（背景は透過のままMVに重ねる） --- */
   .header {
     height: 60px;
   }
-
   .header-brand-name {
     font-size: 14px;
   }
-
-  /* 中身を下げる量をこの帯のヘッダー高さ（60px）に合わせる。
-     円の中心は画面の角の外側で、ヘッダー高さと無関係になったので上書きは不要 */
   .header-nav {
     padding-top: 60px;
   }
-
   .header-cta {
     padding: 6px 20px;
   }
-
-  /* --- ピル型ボタン（MV・CTA共通）：SPの実数値 ---
-     左右paddingが25pxのままだと「文字97.5＋gap16＋矢印12＋padding50＝175.5px」で
-     幅172pxに3.5px入らず「チケットを申し込／む」と2行に折れるため16pxに詰める（必要幅157.5px）。
-     幅・高さ固定＋中央揃えなのでpaddingは見た目に影響せず、折り返さない下限を確保するだけの値。
-     ウェイト500と角丸30pxは全幅共通なのでここには書かない */
   .hero-button,
   .ticket-button {
     width: 172px;
@@ -1513,125 +1076,67 @@ h2 {
     padding: 0 16px;
     font-size: 12px;
   }
-
-  /* --- メインビジュアル（440pxカンプの実測値。1カラム構造は1024pxブロックが担当） --- */
-  /* この帯だけ <picture> がSP用画像（mv-sp.jpg 880×1660）に差し替わる。
-     縦長に切り出し済みで演奏者が中央下寄りに入っているため、
-     1024pxブロックの横ずらし（58%）を解除して中央に戻す。
-     440px時は箱の縦横比（440:830）と画像（880:1660）がほぼ一致するので、ほぼ切れずに収まる */
   .hero-image {
     object-position: center;
   }
-
-  /* h1（SPでは44px）に対してリード文が大きすぎたため14pxに落とす（2026-07-28 ユーザー指定）。
-     768px以上はベース側の clamp（16.5〜18px）のまま */
   .hero-lead {
     margin-top: 40px;
     font-size: 14px;
   }
-
-  .hero-facts {
-    margin-top: 80px;
-  }
-
   .hero-facts-item {
     padding-bottom: 10px;
   }
-
-  /* ボタン下の余白は1024pxブロックの margin: 40px var(--hero-gutter) をそのまま使う。
-     以前はここで 0 に打ち消していたが、画面が低い端末（中身がsvhを超える端末）で
-     ボタンがMV下端に張り付くため40pxを効かせる。
-     ※画面が高い端末では .hero の余りスペースの方が大きく、見た目は変わらない */
-
-  /* --- 見出しブロック（全セクション共通） ---
-     .section / .container / h2 / .section-title の下マージンは
-     基本ルール側の clamp() が担当するので、ここには書かない */
   .section-title-label {
     font-size: 14px;
   }
-
-  /* 下マージンのモディファイもSPでは詰める（PC比 約0.8） */
   .section-title-dance {
     margin-bottom: 40px;
   }
-
   .section-title-food {
     margin-bottom: 32px;
   }
-
   .section-title-info {
     margin-bottom: 52px;
   }
-
-  /* .section-title-ticket はSPもPCと同じ60px（上書きしない＝ユーザー指定） */
-
-  /* PCでは左右2カラムだったため0。縦積みになるSPでは余白が要る */
   .section-title-faq {
     margin-bottom: 64px;
   }
-
-  /* --- CONCEPT --- */
   .concept-cards {
     flex-direction: column;
   }
-
-  .concept-card {
-    padding: 24px;
-  }
-
   .concept-card-image {
     margin-bottom: 16px;
   }
-
-  /* --- FREE DANCE TIME（縦積みへの切り替えは1024pxで済んでいる） --- */
   .dance-panel {
     padding: 60px 20px;
   }
-
-  /* --- ARTISTS & PROGRAM --- */
   .artist-cards {
     flex-direction: column;
-    gap: 20px;
   }
-
-  .artist-card {
-    padding: 24px 24px 20px;
-  }
-
   .artist-card-mark {
     top: 20px;
     left: 20px;
     font-size: 22px;
   }
-
   .artist-card-part {
     font-size: 14px;
   }
-
   .artist-card-name {
     font-size: 22px;
   }
-
   .setlist {
     flex-direction: column;
-    gap: 80px;
     margin-top: 80px;
   }
-
-  /* --- FOOD & DRINK --- */
   .food-image-area {
     height: 320px;
   }
-
   .food-body {
     padding: 100px 20px;
   }
-
   .food-menu-label {
     font-size: 13px;
   }
-
-  /* --- NIGHT FLOW（横並び → 縦のタイムラインへ） --- */
   .flow-list {
     flex-direction: column;
     gap: 0;
@@ -1639,172 +1144,120 @@ h2 {
     border-top: 0;
     border-left: 1px solid rgba(49, 95, 91, .8);
   }
-
   .flow-item {
     padding: 0 0 40px 40px;
   }
-
   .flow-item:last-child {
     padding-bottom: 0;
   }
-
-  /* 丸ポイントを縦線の上に乗せ直す。SPでは一回り小さく（16→12px、中心は維持） */
   .flow-item:before {
     top: 7px;
     left: -9px;
     width: 12px;
     height: 12px;
   }
-
   .flow-item-title {
     font-size: 20px;
   }
-
   .flow-item-text {
     font-size: 15px;
   }
-
-  /* --- INFORMATION --- */
   .info-body {
     padding: 100px 20px;
   }
-
   .info-row {
     padding: 20px 0;
   }
-
   .info-term {
     width: 100px;
   }
-
-  /* 折り返しが増えるので行間を広げる */
   .info-term,
   .info-desc {
     line-height: 1.6;
   }
-
-  /* --- FAQ --- */
-  /* 縦積みでは gap ではなく .section-title-faq の margin-bottom（64px）で間隔を持つ */
   .faq-inner {
     flex-direction: column;
     gap: 0;
   }
-
   .faq-list {
     width: 100%;
   }
-
-  /* 質問が折り返すので、右の＋−マークに重ならないよう余白を広げる */
   .faq-question {
     padding-right: 48px;
     font-size: 15px;
   }
-
-  /* SPではマークが大きく見えるので一回り小さく（アーム16→12px、中心は維持） */
   .faq-question:after {
     right: 26px;
     width: 12px;
   }
-
   .faq-question:before {
     top: 29px;
     height: 12px;
   }
-
-  /* --- チケット（CTA） --- */
   .ticket {
     min-height: 0;
   }
-
   .ticket .section-title-lead-text {
     font-size: 16px;
   }
-
   .ticket-price {
     margin-bottom: 40px;
   }
-
   .ticket-price-note {
     margin-bottom: 6px;
     font-size: 20px;
   }
-
   .ticket-price-value {
     font-size: 48px;
   }
-
   .ticket-price-unit {
     font-size: 20px;
   }
-
-  /* --- 協賛（767px以下は2×2、480px以下で1列） --- */
   .sponsor-list {
     flex-wrap: wrap;
     gap: 20px;
   }
-
   .sponsor-item {
     flex: 0 0 calc(50% - 10px);
   }
-
-  /* --- フッター --- */
   .footer-inner {
     padding: 40px 20px;
   }
-
   .footer-list {
     gap: 20px;
   }
-
-  /* ラベルと値を縦積みへ（値が長く、160pxの列だと折り返しすぎるため） */
   .footer-row {
     flex-direction: column;
     gap: 10px;
   }
-
   .footer-term {
     width: auto;
     font-size: 13px;
   }
-
   .footer-desc {
     font-size: 14px;
   }
-
   .footer-copyright {
     padding: 20px;
   }
 }
-
-/* -------------------------------------------------------------
-  小型スマホ（480px以下）
-------------------------------------------------------------- */
 @media (max-width: 480px) {
-
-  /* 協賛ロゴは2列だと店名が小さく読みにくいので1列に */
   .sponsor-item {
     flex-basis: 100%;
   }
-
-  /* --- MVの概要バー（ユーザー指定：480px以下のみ） ---
-     値の letter-spacing は .05em で基準ルールと同じなので、ここには書かない */
   .hero-facts-label {
     margin-bottom: 8px;
     font-size: 14px;
     letter-spacing: .1em;
   }
-
   .hero-facts-value {
     font-size: 15px;
   }
 }
-
-/* アニメーションを控えたい設定の場合 */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
   *,
   *:before,
   *:after {

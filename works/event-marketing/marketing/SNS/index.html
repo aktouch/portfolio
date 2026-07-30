@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SNSクリエイティブ設計</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <main class="page">
@@ -30,15 +30,29 @@
         <p class="heading-note">数字＝ストーリーズの投稿順</p>
       </div>
 
-      <button class="banner-card thumb-button" type="button" data-index="0" aria-label="SNSバナーを拡大表示">
-        <span class="banner-thumb"><img src="images/banner.png" alt="SNSバナー"><span class="zoom-icon" aria-hidden="true">＋</span></span>
-        <span class="banner-copy">
-          <small>FEED POST</small>
-          <strong>⓪ SNSバナー</strong>
-          <span>フィード投稿・プロフィール固定用</span>
-        </span>
-        <span class="expand-label">拡大表示 ＋</span>
-      </button>
+      <div class="creative-cards">
+        <button class="banner-card thumb-button" type="button" data-index="0" aria-label="SNSバナーを拡大表示">
+          <span class="banner-thumb"><img src="images/banner.png" alt="SNSバナー"><span class="zoom-icon" aria-hidden="true">＋</span></span>
+          <span class="banner-copy">
+            <small>FEED POST</small>
+            <strong>⓪ SNSバナー</strong>
+            <span>フィード投稿・プロフィール固定用</span>
+          </span>
+          <span class="expand-label">拡大表示 ＋</span>
+        </button>
+
+        <!-- 動画は SNS/video/story-movie.mp4 に配置する。
+             サムネは代表画として story-01.jpg を流用している -->
+        <button class="banner-card movie-card thumb-button" type="button" data-index="1" aria-label="ストーリーズ動画を開く">
+          <span class="movie-thumb"><img src="images/story-01.jpg" alt="" onerror="this.hidden=true"><span class="play-badge" aria-hidden="true">▶</span></span>
+          <span class="banner-copy">
+            <small>STORY MOVIE</small>
+            <strong>▶ ストーリーズ動画</strong>
+            <span>音付き・ストーリーズ投稿用</span>
+          </span>
+          <span class="expand-label">再生 ▶</span>
+        </button>
+      </div>
 
       <div class="table-scroll">
         <table class="schedule-table phase-schedule-table">
@@ -55,12 +69,12 @@
             <tr class="creative-row">
               <th class="timeline-head awareness-head" scope="col">認知</th>
               <th class="timeline-head application-head" scope="col">申込</th>
-              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="1" aria-label="メインビジュアルを拡大表示"><span class="thumb"><img src="images/story-01.jpg" alt="メインビジュアル"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>①</b> メイン</span></button></th>
-              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="2" aria-label="参加型体験を拡大表示"><span class="thumb"><img src="images/story-02.jpg" alt="参加型体験"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>②</b> 体験</span></button></th>
-              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="3" aria-label="演者情報を拡大表示"><span class="thumb"><img src="images/story-03.jpg" alt="演者情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>③</b> 演者</span></button></th>
-              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="4" aria-label="演奏曲情報を拡大表示"><span class="thumb"><img src="images/story-04.jpg" alt="演奏曲情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>④</b> 楽曲</span></button></th>
-              <th class="creative-head check-head" scope="col"><button class="thumb-button" type="button" data-index="5" aria-label="開催情報を拡大表示"><span class="thumb"><img src="images/story-05.jpg" alt="開催情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑤</b> 開催</span></button></th>
-              <th class="creative-head action-head" scope="col"><button class="thumb-button" type="button" data-index="6" aria-label="チケット案内を拡大表示"><span class="thumb"><img src="images/story-06.jpg" alt="チケット案内"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑥</b> 申込</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="2" aria-label="メインビジュアルを拡大表示"><span class="thumb"><img src="images/story-01.jpg" alt="メインビジュアル"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>①</b> メイン</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="3" aria-label="参加型体験を拡大表示"><span class="thumb"><img src="images/story-02.jpg" alt="参加型体験"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>②</b> 体験</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="4" aria-label="演者情報を拡大表示"><span class="thumb"><img src="images/story-03.jpg" alt="演者情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>③</b> 演者</span></button></th>
+              <th class="creative-head" scope="col"><button class="thumb-button" type="button" data-index="5" aria-label="演奏曲情報を拡大表示"><span class="thumb"><img src="images/story-04.jpg" alt="演奏曲情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>④</b> 楽曲</span></button></th>
+              <th class="creative-head check-head" scope="col"><button class="thumb-button" type="button" data-index="6" aria-label="開催情報を拡大表示"><span class="thumb"><img src="images/story-05.jpg" alt="開催情報"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑤</b> 開催</span></button></th>
+              <th class="creative-head action-head" scope="col"><button class="thumb-button" type="button" data-index="7" aria-label="チケット案内を拡大表示"><span class="thumb"><img src="images/story-06.jpg" alt="チケット案内"><span class="zoom-icon" aria-hidden="true">＋</span></span><span><b>⑥</b> 申込</span></button></th>
             </tr>
           </thead>
           <tbody>
@@ -244,6 +258,10 @@
       <button class="modal-nav modal-prev" type="button" aria-label="前の制作物">‹</button>
       <figure>
         <img id="modal-image" src="" alt="">
+        <!-- 音を出して視聴させたいので autoplay / muted は付けない（付けると自動再生の制約で無音になる）。
+             画像・動画・案内文のうち表示するのは常に1つだけで、残りは hidden にする -->
+        <video id="modal-video" controls playsinline preload="metadata" hidden></video>
+        <p id="modal-video-fallback" class="modal-fallback" hidden>動画ファイルがまだ配置されていません。<br><code>SNS/video/story-movie.mp4</code> を置くと、ここで再生できます。</p>
         <figcaption><p id="modal-number"></p><h2 id="modal-title"></h2><p id="modal-description"></p></figcaption>
       </figure>
       <button class="modal-nav modal-next" type="button" aria-label="次の制作物">›</button>
@@ -251,33 +269,94 @@
   </div>
 
   <script>
+    // group が同じものだけを前後送りの対象にする。
+    // banner と movie はそれぞれ1件しかないので、開いても前後ナビは出ない
     const creatives = [
-      { src: "images/banner.png", number: "⓪", title: "SNSバナー", description: "情報解禁時のフィード投稿とプロフィール固定に使用します。" },
-      { src: "images/story-01.jpg", number: "①", title: "メインビジュアル／世界観", description: "イベントの入口として、名称と世界観を印象づけます。" },
-      { src: "images/story-02.jpg", number: "②", title: "参加型体験", description: "聴く・飲む・踊る体験への興味を高めます。" },
-      { src: "images/story-03.jpg", number: "③", title: "演者情報", description: "演者の実績や人柄から関心を高めます。" },
-      { src: "images/story-04.jpg", number: "④", title: "演奏曲情報", description: "予定曲から当日の魅力を具体的に伝えます。" },
-      { src: "images/story-05.jpg", number: "⑤", title: "開催情報", description: "日時・会場・料金など、参加判断に必要な情報を整理します。" },
-      { src: "images/story-06.jpg", number: "⑥", title: "チケット案内", description: "リンクスタンプから申込みページへ直接誘導します。" }
+      { group: "banner", src: "images/banner.png", number: "⓪", title: "SNSバナー", description: "情報解禁時のフィード投稿とプロフィール固定に使用します。" },
+      { group: "movie", type: "video", src: "video/story-movie.mp4", poster: "images/story-01.jpg", number: "▶", title: "ストーリーズ動画", description: "会場の雰囲気と生演奏の音を、静止画では伝わらない情報としてストーリーズで届けます。" },
+      { group: "story", src: "images/story-01.jpg", number: "①", title: "メインビジュアル／世界観", description: "イベントの入口として、名称と世界観を印象づけます。" },
+      { group: "story", src: "images/story-02.jpg", number: "②", title: "参加型体験", description: "聴く・飲む・踊る体験への興味を高めます。" },
+      { group: "story", src: "images/story-03.jpg", number: "③", title: "演者情報", description: "演者の実績や人柄から関心を高めます。" },
+      { group: "story", src: "images/story-04.jpg", number: "④", title: "演奏曲情報", description: "予定曲から当日の魅力を具体的に伝えます。" },
+      { group: "story", src: "images/story-05.jpg", number: "⑤", title: "開催情報", description: "日時・会場・料金など、参加判断に必要な情報を整理します。" },
+      { group: "story", src: "images/story-06.jpg", number: "⑥", title: "チケット案内", description: "リンクスタンプから申込みページへ直接誘導します。" }
     ];
 
     const modal = document.querySelector("#creative-modal");
     const modalImage = document.querySelector("#modal-image");
+    const modalVideo = document.querySelector("#modal-video");
+    const modalFallback = document.querySelector("#modal-video-fallback");
     const modalNumber = document.querySelector("#modal-number");
     const modalTitle = document.querySelector("#modal-title");
     const modalDescription = document.querySelector("#modal-description");
+    const modalPrev = document.querySelector(".modal-prev");
+    const modalNext = document.querySelector(".modal-next");
     let currentIndex = 0;
     let lastFocused = null;
+
+    // 同じ group に属する制作物の index 一覧
+    function siblings(index) {
+      const group = creatives[index].group;
+      return creatives.reduce((list, item, i) => {
+        if (item.group === group) list.push(i);
+        return list;
+      }, []);
+    }
+
+    // 前後送りはグループ内だけで循環させる。単独のものは何もしない
+    function step(offset) {
+      const list = siblings(currentIndex);
+      if (list.length < 2) return;
+      const pos = list.indexOf(currentIndex);
+      renderModal(list[(pos + offset + list.length) % list.length]);
+    }
+
+    // 停止するだけでなく src も外す。外さないと、閉じたあとや別の制作物へ移ったあとも
+    // 読み込み済みのバッファから音が鳴り続けることがある
+    function stopVideo() {
+      modalVideo.pause();
+      if (modalVideo.getAttribute("src")) {
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
+      }
+    }
 
     function renderModal(index) {
       currentIndex = (index + creatives.length) % creatives.length;
       const item = creatives[currentIndex];
-      modalImage.src = item.src;
-      modalImage.alt = item.title;
+      const isVideo = item.type === "video";
+
+      stopVideo();
+      modalFallback.hidden = true;
+      modalImage.hidden = isVideo;
+      modalVideo.hidden = !isVideo;
+
+      if (isVideo) {
+        if (item.poster) modalVideo.poster = item.poster;
+        modalVideo.setAttribute("src", item.src);
+        modalVideo.load();
+      } else {
+        modalImage.src = item.src;
+        modalImage.alt = item.title;
+      }
+
       modalNumber.textContent = item.number;
       modalTitle.textContent = item.title;
       modalDescription.textContent = item.description;
+
+      // グループ内に自分しかいなければ前後ナビを隠す
+      const solo = siblings(currentIndex).length < 2;
+      modalPrev.hidden = solo;
+      modalNext.hidden = solo;
     }
+
+    // ファイル未配置・再生できない形式のときは案内文へ差し替える。
+    // stopVideo() で src を外した直後にも発火しうるので、その場合は無視する
+    modalVideo.addEventListener("error", () => {
+      if (!modalVideo.getAttribute("src")) return;
+      modalVideo.hidden = true;
+      modalFallback.hidden = false;
+    });
 
     function openModal(index, trigger) {
       lastFocused = trigger;
@@ -288,6 +367,7 @@
     }
 
     function closeModal() {
+      stopVideo();
       modal.hidden = true;
       document.body.classList.remove("modal-open");
       if (lastFocused) lastFocused.focus();
@@ -298,13 +378,13 @@
     });
     document.querySelector(".modal-close").addEventListener("click", closeModal);
     document.querySelector(".modal-backdrop").addEventListener("click", closeModal);
-    document.querySelector(".modal-prev").addEventListener("click", () => renderModal(currentIndex - 1));
-    document.querySelector(".modal-next").addEventListener("click", () => renderModal(currentIndex + 1));
+    modalPrev.addEventListener("click", () => step(-1));
+    modalNext.addEventListener("click", () => step(1));
     document.addEventListener("keydown", (event) => {
       if (modal.hidden) return;
       if (event.key === "Escape") closeModal();
-      if (event.key === "ArrowLeft") renderModal(currentIndex - 1);
-      if (event.key === "ArrowRight") renderModal(currentIndex + 1);
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
     });
   </script>
 </body>

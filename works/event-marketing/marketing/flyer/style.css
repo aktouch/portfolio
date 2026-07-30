@@ -278,12 +278,14 @@ img {
   gap: 30px;
 }
 
+/* チラシ本体（A4）は実物が直角なので角丸を付けない。
+   overflow: hidden で画像の角を丸めていたのをやめる */
 .flyer-card {
   display: block;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 0;
   box-shadow: 0 12px 26px rgba(47, 42, 39, 0.08);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
@@ -538,11 +540,12 @@ img {
   border-radius: 20px;
 }
 
+/* 03 情報設計の小サムネイルも、中身はチラシ本体なので直角 */
 .mini-flyer {
   align-self: center;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 8px 18px rgba(47, 42, 39, 0.08);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }

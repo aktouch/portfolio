@@ -135,7 +135,7 @@ svg { display: block; }
 }
 
 .hero h1 {
-  max-width: 820px;
+  max-width: 1200px;
   font-size: clamp(2.4rem, 5vw, 4.6rem);
   letter-spacing: -0.03em;
 }
@@ -708,7 +708,9 @@ svg { display: block; }
   overflow: hidden;
   background: #f8f4ef;
   border: 1px solid rgba(47, 42, 39, 0.12);
-  border-radius: 12px;
+  /* 制作物そのもの（A4チラシ・SNSバナー／ストーリーズ）は実物が直角なので角丸を付けない。
+     角丸は器（.work-preview のマットやカード側）だけが持つ、という切り分け */
+  border-radius: 0;
   box-shadow: 0 14px 28px rgba(47, 42, 39, 0.14);
   transition:
     transform 0.22s ease,
@@ -768,9 +770,12 @@ svg { display: block; }
   aspect-ratio: 1 / 1;
 }
 
+/* ストーリーズはスマホの画面表示そのものなので、実機に合わせて角丸を持たせる。
+   直角にするのは印刷物・フィード画像（.flyer-sheet／.sns-banner）だけ */
 .sns-story {
   width: min(27%, 152px);
   aspect-ratio: 9 / 16;
+  border-radius: 12px;
 }
 
 /* LP実ページプレビュー */
@@ -800,7 +805,9 @@ svg { display: block; }
 .live-preview-pc {
   --preview-scale: 0.39;
   height: 320px;
-  border-radius: 12px;
+  /* PC枠はLPの画面そのものを見せるサムネイルなので直角。
+     角丸を持つのは実機が角丸のスマホ枠（.live-preview-mobile）だけ */
+  border-radius: 0;
 }
 
 .live-preview-mobile {
@@ -1493,4 +1500,102 @@ svg { display: block; }
     font-weight:700;
   }
 
+}
+
+
+/* =============================================================
+   LPプレビュー（PC枠）を1920px相当で表示する
+   -------------------------------------------------------------
+   このブロックを丸ごと削除すれば元の挙動に戻ります。
+
+   【元の実装の問題】
+   iframeの幅を calc(100% / var(--preview-scale)) で決めていたため、
+   iframe内部のビューポート幅が「枠の実寸 ÷ 倍率」に引きずられていた。
+   デスクトップでは枠が約361pxなので 361 ÷ 0.39 ≒ 930px となり、
+   LP側の @media (max-width: 1024px) が効いた1カラム版が描画されていた。
+   「PC VIEW」と表示しているのにPCレイアウトが出ていない状態。
+
+   【ここでの対処】
+   幅・高さを 1920×1080 の固定値にし、倍率は見た目の縮小だけに使う。
+   transform はレイアウト完了後のペイント処理なので、いくら縮小しても
+   iframe内部のビューポートは 1920px のまま保たれる
+   （＝LP側のメディアクエリは常に1920pxとして評価される）。
+
+   枠のサイズは 1920×1080 に倍率を掛けて自動で決まるので、
+   大きさを変えたいときは --preview-scale だけを触ればよい。
+============================================================= */
+.live-preview-pc {
+  /* iframe内部のビューポート。表示したいPC幅を変えるならここ */
+  --frame-w: 1920px;
+  --frame-h: 1080px;
+  /* デスクトップ時のPC枠の実寸（約361px）÷ 1920px ≒ 0.188。
+     わずかに大きい0.19にして、隙間が出るのではなく
+     右端が数px切れる（overflow: hidden が飲み込む）側に倒している */
+  --preview-scale: 0.19;
+
+  width: calc(var(--frame-w) * var(--preview-scale));
+  height: calc(var(--frame-h) * var(--preview-scale));
+  /* グリッドの列より広くなる幅では、はみ出さずに列幅で頭打ちにする */
+  max-width: 100%;
+  /* 幅を明示すると stretch が効かなくなり左寄せになるため、中央に置き直す */
+  justify-self: center;
+}
+
+/* ベース側の calc(100% / var(--preview-scale)) を固定値で打ち消す。
+   ここが1920pxである一点が、この対応の本体 */
+.live-preview-pc iframe {
+  width: var(--frame-w);
+  height: var(--frame-h);
+}
+
+/* 1カラムになり、スマホ枠が display: none になる帯。
+   375px端末で .work-preview の内寸が約305pxなので、そこに収まる倍率まで落とす。
+   iframe内部は変わらず1920pxのまま */
+@media (max-width: 640px) {
+  .live-preview-pc {
+    --preview-scale: 0.155;
+  }
+}
+
+
+/* =============================================================
+   LPプレビュー（MOBILE枠）を440px相当で表示する
+   -------------------------------------------------------------
+   このブロックを丸ごと削除すれば元の挙動に戻ります。
+
+   【元の実装の問題】
+   PC枠と同じく iframe の幅が calc(100% / var(--preview-scale)) だったため、
+   内部のビューポート幅が枠に引きずられて 385px になっていた
+   （175px - border 6px×2 = 163px ÷ 0.423）。
+   実機相当ではあるものの、LPの設計基準は440pxなので、
+   リード文が「一夜限り／の生演奏」で折れるなど本来の想定とは違う状態だった。
+
+   【ここでの対処】
+   モックの見た目（175×320px）は変えずに、iframeだけ 440×950 の固定値にし、
+   倍率を「枠の内寸 ÷ 440px」に合わせ直す。
+     通常時   163px ÷ 440px = 0.3705
+     1024px以下 143px ÷ 440px = 0.325（枠が155pxに縮むため）
+
+   高さを950pxにしているのは、1024px以下の倍率0.325で
+   枠の内寸308pxを満たすのに 308 ÷ 0.325 ≒ 948px 必要なため。
+   880pxだと下端に余白が出る。440×950は実機（iPhone 14 Plus 428×926）に近い比率。
+   通常時は上から831pxぶんが見え、残りは overflow: hidden が切り落とす。
+============================================================= */
+.live-preview-mobile {
+  --frame-w: 440px;
+  --frame-h: 950px;
+  --preview-scale: 0.3705;
+}
+
+/* ベース側の calc(100% / var(--preview-scale)) を固定値で打ち消す */
+.live-preview-mobile iframe {
+  width: var(--frame-w);
+  height: var(--frame-h);
+}
+
+/* 枠が 175px → 155px に縮む帯。内寸143pxに合わせて倍率を下げる */
+@media (max-width: 1024px) {
+  .live-preview-mobile {
+    --preview-scale: 0.325;
+  }
 }

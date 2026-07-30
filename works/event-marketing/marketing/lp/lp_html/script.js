@@ -1,35 +1,44 @@
+if (window.self !== window.top) {
+  document.documentElement.classList.add('is-embedded');
+}
+
 const menuButton = document.querySelector('.header-toggle');
 const navigation = document.querySelector('#header-nav');
+const mainContent = document.querySelector('.main');
 
 if (menuButton && navigation) {
-  const closeMenu = () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    navigation.classList.remove('is-open');
+
+  const setOpen = (open) => {
+    menuButton.setAttribute('aria-expanded', String(open));
+    navigation.classList.toggle('is-open', open);
+    if (mainContent) mainContent.inert = open;
   };
 
+  const closeMenu = () => setOpen(false);
+
   menuButton.addEventListener('click', () => {
-    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!isOpen));
-    navigation.classList.toggle('is-open', !isOpen);
+    setOpen(menuButton.getAttribute('aria-expanded') !== 'true');
   });
 
-  navigation.querySelectorAll('a').forEach((link) => {
+  document.querySelectorAll('.header a').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
   });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) closeMenu();
+  }, { passive: true });
 }
 
-// ヘッダーの背景切り替え：MVに乗っている間は透過、MVを抜けたらべた塗り（.is-solid）
 const header = document.querySelector('.header');
 const hero = document.querySelector('.hero');
 
 if (header && hero) {
   let threshold = 0;
 
-  // ヘッダー下端がMVの下端を抜ける位置。ブレイクポイントで高さが変わるので測り直す
   const measure = () => {
     threshold = hero.offsetHeight - header.offsetHeight;
   };

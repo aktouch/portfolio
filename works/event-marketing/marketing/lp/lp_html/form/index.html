@@ -23,7 +23,7 @@
       <div class="hero-line" aria-hidden="true"></div>
       <p class="eyebrow">TICKET APPLICATION</p>
       <h1 id="form-title">チケット申込</h1>
-      <p class="hero-copy">必要事項をご入力後、Stripeの決済画面へお進みください。<br>決済完了後にチケットが確定します。</p>
+      <p class="hero-copy">必要事項をご入力後、決済画面へお進みください。<br>決済完了後にチケットが確定します。</p>
       <div class="event-summary" aria-label="開催概要">
         <div><span>DATE</span><strong>2026.10.30 FRI</strong></div>
         <div><span>OPEN / START</span><strong>19:00 / 19:30</strong></div>
@@ -148,13 +148,25 @@
             </div>
           </fieldset>
 
-          <div class="consent-box">
-            <label class="checkbox-label" for="privacy-consent">
-              <input type="checkbox" id="privacy-consent" name="privacy_consent" required>
-              <span><a href="./privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>を確認し、個人情報の取扱いに同意します。 <b class="required">必須</b></span>
-            </label>
-            <p class="error-message" id="privacy-consent-error"></p>
-          </div>
+          <section class="application-policy" aria-labelledby="application-policy-heading">
+            <h3 id="application-policy-heading">お申込み前にご確認ください</h3>
+
+            <div class="policy-summary-item">
+              <h4>プライバシーポリシー</h4>
+              <p>イベントへのお申込みにあたり取得する個人情報を、以下の方針に基づき適切に取り扱います。</p>
+              <p class="policy-detail">取得した情報は、お申込み・決済の確認、開催案内、緊急時のご連絡およびイベント運営に必要な範囲で利用し、法令に基づく場合を除き、ご本人の同意なく第三者へ提供しません。</p>
+            </div>
+
+            <div class="policy-summary-item">
+              <h4>キャンセルポリシー</h4>
+              <ul>
+                <li>お客様都合によるキャンセルは、2026年10月23日（金）23:59までに運営へメールでご連絡ください。</li>
+                <li>上記期限までのキャンセルはチケット代金を返金します。決済時に発生した手数料は返金対象外となる場合があります。</li>
+                <li>2026年10月24日（土）以降のキャンセルおよび無断不参加は、原則として返金できません。</li>
+                <li>主催者都合でイベントを中止した場合は、チケット代金を返金します。交通費・宿泊費などの付随費用は補償対象外です。</li>
+              </ul>
+            </div>
+          </section>
 
           <div id="form-error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
             <strong>入力内容をご確認ください。</strong>
@@ -162,7 +174,7 @@
           </div>
 
           <button class="submit-button" type="submit" id="submit-button">
-            <span>Stripeの決済画面へ進む</span>
+            <span>決済画面へ進む</span>
             <small>クレジットカード等で安全にお支払い</small>
           </button>
           <p class="submit-note">この時点では申込みは確定しません。決済完了後にチケットが確定します。</p>

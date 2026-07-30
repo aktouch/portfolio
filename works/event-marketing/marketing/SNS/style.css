@@ -141,6 +141,8 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 10px;
 }
+/* バナーはフィード投稿画像なので直角。
+   ストーリーズ（.thumb）はスマホ画面の表示なので角丸のまま */
 .banner-thumb {
   position: relative;
   display: block;
@@ -149,7 +151,7 @@ h1 {
   overflow: hidden;
   background: #ece9e2;
   border: 1px solid #d8d3ca;
-  border-radius: 6px;
+  border-radius: 0;
 }
 .banner-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .banner-copy small { display: block; color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .12em; }
@@ -325,7 +327,8 @@ h1 {
 .modal-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; background: rgba(26,29,28,.82); border: 0; cursor: zoom-out; }
 .modal-card { position: relative; z-index: 1; width: min(880px, calc(100vw - 40px)); max-height: calc(100vh - 48px); padding: 22px 58px; overflow: auto; background: var(--paper); border-radius: 13px; box-shadow: 0 28px 70px rgba(0,0,0,.34); }
 .modal-card figure { display: grid; grid-template-columns: minmax(250px, 1fr) minmax(220px, .7fr); align-items: center; gap: 26px; margin: 0; }
-.modal-card figure > img { width: 100%; max-height: calc(100vh - 95px); object-fit: contain; background: #ece9e2; border-radius: 7px; box-shadow: var(--shadow); }
+/* 拡大表示は制作物の原寸確認なので角丸を付けない（器は .modal-card 側が持つ） */
+.modal-card figure > img { width: 100%; max-height: calc(100vh - 95px); object-fit: contain; background: #ece9e2; box-shadow: var(--shadow); }
 .modal-card figcaption { padding-right: 8px; }
 #modal-number { margin-bottom: 2px; color: var(--wine); font-family: "Noto Serif JP", serif; font-size: 20px; font-weight: 700; }
 #modal-title { margin-bottom: 10px; font-family: "Noto Serif JP", serif; font-size: 23px; }
@@ -1153,3 +1156,161 @@ body {
   color: var(--semantic-action) !important;
 }
 
+
+/* =============================================================
+   01 制作物：SNSバナーの横にストーリーズ動画を並べる
+   -------------------------------------------------------------
+   動画は SNS/video/story-movie.mp4 に配置する。
+   サムネのポスター画像 SNS/video/story-movie-poster.jpg は任意。
+   どちらも未配置のままレイアウトは崩れず、モーダルは案内文になる。
+
+   このファイルは後方の無条件ルールが前方のメディアクエリを
+   打ち消す構造になっているため、末尾に追記している。
+============================================================= */
+.creative-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 2枚のカードの高さを揃える（.banner-card 側の margin-bottom は gap に任せる）。
+   サムネを縦横2倍（64→128px）にしたので、1列目も既定の72pxから128pxへ広げる。
+   ここを直さないとサムネが列からはみ出す */
+.creative-cards .banner-card {
+  height: 100%;
+  margin-bottom: 0;
+  grid-template-columns: 128px minmax(0, 1fr) auto;
+}
+
+.creative-cards .banner-thumb {
+  width: 128px;
+}
+
+/* 縦長サムネ。高さをバナー側の128pxに合わせることで、
+   9:16でも2枚のカードが同じ高さに収まる（幅は72pxになる） */
+.movie-thumb {
+  position: relative;
+  display: block;
+  height: 128px;
+  aspect-ratio: 9 / 16;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #1b1d1c;
+  border: 1px solid #d8d3ca;
+  /* スマホ画面の表示なので角丸。ストーリーズの .thumb と同じ扱い */
+  border-radius: 4px;
+}
+
+.movie-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.play-badge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  /* サムネ2倍に合わせて▶も拡大 */
+  font-size: 26px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .7);
+  pointer-events: none;
+}
+
+/* モーダル内の動画。縦長前提なので高さを基準に置く */
+.modal-card figure > video {
+  justify-self: center;
+  height: min(70vh, 620px);
+  max-width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+/* hidden を確実に効かせる。属性セレクタで詳細度を上げておく。
+   .modal-nav は display:grid を持つので、これが無いと hidden にしても消えない */
+.modal-card figure > img[hidden],
+.modal-card figure > video[hidden],
+.modal-nav[hidden],
+.modal-fallback[hidden] { display: none; }
+
+.modal-fallback {
+  justify-self: center;
+  align-self: center;
+  margin: 0;
+  padding: 30px 22px;
+  color: var(--muted);
+  background: #f5f4f0;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.9;
+  text-align: center;
+}
+
+.modal-fallback code {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 閉じるボタンの×を円の中心に置く。
+   place-items: center は「行ボックス」を中央に揃えるだけで、その中でグリフが
+   どこに座るかはフォント次第。Noto Sans JP は CJK 用にアセントが大きく、
+   body の line-height:1.6 と重なって×が約3px下がっていた。
+   フォントに依存しないよう、文字は消して2本の線で描く。
+   読み上げ名は button の aria-label="閉じる" が持つので情報は失われない */
+.modal-close {
+  padding: 0;
+  font-size: 0;
+  line-height: 1;
+}
+
+.modal-close::before,
+.modal-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.modal-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.modal-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* 前後ナビの ‹ › も×と同じ理由で下寄りになるため、山形を線で描く。
+   読み上げ名は aria-label="前の制作物" / "次の制作物" が持つ */
+.modal-nav {
+  padding: 0;
+  font-size: 0;
+  line-height: 1;
+}
+
+.modal-nav::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+/* 正方形の2辺で作る山形は、見た目の中心が正方形の中心から尖端側へ約3.2px
+   ずれる。回転後にその分を戻して、円の中心と一致させる */
+.modal-prev::before { transform: translate(calc(-50% + 3.2px), -50%) rotate(-135deg); }
+.modal-next::before { transform: translate(calc(-50% - 3.2px), -50%) rotate(45deg); }
+
+@media (max-width: 620px) {
+  .creative-cards { grid-template-columns: 1fr; }
+  /* SP側も2倍（52→104px）。前方の @media にある .banner-thumb{width:52px} は
+     このファイルの構造上あとから打ち消されるため、ここで指定し直している */
+  .creative-cards .banner-card { grid-template-columns: 104px minmax(0, 1fr) auto; }
+  .creative-cards .banner-thumb { width: 104px; }
+  .movie-thumb { height: 104px; }
+  .play-badge { font-size: 22px; }
+  .modal-card figure > video { height: min(56vh, 420px); }
+}
